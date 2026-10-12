@@ -1,0 +1,220 @@
+/* ==========================================================================
+   content.js: the ONLY file you need to edit.
+
+   PLACEHOLDER RULE
+   Anything written like  "[[ ... ]]"  is a placeholder.
+   - On the public page, placeholders are HIDDEN automatically.
+   - Open index.html?preview to see them with dashed outlines.
+   - To fill one in: replace the whole "[[ ... ]]" text with your real text
+     (delete the brackets). It then appears on the page.
+   Only write facts that are true; recruiters do check.
+   ========================================================================== */
+
+window.CONTENT = {
+  name: "Chakshit Gaur",
+  role: "Python Developer · AI/ML Engineer",
+  // Hero (top of the page).
+  hero: {
+    greeting: "Hi, i’m chakshit",
+    // Hero line: the prefix stays, the last words scramble from one phrase to the next.
+    blurbPrefix: "a python developer building",
+    rotating: ["automation", "data pipelines", "machine-learning systems"],
+    // Used when motion is reduced (no scrambling).
+    blurb: "a python developer building automation, data pipelines and machine-learning systems",
+  },
+
+  // Terminal in the About section. t: "cmd" (typed after a $ prompt), "code" (a line of Python), "out" (program output).
+  // Keep it to facts from your resume.
+  terminal: [
+    { t: "cmd", s: "cat about.py" },
+    { t: "code", s: 'name = "Chakshit Gaur"' },
+    { t: "code", s: 'role = "Python Developer & AI/ML Engineer"' },
+    { t: "code", s: 'location = "New Delhi, India"' },
+    { t: "code", s: 'stack = ["Python", "SQL", "Pandas", "TensorFlow", "PyTorch"]' },
+    { t: "code", s: 'experience = "AI/ML Engineer @ Isourse Technologies"' },
+    { t: "code", s: "applicants_managed = 5000  # in the ATS I built" },
+    { t: "code", s: 'print(f"{name} | {role} | {location}")' },
+    { t: "cmd", s: "python about.py" },
+    { t: "out", s: "Chakshit Gaur | Python Developer & AI/ML Engineer | New Delhi, India" },
+  ],
+
+  // "What I do" section (white block). Facts only, taken from your resume.
+  services: [
+    {
+      name: "Python Automation",
+      text:
+        "Tools that replace manual work, such as an employee-productivity monitor packaged as a standalone executable, with documentation and user support.",
+    },
+    {
+      name: "Data & SQL Systems",
+      text:
+        "Storage and data pipelines in Python and SQL, including an applicant tracking system managing 5,000+ applicants and integrated with HR systems.",
+    },
+    {
+      name: "Machine Learning",
+      text:
+        "Predictive and recommendation models in Python, from disease-risk classifiers (logistic regression, SVM) to collaborative-filtering recommenders.",
+    },
+    {
+      name: "Video Pipelines",
+      text:
+        "Processing live-stream data: capturing, synchronising and stitching video feeds by timestamp into one seamless output. Familiar with YOLO for detection.",
+    },
+  ],
+
+  // Optional line shown in the hero contact area, e.g. "Open to work". Leave as placeholder to hide.
+  status: "[[ e.g. Open to work ]]",
+
+  location: "New Delhi, India",
+
+  links: {
+    email: "chakshitgaur25@gmail.com",
+    linkedin: "[[ paste your LinkedIn profile URL ]]",
+    github: "[[ paste your GitHub profile URL ]]",
+  },
+
+  resumeFile: "assets/ChakshitGaur_resume.pdf",
+
+  about: [
+    "I'm a Computer Science graduate (B.Tech, 2023) based in New Delhi. I started my career as an AI/ML Engineer, " +
+      "where I built internal tools and client systems end to end, from data collection and storage to packaging and documentation.",
+    "My core toolkit is Python and SQL, backed by NumPy, Pandas, Selenium and machine-learning frameworks such as " +
+      "TensorFlow, PyTorch and YOLO. I'm comfortable with object-oriented design and enjoy turning messy data and manual processes into reliable software.",
+  ],
+
+  // Only facts taken from the resume. Add more numbers here once you have real ones.
+  stats: [
+    { value: "1+ yr", label: "Professional experience" },
+    { value: "5,000+", label: "Applicants managed in the ATS" },
+    { value: "3", label: "Projects built at Isourse" },
+  ],
+
+  experience: [
+    // ---- FILL ME: what you have done since June 2024 (freelance, courses, open source, a new job...) ----
+    {
+      title: "[[ Your role or activity since June 2024 ]]",
+      org: "[[ Organisation, or 'Independent' ]]",
+      location: "[[ City / Remote ]]",
+      period: "[[ Jun 2024 – Present ]]",
+      bullets: [
+        "[[ What you built or learned: lead with the result, then the tools used ]]",
+        "[[ A second concrete achievement ]]",
+        "[[ Optional third achievement ]]",
+      ],
+      tags: ["[[ tech ]]"],
+    },
+
+    {
+      title: "AI/ML Engineer",
+      org: "Isourse Technologies Pvt. Ltd.",
+      location: "Delhi",
+      period: "May 2023 – Jun 2024",
+      bullets: [],
+      projects: [
+        {
+          name: "Employee Management System",
+          text:
+            "Built a system that monitors workforce productivity through keyboard-activity tracking and idle-time detection. " +
+            "Packaged it as a standalone executable for simple deployment across machines, with full documentation and user support.",
+          tags: ["Python", "Desktop executable", "Activity tracking"],
+        },
+        {
+          name: "Applicant Tracking System (ATS)",
+          text:
+            "Developed an ATS that uses Selenium to extract LinkedIn data, designed to meet GDPR and CCPA requirements. " +
+            "Built the storage layer in Python and SQL and integrated it with HR systems to manage 5,000+ applicants, " +
+            "then documented it and trained HR staff to use it.",
+          tags: ["Python", "Selenium", "SQL", "GDPR / CCPA"],
+        },
+        {
+          name: "Live-stream video sync for FM Logistics",
+          text:
+            "Built a pipeline for FM Logistics that collects live-stream data, captures two video feeds and synchronises them. " +
+            "Videos are stitched by matching timestamps, so users receive one seamless combined video.",
+          tags: ["Python", "Video processing", "Stream synchronisation"],
+        },
+      ],
+      tags: [],
+    },
+  ],
+
+  projects: [
+    {
+      name: "Multiple Disease Prediction System",
+      category: "Machine Learning",
+      problem: "Early detection of Parkinson's disease, heart disease and diabetes from patient data.",
+      approach:
+        "Trained machine-learning classifiers for each condition, using logistic regression and support vector machines for predictive modelling.",
+      stack: ["Python", "Machine Learning", "Logistic Regression", "SVM"],
+      metric: "[[ e.g. 'Reached 8x% accuracy on the heart-disease model': only if true ]]",
+      github: "[[ GitHub repo URL ]]",
+      demo: "[[ Live demo URL (optional) ]]",
+    },
+    {
+      name: "Book Recommendation System",
+      category: "Recommender System",
+      problem: "Suggesting books readers are likely to enjoy, based on their ratings and similar readers.",
+      approach:
+        "Collaborative filtering on a book-ratings dataset: preprocessed and analysed the data, then computed user and item similarities to produce personalised recommendations.",
+      stack: ["Python", "NumPy", "Pandas", "Scikit-learn"],
+      metric: "[[ optional: dataset size or an evaluation score ]]",
+      github: "[[ GitHub repo URL ]]",
+      demo: "[[ Live demo URL (optional) ]]",
+    },
+    // ---- Extra project slots: hidden until you fill the name ----
+    {
+      name: "[[ Project 3 name ]]",
+      category: "[[ Category ]]",
+      problem: "[[ One line: what problem does it solve? ]]",
+      approach: "[[ How you built it, in 1-2 sentences ]]",
+      stack: ["[[ tech ]]"],
+      metric: "[[ optional ]]",
+      github: "[[ GitHub repo URL ]]",
+      demo: "[[ Live demo URL (optional) ]]",
+    },
+    {
+      name: "[[ Project 4 name ]]",
+      category: "[[ Category ]]",
+      problem: "[[ One line: what problem does it solve? ]]",
+      approach: "[[ How you built it, in 1-2 sentences ]]",
+      stack: ["[[ tech ]]"],
+      metric: "[[ optional ]]",
+      github: "[[ GitHub repo URL ]]",
+      demo: "[[ Live demo URL (optional) ]]",
+    },
+  ],
+
+  skills: [
+    { group: "Languages", items: ["Python", "SQL", "Core Java"] },
+    {
+      group: "Libraries & frameworks",
+      items: ["NumPy", "Pandas", "Matplotlib", "Selenium", "YOLO", "TensorFlow", "PyTorch"],
+    },
+    { group: "Databases", items: ["Oracle SQL", "MySQL"] },
+    { group: "Tools", items: ["VS Code", "PyCharm", "Jupyter Notebook", "Power BI"] },
+  ],
+
+  education: [
+    {
+      title: "B.Tech, Computer Science & Engineering",
+      org: "D.P.G Institute of Technology and Management, Gurugram",
+      period: "2019 – 2023",
+    },
+    {
+      title: "Class XII",
+      org: "Shri Krishna Parnami Sr. Sec. School, Karnal",
+      period: "2018",
+    },
+    {
+      title: "Class X",
+      org: "V.P International School, Karnal",
+      period: "2016",
+    },
+  ],
+
+  // Hidden until you fill in at least a name.
+  certifications: [
+    { name: "[[ Course or certification name ]]", issuer: "[[ Issuer ]]", year: "[[ Year ]]" },
+    { name: "[[ Another one ]]", issuer: "[[ Issuer ]]", year: "[[ Year ]]" },
+  ],
+};

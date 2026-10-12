@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0C0C0C">
+  <title>Chakshit Gaur | Python Developer & AI/ML Engineer</title>
+  <meta name="description" content="Portfolio of Chakshit Gaur, Python developer and AI/ML engineer based in New Delhi.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div id="preview-banner" class="preview-banner" hidden>
+    Preview mode: dashed items are placeholders. Fill them in <code>content.js</code>; unfilled ones stay hidden on the public page.
+  </div>
+
+  <!-- Floating nav, appears after the hero -->
+  <nav class="dock" id="dock" aria-label="Quick navigation">
+    <a href="#about">About</a>
+    <a href="#experience">Experience</a>
+    <a href="#projects">Projects</a>
+    <a href="#contact">Contact</a>
+  </nav>
+
+  <main id="top">
+    <!-- HERO -->
+    <section class="hero" id="hero">
+      <nav class="nav fade" data-y="-20" data-d="0" aria-label="Primary">
+        <a href="#about">About</a>
+        <a href="#experience">Experience</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+      </nav>
+
+      <div class="hero-head">
+        <h1 class="hero-heading hero-title fade" id="heroTitle" data-y="40" data-d="0.15"></h1>
+      </div>
+
+      <div class="hero-bottom">
+        <p class="blurb fade" id="heroBlurb" data-y="20" data-d="0.35"></p>
+        <a class="contact-btn fade" href="#contact" data-y="20" data-d="0.5">Contact Me</a>
+      </div>
+
+      <canvas class="flow fade" id="flow" data-y="0" data-d="0.2" data-t="1.2" aria-hidden="true"></canvas>
+    </section>
+
+    <!-- SKILLS MARQUEE (scroll-driven) -->
+    <section class="marquee" id="marquee" aria-label="Skills">
+      <div class="row" id="row1"></div>
+      <div class="row" id="row2"></div>
+    </section>
+
+    <!-- ABOUT -->
+    <section class="about" id="about">
+      <div class="decor decor-tl fade" data-x="-80" data-y="0" data-d="0.1" data-t="0.9" aria-hidden="true"><span>Py</span></div>
+      <div class="decor decor-bl fade" data-x="-80" data-y="0" data-d="0.25" data-t="0.9" aria-hidden="true"><span>SQL</span></div>
+      <div class="decor decor-tr fade" data-x="80" data-y="0" data-d="0.15" data-t="0.9" aria-hidden="true"><span>ML</span></div>
+      <div class="decor decor-br fade" data-x="80" data-y="0" data-d="0.3" data-t="0.9" aria-hidden="true"><span>AI</span></div>
+
+      <div class="about-inner">
+        <div class="about-text">
+          <h2 class="hero-heading sec-title fade" data-y="40" data-d="0">About me</h2>
+          <p class="ap" id="aboutText"></p>
+        </div>
+        <div class="term fade" id="term" role="region" aria-label="Terminal: about Chakshit" data-y="40">
+          <div class="term-bar" aria-hidden="true"><i></i><i></i><i></i><span>about.py &mdash; python</span></div>
+          <div class="term-body" id="termBody" aria-hidden="true"></div>
+          <pre class="sr-only" id="termText"></pre>
+        </div>
+        <ul class="stats" id="stats"></ul>
+        <a class="contact-btn fade" href="#contact">Contact Me</a>
+      </div>
+    </section>
+
+    <!-- WHAT I DO (white) -->
+    <section class="services" id="services">
+      <h2 class="sec-title dark fade" data-y="40">What I do</h2>
+      <ol class="svc-list" id="svcList"></ol>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section class="experience" id="experience">
+      <div class="wrap">
+        <h2 class="hero-heading sec-title fade" data-y="40">Experience</h2>
+        <ol class="timeline" id="timeline"></ol>
+      </div>
+    </section>
+
+    <!-- PROJECTS (sticky stacking cards) -->
+    <section class="projects" id="projects">
+      <div class="wrap wide">
+        <h2 class="hero-heading sec-title fade" data-y="40">Projects</h2>
+      </div>
+      <div class="stack" id="stack"></div>
+    </section>
+
+    <!-- EDUCATION -->
+    <section class="education" id="education">
+      <div class="wrap">
+        <h2 class="hero-heading sec-title fade" data-y="40">Education</h2>
+        <ul class="edu" id="eduList"></ul>
+        <div id="certWrap" hidden>
+          <h3 class="sub-title">Courses &amp; certifications</h3>
+          <ul class="edu" id="certList"></ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="contact" id="contact">
+      <div class="wrap center">
+        <h2 class="hero-heading sec-title fade" data-y="40">Contact</h2>
+        <p class="contact-lead fade" data-y="20" data-d="0.1">Have a role, project or idea in mind? I'd be glad to hear about it.</p>
+        <div class="contact-actions fade" id="contactActions" data-y="20" data-d="0.2"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p class="copy" id="copy"></p>
+  </footer>
+
+  <script src="content.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

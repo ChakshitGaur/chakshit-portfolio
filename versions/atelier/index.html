@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0d0905">
+  <title>Chakshit Gaur | Python Developer & AI/ML Engineer</title>
+  <meta name="description" content="Portfolio of Chakshit Gaur, Python developer and AI/ML engineer based in New Delhi.">
+  <script>
+    /* Entrance animation: only when motion is allowed. 4.5s failsafe so the page is never left hidden. */
+    (function () {
+      var r = document.documentElement;
+      if (window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches) { return; }
+      r.classList.add("is-entering");
+      window.__auFail = setTimeout(function () { r.classList.remove("is-entering", "is-playing"); }, 4500);
+    })();
+  </script>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div id="preview-banner" class="preview-banner" hidden>
+    Preview mode: dashed items are placeholders. Fill them in <code>content.js</code>; unfilled ones stay hidden on the public page.
+  </div>
+
+  <header class="topbar" id="topbar">
+    <a href="#top" class="logo" id="logo" aria-label="Chakshit Gaur, back to top"></a>
+    <div class="actions small">
+      <a class="resume" id="resumeLink" href="#" download>Resume</a>
+      <button class="menu" id="menuBtn" type="button" aria-expanded="false" aria-controls="menuPanel"><span>Menu</span></button>
+    </div>
+  </header>
+
+  <div class="menu-panel" id="menuPanel" hidden role="dialog" aria-modal="true" aria-label="Site menu">
+    <nav aria-label="Primary">
+      <a href="#about"><span>01</span>About</a>
+      <a href="#experience"><span>02</span>Experience</a>
+      <a href="#projects"><span>03</span>Projects</a>
+      <a href="#skills"><span>04</span>Skills</a>
+      <a href="#education"><span>05</span>Education</a>
+      <a href="#contact"><span>06</span>Contact</a>
+    </nav>
+    <button class="menu-close" id="menuClose" type="button">Close</button>
+  </div>
+
+  <main id="top">
+    <section class="hero" id="hero">
+      <div class="hero__glow" role="presentation" aria-hidden="true"><b class="arc"></b><b class="haze"></b></div>
+      <div class="hero__grid" id="heroGrid" aria-hidden="true"></div>
+
+      <p class="tagline small" id="tagline"></p>
+      <address class="contact small" id="heroContact"></address>
+
+      <ul class="services small" id="services" aria-label="Services"></ul>
+      <div class="rule" aria-hidden="true"></div>
+
+      <h1 class="hl" id="headline"></h1>
+    </section>
+
+    <section id="about" class="section">
+      <div class="container narrow">
+        <h2 class="section-title"><span class="idx">01</span> About</h2>
+        <div id="aboutBody" class="prose reveal"></div>
+        <p class="loc reveal" id="aboutLoc"></p>
+        <ul class="stats" id="stats"></ul>
+      </div>
+    </section>
+
+    <section id="experience" class="section">
+      <div class="container narrow">
+        <h2 class="section-title"><span class="idx">02</span> Experience</h2>
+        <ol class="timeline" id="timeline"></ol>
+      </div>
+    </section>
+
+    <section id="projects" class="section">
+      <div class="container">
+        <h2 class="section-title"><span class="idx">03</span> Projects</h2>
+        <div class="cards" id="projectCards"></div>
+      </div>
+    </section>
+
+    <section id="skills" class="section">
+      <div class="container">
+        <h2 class="section-title"><span class="idx">04</span> Skills</h2>
+        <div class="skill-grid" id="skillGrid"></div>
+      </div>
+    </section>
+
+    <section id="education" class="section">
+      <div class="container narrow">
+        <h2 class="section-title"><span class="idx">05</span> Education</h2>
+        <ul class="edu" id="eduList"></ul>
+        <div id="certWrap" hidden>
+          <h3 class="sub-title">Courses &amp; certifications</h3>
+          <ul class="edu" id="certList"></ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="section contact-section">
+      <div class="container narrow center">
+        <h2 class="section-title center"><span class="idx">06</span> Contact</h2>
+        <p class="contact-lead">Have a role, project or idea in mind? I'd be glad to hear about it.</p>
+        <div class="contact-actions" id="contactActions"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <p class="copy" id="copy"></p>
+    </div>
+  </footer>
+
+  <script src="content.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
