@@ -21,7 +21,9 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+  <a class="skip" href="#skills">Skip to content</a>
   <div class="progress" id="progress" aria-hidden="true"></div>
+  <div class="cursor" id="cursor" aria-hidden="true"></div>
   <div id="preview-banner" class="preview-banner" hidden>
     Preview mode: dashed items are placeholders. Fill them in <code>content.js</code>; unfilled ones stay hidden on the public page.
   </div>
@@ -32,7 +34,6 @@
     <nav class="nav-links" id="navLinks" aria-label="Primary">
       <a href="#skills">Skills</a>
       <a href="#projects">Projects</a>
-      <a href="#playground">Playground</a>
       <a href="#experience">Experience</a>
       <a href="#about">About</a>
       <a class="nav-cta" id="navResume" href="#" download>Resume</a>
@@ -80,6 +81,7 @@
       <div class="container">
         <ul class="stats rise" id="stats" style="--i:9"></ul>
       </div>
+      <div class="ticker rise" style="--i:10" aria-hidden="true"><div class="ticker-track" id="tickerTrack"></div></div>
     </section>
 
     <!-- SKILLS -->
@@ -107,48 +109,11 @@
       </div>
     </section>
 
-    <!-- PLAYGROUND -->
-    <section class="section" id="playground">
-      <div class="container">
-        <header class="sec-head fade">
-          <p class="sec-num">03</p>
-          <h2>Playground</h2>
-          <p class="sec-sub">Two small demos running in your browser, to show how I work with data. They use made-up sample data, not real records.</p>
-        </header>
-        <div class="play-grid">
-          <article class="play-card fade" id="cleanDemo">
-            <h3>Clean it</h3>
-            <p>A messy table, tidied step by step with the kind of Pandas calls I use for data cleaning.</p>
-            <pre class="codeblock" id="cleanCode" aria-label="Pandas cleaning steps"></pre>
-            <div class="table-wrap"><table class="dtable" id="cleanTable"></table></div>
-            <div class="play-actions">
-              <button class="btn btn-dark" id="cleanBtn" type="button">Run clean()</button>
-              <button class="btn btn-line" id="cleanReset" type="button">Reset</button>
-              <span class="play-status" id="cleanStatus" role="status" aria-live="polite"></span>
-            </div>
-          </article>
-          <article class="play-card fade" id="clfDemo" style="--d:0.1s">
-            <h3>Classify it</h3>
-            <p>Click to add points. A logistic-regression model retrains on every click and redraws what it thinks each region is.</p>
-            <div class="clf-wrap"><canvas id="clf" aria-label="Interactive classifier: click to add points"></canvas></div>
-            <div class="play-actions">
-              <div class="seg" role="group" aria-label="Class to add">
-                <button type="button" id="clsA" aria-pressed="true">Add class A</button>
-                <button type="button" id="clsB" aria-pressed="false">Add class B</button>
-              </div>
-              <button class="btn btn-line" id="clfReset" type="button">New data</button>
-              <span class="play-status" id="clfStatus" role="status" aria-live="polite"></span>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
-
     <!-- EXPERIENCE -->
     <section class="section" id="experience">
       <div class="container">
         <header class="sec-head fade">
-          <p class="sec-num">04</p>
+          <p class="sec-num">03</p>
           <h2>Experience</h2>
         </header>
         <ol class="timeline" id="timeline"></ol>
@@ -160,7 +125,7 @@
       <div class="container about-grid">
         <div class="fade">
           <header class="sec-head">
-            <p class="sec-num">05</p>
+            <p class="sec-num">04</p>
             <h2>About</h2>
           </header>
           <div class="prose" id="aboutText"></div>
@@ -179,7 +144,7 @@
     <!-- CONTACT -->
     <section class="contact" id="contact">
       <div class="container">
-        <p class="sec-num light fade">06 Contact</p>
+        <p class="sec-num light fade">05 Contact</p>
         <h2 class="contact-title fade">Let's build something useful.</h2>
         <a class="contact-mail fade" id="contactMail" href="#"></a>
         <div class="contact-actions fade" id="contactActions"></div>

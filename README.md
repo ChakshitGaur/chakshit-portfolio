@@ -30,8 +30,8 @@ Only add numbers and claims that are true.
 ## Extras built in
 - **Light/dark theme:** follows the visitor's system setting; the moon/sun button switches and remembers it.
 - **Command palette:** press `Ctrl+K` (or `Cmd+K`) to jump to a section, copy the email, or download the resume.
-- **Playground:** two small demos with made-up sample data (a Pandas-style data-cleaning walkthrough and a live logistic-regression classifier). Their code is in `script.js`.
-- **Scroll progress bar** along the top.
+- **Scroll progress bar** along the top, and a "Skip to content" link for keyboard users.
+- **Creative layer:** spotlight glow on cards, a light beam around the terminal, 3D tilt on project cards, magnetic buttons, a soft cursor follower, a skills ticker, masked word reveals on headings, and an animated highlighter for phrases wrapped in `**double asterisks**` in the `about` text. All of it switches off for visitors who prefer reduced motion, and the cursor effects are desktop-only.
 
 ## Files
 - `index.html`: page structure

@@ -63,10 +63,10 @@ window.CONTENT = {
   resumeFile: "assets/ChakshitGaur_resume.pdf",
 
   about: [
-    "I'm a Computer Science graduate (B.Tech, 2023) based in New Delhi. I started my career as an AI/ML Engineer, " +
-      "where I built internal tools and client systems end to end, from data collection and storage to packaging and documentation.",
-    "My core toolkit is Python, Django and SQL, with Pandas and NumPy for cleaning data and machine-learning frameworks such as " +
-      "TensorFlow, PyTorch and YOLO. I'm comfortable with object-oriented design and enjoy turning messy data and manual processes into reliable software.",
+    "I'm a Computer Science graduate (B.Tech, 2023) based in New Delhi. I started my career as an **AI/ML Engineer**, " +
+      "where I built **internal tools and client systems end to end**, from data collection and storage to packaging and documentation.",
+    "My core toolkit is **Python, Django and SQL**, with Pandas and NumPy for cleaning data and machine-learning frameworks such as " +
+      "TensorFlow, PyTorch and YOLO. I'm comfortable with object-oriented design and enjoy turning **messy data and manual processes into reliable software**.",
   ],
 
   // Only facts taken from the resume. Add more numbers here once you have real ones.
