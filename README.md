@@ -27,6 +27,12 @@ Everything you change lives in **`content.js`**.
 
 Only add numbers and claims that are true.
 
+## Extras built in
+- **Light/dark theme:** follows the visitor's system setting; the moon/sun button switches and remembers it.
+- **Command palette:** press `Ctrl+K` (or `Cmd+K`) to jump to a section, copy the email, or download the resume.
+- **Playground:** two small demos with made-up sample data (a Pandas-style data-cleaning walkthrough and a live logistic-regression classifier). Their code is in `script.js`.
+- **Scroll progress bar** along the top.
+
 ## Files
 - `index.html`: page structure
 - `styles.css`: light editorial theme and layout
