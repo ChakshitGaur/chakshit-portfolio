@@ -269,8 +269,9 @@
   (C.skills || []).forEach(function (g, i) {
     var items = (g.items || []).filter(show);
     if (!items.length) { return; }
-    var chips = el("div", { cls: "chips" }, items.map(function (n) {
+    var chips = el("div", { cls: "chips" }, items.map(function (n, ci) {
       var c = el("span", { cls: "chip", text: n });
+      c.style.setProperty("--c", ci);
       if (isPh(n)) { c.classList.add("ph"); }
       return c;
     }));
@@ -311,7 +312,7 @@
         svg.appendChild(svgEl("circle", {
           cx: 125, cy: 105, r: 58, fill: "none", "stroke-width": 30, transform: "rotate(-90 125 105)",
           "stroke-dasharray": (v * circ - 3).toFixed(2) + " " + (circ - v * circ + 3).toFixed(2), "stroke-dashoffset": (-acc * circ).toFixed(2),
-          class: k === 0 ? "accl" : "", stroke: ink, "stroke-opacity": k === 0 ? 1 : ops[k] * 0.8
+          class: k === 0 ? "accd" : "", stroke: ink, "stroke-opacity": k === 0 ? 1 : ops[k] * 0.8
         }));
         acc += v;
         svg.appendChild(svgEl("rect", { x: 232, y: 58 + k * 30, width: 10, height: 10, rx: 3, class: k === 0 ? "acc" : "", fill: ink, "fill-opacity": k === 0 ? 1 : ops[k] * 0.8 }));
@@ -407,9 +408,63 @@
   }
 
   /* ---------- contact + footer ---------- */
+  var email = show(C.links.email) && !isPh(C.links.email) ? C.links.email : null;
+  var SUBJECT = "Hello from your portfolio";
   var mail = $("contactMail");
-  if (show(C.links.email)) { mail.textContent = C.links.email; mail.setAttribute("href", "mailto:" + C.links.email); } else { mail.hidden = true; }
+  if (email) {
+    mail.textContent = email;
+    mail.setAttribute("href", "mailto:" + email + "?subject=" + encodeURIComponent(SUBJECT));
+  } else { mail.hidden = true; $("composer").hidden = true; }
+
+  function copyEmail() {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(email).then(function () { toast("Email copied"); }, function () { toast(email); });
+    } else { toast(email); }
+  }
+  // Confetti burst from a click (or from the element's centre when triggered by keyboard)
+  function burstAt(e) {
+    if (REDUCED) { return; }
+    var x = e.clientX, y = e.clientY;
+    if (!e.detail && e.currentTarget) { var r = e.currentTarget.getBoundingClientRect(); x = r.left + r.width / 2; y = r.top + r.height / 2; }
+    var colors = ["#2f4bff", "#ff9a4d", "#e070dc", "#1fb26b", "#ffd166"];
+    for (var i = 0; i < 18; i++) {
+      var a = (i / 18) * Math.PI * 2 + Math.random() * 0.4, d = 46 + Math.random() * 60, s = el("i", { cls: "spark" });
+      s.style.cssText = "left:" + x + "px;top:" + y + "px;--dx:" + (Math.cos(a) * d).toFixed(1) + "px;--dy:" + (Math.sin(a) * d).toFixed(1) + "px;background:" + colors[i % colors.length];
+      document.body.appendChild(s);
+      setTimeout((function (n) { return function () { n.remove(); }; })(s), 800);
+    }
+  }
+
   var actions = $("contactActions");
+  if (email) {
+    var copyBtn = el("button", { cls: "btn btn-outline-light", text: "Copy email", attrs: { type: "button" } });
+    copyBtn.addEventListener("click", function (e) { copyEmail(); burstAt(e); });
+    actions.appendChild(copyBtn);
+  }
+
+  // Message box: builds a draft for Gmail or the visitor's mail app. Nothing is sent from this page.
+  var cName = $("cName"), cMsg = $("cMsg"), cErr = $("cErr");
+  cMsg.maxLength = 1500;
+  function draft() {
+    var msg = cMsg.value.trim();
+    if (!msg) { cErr.textContent = "Write a short message first."; cErr.hidden = false; cMsg.focus(); return null; }
+    cErr.hidden = true;
+    var name = cName.value.trim();
+    return { subject: name ? "Portfolio message from " + name : SUBJECT, body: msg + (name ? "\n\n" + name : "") };
+  }
+  cMsg.addEventListener("input", function () { cErr.hidden = true; });
+  $("cGmail").addEventListener("click", function (e) {
+    var d = draft(); if (!d || !email) { return; }
+    window.open("https://mail.google.com/mail/?view=cm&fs=1&to=" + encodeURIComponent(email) + "&su=" + encodeURIComponent(d.subject) + "&body=" + encodeURIComponent(d.body), "_blank", "noopener");
+    burstAt(e);
+  });
+  $("cMail").addEventListener("click", function (e) {
+    var d = draft(); if (!d || !email) { return; }
+    var a = el("a", { attrs: { href: "mailto:" + email + "?subject=" + encodeURIComponent(d.subject) + "&body=" + encodeURIComponent(d.body) } });
+    document.body.appendChild(a); a.click(); a.remove();
+    burstAt(e);
+  });
+
   if (show(C.links.linkedin)) { actions.appendChild(link(C.links.linkedin, "LinkedIn", "btn btn-outline-light", true)); }
   if (show(C.links.github)) { actions.appendChild(link(C.links.github, "GitHub", "btn btn-outline-light", true)); }
   actions.appendChild(el("a", { cls: "btn btn-light", text: "Download resume", attrs: { href: C.resumeFile, download: C.name.replace(/\s+/g, "") + "_Resume.pdf" } }));
@@ -454,11 +509,16 @@
   function toggleTheme() { setTheme(root.getAttribute("data-theme") === "dark" ? "light" : "dark"); }
   $("themeBtn").addEventListener("click", toggleTheme);
 
+  $("toTop").addEventListener("click", function () { window.scrollTo({ top: 0, behavior: REDUCED ? "auto" : "smooth" }); });
+
   /* ---------- scroll progress ---------- */
   var progress = $("progress");
   function onProgress() {
     var max = document.documentElement.scrollHeight - window.innerHeight;
-    progress.style.transform = "scaleX(" + (max > 0 ? clamp(window.scrollY / max, 0, 1) : 0).toFixed(4) + ")";
+    var pct = max > 0 ? clamp(window.scrollY / max, 0, 1) : 0;
+    progress.style.transform = "scaleX(" + pct.toFixed(4) + ")";
+    $("ring").style.strokeDashoffset = (119.4 * (1 - pct)).toFixed(1);
+    $("toTop").classList.toggle("show", window.scrollY > 600);
   }
   window.addEventListener("scroll", onProgress, { passive: true });
   window.addEventListener("resize", onProgress);
@@ -478,7 +538,8 @@
     { label: "Go to Projects", tag: "Section", run: function () { goTo("projects"); } },
     { label: "Go to Experience", tag: "Section", run: function () { goTo("experience"); } },
     { label: "Go to About", tag: "Section", run: function () { goTo("about"); } },
-    { label: "Go to Contact", tag: "Section", run: function () { goTo("contact"); } }
+    { label: "Go to Contact", tag: "Section", run: function () { goTo("contact"); } },
+    { label: "Write me a message", tag: "Action", run: function () { goTo("contact"); setTimeout(function () { $("cMsg").focus({ preventScroll: true }); }, 700); } }
   ];
   if (show(C.links.email) && !isPh(C.links.email)) {
     commands.push({ label: "Copy email address", tag: "Action", run: function () {
@@ -546,8 +607,33 @@
   var bandWords = (C.core || []).map(function (c) { return c.name; });
   if (bandWords.length) {
     for (var br = 0; br < 4; br++) { bandWords.forEach(function (w, wi) { bandTrack.appendChild(el("span", { cls: wi % 2 ? "solid" : "", text: w })); }); }
-    if (REDUCED) { bandTrack.style.animation = "none"; }
+    // The band slides with the scroll position (no timer), looping seamlessly.
+    bandTrack.style.animation = "none";
+    if (!REDUCED) {
+      var bandEl = document.querySelector(".band"), bandHalf = 0, bandTick = false;
+      var measureBand = function () { bandHalf = bandTrack.scrollWidth / 2; moveBand(); };
+      var moveBand = function () {
+        bandTick = false;
+        if (!bandHalf) { return; }
+        var off = (window.innerHeight - bandEl.getBoundingClientRect().top) * 0.5;
+        bandTrack.style.transform = "translate3d(" + (-(((off % bandHalf) + bandHalf) % bandHalf)).toFixed(1) + "px,0,0)";
+      };
+      window.addEventListener("scroll", function () { if (!bandTick) { bandTick = true; requestAnimationFrame(moveBand); } }, { passive: true });
+      window.addEventListener("resize", measureBand);
+      window.addEventListener("load", measureBand);
+      if (document.fonts && document.fonts.ready) { document.fonts.ready.then(measureBand); }
+      measureBand();
+    }
   } else { bandTrack.parentNode.hidden = true; }
+
+  // Floating badges drift with the cursor
+  if (HOVER && !REDUCED) {
+    heroEl.addEventListener("pointermove", function (e) {
+      var r = heroEl.getBoundingClientRect();
+      heroEl.style.setProperty("--tx", ((e.clientX - r.left) / r.width - 0.5).toFixed(3));
+      heroEl.style.setProperty("--ty", ((e.clientY - r.top) / r.height - 0.5).toFixed(3));
+    }, { passive: true });
+  }
 
   // Big outlined section numbers behind headings
   document.querySelectorAll(".sec-head").forEach(function (h) {

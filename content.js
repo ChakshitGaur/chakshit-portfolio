@@ -57,7 +57,7 @@ window.CONTENT = {
   links: {
     email: "chakshitgaur25@gmail.com",
     linkedin: "[[ paste your LinkedIn profile URL ]]",
-    github: "[[ paste your GitHub profile URL ]]",
+    github: "https://github.com/ChakshitGaur", // taken from the GitHub account signed in on this PC; change it if you want another profile
   },
 
   resumeFile: "assets/ChakshitGaur_resume.pdf",

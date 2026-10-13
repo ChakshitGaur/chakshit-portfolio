@@ -71,10 +71,15 @@
           </div>
         </div>
 
-        <div class="term rise" id="term" style="--i:5" role="region" aria-label="Terminal: about Chakshit">
-          <div class="term-bar" aria-hidden="true"><i></i><i></i><i></i><span>about.py &mdash; python</span></div>
-          <div class="term-body" id="termBody" aria-hidden="true"></div>
-          <pre class="sr-only" id="termText"></pre>
+        <div class="term-wrap rise" style="--i:5">
+          <span class="float f1" style="--m:26" aria-hidden="true">Python</span>
+          <span class="float f2" style="--m:-34" aria-hidden="true">Django</span>
+          <span class="float f3" style="--m:20" aria-hidden="true">SQL</span>
+          <div class="term" id="term" role="region" aria-label="Terminal: about Chakshit">
+            <div class="term-bar" aria-hidden="true"><i></i><i></i><i></i><span>about.py &mdash; python</span></div>
+            <div class="term-body" id="termBody" aria-hidden="true"></div>
+            <pre class="sr-only" id="termText"></pre>
+          </div>
         </div>
       </div>
 
@@ -147,9 +152,26 @@
     <section class="contact" id="contact">
       <div class="container">
         <p class="sec-num light fade">05 Contact</p>
-        <h2 class="contact-title fade">Let's build something useful.</h2>
-        <a class="contact-mail fade" id="contactMail" href="#"></a>
-        <div class="contact-actions fade" id="contactActions"></div>
+        <div class="contact-grid">
+          <div>
+            <h2 class="contact-title fade">Let's build something useful.</h2>
+            <a class="contact-mail fade" id="contactMail" href="#"></a>
+            <div class="contact-actions fade" id="contactActions"></div>
+          </div>
+          <form class="composer fade" id="composer" novalidate style="--d:0.1s">
+            <h3>Send me a message</h3>
+            <label for="cName">Your name</label>
+            <input id="cName" type="text" autocomplete="name" placeholder="Jane Doe">
+            <label for="cMsg">Message</label>
+            <textarea id="cMsg" rows="5" placeholder="Hi Chakshit, I'd like to talk about..."></textarea>
+            <p class="composer-err" id="cErr" role="alert" hidden></p>
+            <div class="composer-actions">
+              <button class="btn btn-light" id="cGmail" type="button">Open in Gmail</button>
+              <button class="btn btn-outline-light" id="cMail" type="button">Use my mail app</button>
+            </div>
+            <p class="composer-note">This opens a ready-written draft in your email. Nothing is sent until you press send.</p>
+          </form>
+        </div>
       </div>
     </section>
   </main>
@@ -157,6 +179,10 @@
   <footer class="footer">
     <p id="copy"></p>
   </footer>
+
+  <button class="totop" id="toTop" type="button" aria-label="Back to top">
+    <svg viewBox="0 0 44 44" aria-hidden="true"><circle class="ring-bg" cx="22" cy="22" r="19"/><circle class="ring" id="ring" cx="22" cy="22" r="19"/><path d="M22 28V16M16 21l6-6 6 6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </button>
 
   <script src="content.js"></script>
   <script src="script.js"></script>

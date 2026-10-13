@@ -20,7 +20,7 @@ Everything you change lives in **`content.js`**.
 | Five headline skills with a proof line each | `core` |
 | All skills, in groups | `skills` |
 | What you did since June 2024 | first item in `experience` |
-| LinkedIn / GitHub URLs | `links` |
+| LinkedIn / GitHub URLs, email | `links` (LinkedIn is still a `[[ placeholder ]]`, so it is hidden until you paste your URL) |
 | Projects (card art is `visual`: scatter, graph or bars) | `projects` |
 | Courses & certifications | `certifications` |
 | Count-up numbers | `stats` |
@@ -30,6 +30,8 @@ Only add numbers and claims that are true.
 ## Extras built in
 - **Light/dark theme:** follows the visitor's system setting; the moon/sun button switches and remembers it.
 - **Command palette:** press `Ctrl+K` (or `Cmd+K`) to jump to a section, copy the email, or download the resume.
+- **Contact message box:** visitors type a message and choose "Open in Gmail" or "Use my mail app"; it opens a ready-written draft addressed to your email. Nothing is sent from the page itself, and no server is involved. (For messages that arrive without the visitor pressing send, you would add a form service such as Formspree; that needs your own account.)
+- **Extra motion:** floating tech badges near the terminal, a skills band that slides as you scroll, chips that pop in, animated project artwork on hover, a headline shimmer, a back-to-top button with a progress ring, and confetti when someone copies your email or opens a draft.
 - **Scroll progress bar** along the top, and a "Skip to content" link for keyboard users.
 - **Creative layer:** spotlight glow on cards, a light beam around the terminal, 3D tilt on project cards, magnetic buttons, a soft cursor follower, a skills ticker, masked word reveals on headings, and an animated highlighter for phrases wrapped in `**double asterisks**` in the `about` text. All of it switches off for visitors who prefer reduced motion, and the cursor effects are desktop-only.
 
