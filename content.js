@@ -15,22 +15,22 @@ window.CONTENT = {
   role: "Python Developer · AI/ML Engineer",
   // Hero (top of the page).
   hero: {
-    greeting: "Hi, i’m chakshit",
-    // Hero line: the prefix stays, the last words scramble from one phrase to the next.
-    blurbPrefix: "a python developer building",
-    rotating: ["automation", "data pipelines", "machine-learning systems"],
-    // Used when motion is reduced (no scrambling).
-    blurb: "a python developer building automation, data pipelines and machine-learning systems",
+    eyebrow: "Python developer · AI/ML engineer",
+    headline: "Python developer turning messy data into working software.",
+    accent: "working software.", // the part of the headline shown in the accent colour
+    // Line under the headline: the last words scramble from one phrase to the next.
+    rotatingPrefix: "Currently into",
+    rotating: ["automation", "data pipelines", "machine learning", "Django back ends"],
   },
 
-  // Terminal in the About section. t: "cmd" (typed after a $ prompt), "code" (a line of Python), "out" (program output).
+  // Terminal in the hero. t: "cmd" (typed after a $ prompt), "code" (a line of Python), "out" (program output).
   // Keep it to facts from your resume.
   terminal: [
     { t: "cmd", s: "cat about.py" },
     { t: "code", s: 'name = "Chakshit Gaur"' },
     { t: "code", s: 'role = "Python Developer & AI/ML Engineer"' },
     { t: "code", s: 'location = "New Delhi, India"' },
-    { t: "code", s: 'stack = ["Python", "SQL", "Pandas", "TensorFlow", "PyTorch"]' },
+    { t: "code", s: 'stack = ["Python", "Django", "SQL", "Pandas", "TensorFlow"]' },
     { t: "code", s: 'experience = "AI/ML Engineer @ Isourse Technologies"' },
     { t: "code", s: "applicants_managed = 5000  # in the ATS I built" },
     { t: "code", s: 'print(f"{name} | {role} | {location}")' },
@@ -38,31 +38,18 @@ window.CONTENT = {
     { t: "out", s: "Chakshit Gaur | Python Developer & AI/ML Engineer | New Delhi, India" },
   ],
 
-  // "What I do" section (white block). Facts only, taken from your resume.
-  services: [
-    {
-      name: "Python Automation",
-      text:
-        "Tools that replace manual work, such as an employee-productivity monitor packaged as a standalone executable, with documentation and user support.",
-    },
-    {
-      name: "Data & SQL Systems",
-      text:
-        "Storage and data pipelines in Python and SQL, including an applicant tracking system managing 5,000+ applicants and integrated with HR systems.",
-    },
-    {
-      name: "Machine Learning",
-      text:
-        "Predictive and recommendation models in Python, from disease-risk classifiers (logistic regression, SVM) to collaborative-filtering recommenders.",
-    },
-    {
-      name: "Video Pipelines",
-      text:
-        "Processing live-stream data: capturing, synchronising and stitching video feeds by timestamp into one seamless output. Familiar with YOLO for detection.",
-    },
+  // Core stack: your five headline skills, each with one line of proof.
+  // "match" words are compared with project tags: hovering a card highlights the projects that use it.
+  // A proof line left as a [[ placeholder ]] is shown dashed in preview mode and hidden otherwise.
+  core: [
+    { name: "Python", proof: "Automation tool, ATS, video pipeline", match: ["python"] },
+    { name: "Django", proof: "[[ Add a Django project here ]]", match: ["django"] },
+    { name: "SQL", proof: "ATS with 5,000+ applicants", match: ["sql"] },
+    { name: "Pandas", proof: "Data cleaning, book recommender", match: ["pandas"] },
+    { name: "Machine learning", proof: "Disease prediction, recommender", match: ["machine learning", "svm", "logistic", "recommender"] },
   ],
 
-  // Optional line shown in the hero contact area, e.g. "Open to work". Leave as placeholder to hide.
+  // Optional status shown in the hero, e.g. "Open to work". Leave as placeholder to hide.
   status: "[[ e.g. Open to work ]]",
 
   location: "New Delhi, India",
@@ -78,7 +65,7 @@ window.CONTENT = {
   about: [
     "I'm a Computer Science graduate (B.Tech, 2023) based in New Delhi. I started my career as an AI/ML Engineer, " +
       "where I built internal tools and client systems end to end, from data collection and storage to packaging and documentation.",
-    "My core toolkit is Python and SQL, backed by NumPy, Pandas, Selenium and machine-learning frameworks such as " +
+    "My core toolkit is Python, Django and SQL, with Pandas and NumPy for cleaning data and machine-learning frameworks such as " +
       "TensorFlow, PyTorch and YOLO. I'm comfortable with object-oriented design and enjoy turning messy data and manual processes into reliable software.",
   ],
 
@@ -142,6 +129,7 @@ window.CONTENT = {
     {
       name: "Multiple Disease Prediction System",
       category: "Machine Learning",
+      visual: "scatter", // card artwork: "scatter", "graph" or "bars"
       problem: "Early detection of Parkinson's disease, heart disease and diabetes from patient data.",
       approach:
         "Trained machine-learning classifiers for each condition, using logistic regression and support vector machines for predictive modelling.",
@@ -153,6 +141,7 @@ window.CONTENT = {
     {
       name: "Book Recommendation System",
       category: "Recommender System",
+      visual: "graph",
       problem: "Suggesting books readers are likely to enjoy, based on their ratings and similar readers.",
       approach:
         "Collaborative filtering on a book-ratings dataset: preprocessed and analysed the data, then computed user and item similarities to produce personalised recommendations.",
@@ -185,13 +174,12 @@ window.CONTENT = {
   ],
 
   skills: [
-    { group: "Languages", items: ["Python", "SQL", "Core Java"] },
-    {
-      group: "Libraries & frameworks",
-      items: ["NumPy", "Pandas", "Matplotlib", "Selenium", "YOLO", "TensorFlow", "PyTorch"],
-    },
-    { group: "Databases", items: ["Oracle SQL", "MySQL"] },
-    { group: "Tools", items: ["VS Code", "PyCharm", "Jupyter Notebook", "Power BI"] },
+    { group: "Languages", items: ["Python", "SQL"] },
+    { group: "Backend", items: ["Django", "Django REST Framework", "REST APIs"] },
+    { group: "Data cleaning & analysis", items: ["Pandas", "NumPy", "Matplotlib", "Seaborn"] },
+    { group: "ML & automation", items: ["TensorFlow", "PyTorch", "YOLO", "Selenium"] },
+    { group: "Databases", items: ["Oracle SQL", "MySQL", "SQL joins & query optimisation"] },
+    { group: "Tools", items: ["Git & GitHub", "VS Code", "Jupyter Notebook", "Power BI"] },
   ],
 
   education: [
