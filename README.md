@@ -28,12 +28,12 @@ Everything you change lives in **`content.js`**.
 Only add numbers and claims that are true.
 
 ## Extras built in
-- **Hero:** a centred headline with a golden spiral that draws itself behind it, and your first three projects fanned out as cards underneath (they spread on hover and link to Projects). Ideas adapted from the 21st.dev hero components "Centered Hero with Image Fan" and "Hero Golden Spiral".
+- **Hero:** a calm, centred headline with rotating words, two buttons, count-up stats and a slow skills ticker.
 - **Terminal in About:** types a short Python script about you when it scrolls into view (edit `terminal` in `content.js`).
-- **Email:** clicking your address opens a Gmail compose window with your address already in the "To" field. The "Send me a message" box does the same with the visitor's name and message filled in. Nothing is sent from the page, and no server is involved. (To receive messages without the visitor pressing send, you would add a form service such as Formspree; that needs your own account.)
+- **Email:** the address is a normal email link (opens the visitor's own mail app, with a subject filled in), and a "Copy email" button sits next to it for visitors with no mail app. No third-party service is involved.
 - **Light/dark theme:** follows the visitor's system setting; the moon/sun button switches and remembers it.
-- **Motion:** an intro splash (once per tab session), word-by-word headline reveals, a skills ticker and a scroll-driven band, a sliding nav highlight, parallax on the outlined numbers, project artwork that draws itself in, spotlight glow and tilt on cards, magnetic buttons, a cursor follower, a back-to-top button with a progress ring, confetti on email actions, a hidden Konami-code easter egg, and an animated highlighter for phrases wrapped in `**double asterisks**` in the `about` text.
-- **Accessibility:** a "Skip to content" link, keyboard focus outlines, labelled form fields, and everything animated switches off for visitors who prefer reduced motion. Cursor effects are desktop-only.
+- **Motion:** word-by-word headline reveals, a scroll-driven skills band, a sliding nav highlight, parallax on the outlined numbers, project artwork that draws itself in, spotlight glow and tilt on cards, magnetic buttons, a cursor follower, a back-to-top button with a progress ring, confetti on "Copy email", a hidden Konami-code easter egg, and an animated highlighter for phrases wrapped in `**double asterisks**` in the `about` text.
+- **Accessibility:** a "Skip to content" link, keyboard focus outlines, and everything animated switches off for visitors who prefer reduced motion. Cursor effects are desktop-only.
 ## Files
 - `index.html`: page structure
 - `styles.css`: light editorial theme and layout

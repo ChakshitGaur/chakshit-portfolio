@@ -367,36 +367,6 @@
   });
   if (!projectList.length) { $("projects").hidden = true; }
 
-  /* ---------- hero: fan of project cards + golden spiral ---------- */
-  var fan = $("fan");
-  var fanProjects = projectList.slice(0, 3);
-  var fanOrder = fanProjects.length === 3 ? [1, 0, 2] : fanProjects.length === 2 ? [1, 0] : [0];
-  var fanPos = fanProjects.length === 3 ? ["l", "c", "r"] : fanProjects.length === 2 ? ["l", "c"] : ["c"];
-  fan.setAttribute("role", "group");
-  fanOrder.forEach(function (pi, slot) {
-    var p = fanProjects[pi];
-    var artWrap = el("div", { cls: "fan-art" });
-    artWrap.appendChild(art(p.visual || ["scatter", "graph", "bars"][pi % 3], pi + 1));
-    var card = el("a", { cls: "fan-card " + fanPos[slot], attrs: { href: "#projects", "aria-label": "See the project: " + p.name } }, [
-      artWrap,
-      el("div", { cls: "fan-cap" }, [el("small", { text: show(p.category) ? p.category : "Project" }), el("strong", { text: p.name })]),
-    ]);
-    card.style.setProperty("--n", slot);
-    fan.appendChild(card);
-  });
-  if (!fanProjects.length) { fan.hidden = true; }
-
-  // Golden spiral drawn behind the headline
-  (function () {
-    var svg = $("spiral"), phi = (1 + Math.sqrt(5)) / 2, b = Math.log(phi) / (Math.PI / 2), a = 3.2, d = "";
-    for (var t = 0; t <= 14.6; t += 0.05) {
-      var r = a * Math.exp(b * t);
-      d += (t === 0 ? "M" : "L") + (r * Math.cos(t)).toFixed(1) + " " + (r * Math.sin(t)).toFixed(1) + " ";
-    }
-    svg.appendChild(svgEl("path", { d: d, pathLength: 1, class: "spiral-path" }));
-    svg.appendChild(svgEl("circle", { cx: 0, cy: 0, r: 3.5, class: "acc" }));
-  })();
-
   /* ---------- experience ---------- */
   var timeline = $("timeline");
   (C.experience || []).forEach(function (job) {
@@ -449,13 +419,10 @@
   var SUBJECT = "Hello from your portfolio";
   var mail = $("contactMail");
   if (email) {
-    // Clicking the address opens a Gmail compose window with it already in the "To" field.
+    // A plain email link: clicking opens the visitor's own mail app. The address stays visible and can be copied.
     mail.textContent = email;
-    mail.setAttribute("href", gmailUrl(SUBJECT));
-    mail.setAttribute("target", "_blank");
-    mail.setAttribute("rel", "noopener noreferrer");
-    mail.setAttribute("title", "Opens Gmail with " + email + " in the To field");
-  } else { mail.hidden = true; $("composer").hidden = true; }
+    mail.setAttribute("href", "mailto:" + email + "?subject=" + encodeURIComponent(SUBJECT));
+  } else { mail.hidden = true; }
 
   function copyEmail() {
     if (navigator.clipboard && navigator.clipboard.writeText) {
@@ -479,35 +446,12 @@
     sparksAt(x, y);
   }
 
-  // Gmail compose link: the recipient (To) is always filled in.
-  function gmailUrl(subject, body) {
-    return "https://mail.google.com/mail/?view=cm&fs=1&to=" + encodeURIComponent(email) + "&su=" + encodeURIComponent(subject) + (body ? "&body=" + encodeURIComponent(body) : "");
-  }
-  if (email) { mail.addEventListener("click", burstAt); }
-
   var actions = $("contactActions");
   if (email) {
     var copyBtn = el("button", { cls: "btn btn-outline-light", text: "Copy email", attrs: { type: "button" } });
     copyBtn.addEventListener("click", function (e) { copyEmail(); burstAt(e); });
     actions.appendChild(copyBtn);
   }
-
-  // Message box: builds a Gmail draft addressed to you. Nothing is sent from this page.
-  var cName = $("cName"), cMsg = $("cMsg"), cErr = $("cErr");
-  cMsg.maxLength = 1500;
-  function draft() {
-    var msg = cMsg.value.trim();
-    if (!msg) { cErr.textContent = "Write a short message first."; cErr.hidden = false; cMsg.focus(); return null; }
-    cErr.hidden = true;
-    var name = cName.value.trim();
-    return { subject: name ? "Portfolio message from " + name : SUBJECT, body: msg + (name ? "\n\n" + name : "") };
-  }
-  cMsg.addEventListener("input", function () { cErr.hidden = true; });
-  $("cGmail").addEventListener("click", function (e) {
-    var d = draft(); if (!d || !email) { return; }
-    window.open(gmailUrl(d.subject, d.body), "_blank", "noopener");
-    burstAt(e);
-  });
 
   if (show(C.links.linkedin)) { actions.appendChild(link(C.links.linkedin, "LinkedIn", "btn btn-outline-light", true)); }
   if (show(C.links.github)) { actions.appendChild(link(C.links.github, "GitHub", "btn btn-outline-light", true)); }
@@ -748,15 +692,6 @@
       }
     }
   });
-
-  // Intro splash: lifts away, then the hero animates in
-  var splash = $("splash"), rootEl = document.documentElement;
-  if (splash) {
-    if (rootEl.classList.contains("splash")) {
-      setTimeout(function () { splash.classList.add("out"); rootEl.classList.remove("splash"); }, 1150);
-      setTimeout(function () { rootEl.classList.remove("splash-run"); splash.remove(); }, 2000);
-    } else { splash.remove(); }
-  }
 
   /* ---------- scroll: fades, active nav ---------- */
   var fades = document.querySelectorAll(".fade");

@@ -18,23 +18,9 @@
       document.documentElement.setAttribute("data-theme", t);
     })();
   </script>
-  <script>
-    /* Intro splash: once per browser tab, never with reduced motion. A failsafe removes it if scripts fail. */
-    (function () {
-      var r = document.documentElement;
-      try {
-        if (window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches) { return; }
-        if (sessionStorage.getItem("seen")) { return; }
-        sessionStorage.setItem("seen", "1");
-      } catch (e) { return; }
-      r.classList.add("splash", "splash-run");
-      setTimeout(function () { r.classList.remove("splash", "splash-run"); }, 3200);
-    })();
-  </script>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div class="splash" id="splash" aria-hidden="true"><span>Chakshit Gaur<i>.</i></span></div>
   <a class="skip" href="#skills">Skip to content</a>
   <div class="progress" id="progress" aria-hidden="true"></div>
   <div class="cursor" id="cursor" aria-hidden="true"></div>
@@ -64,7 +50,6 @@
     <!-- HERO -->
     <section class="hero" id="hero">
       <div class="dots" aria-hidden="true"></div>
-      <svg class="spiral" id="spiral" viewBox="-300 -300 600 600" aria-hidden="true" focusable="false"></svg>
       <div class="container hero-center">
         <p class="eyebrow rise" id="heroEyebrow"></p>
         <h1 class="hero-title" id="heroTitle"></h1>
@@ -74,7 +59,6 @@
           <a class="btn btn-dark" href="#projects">View projects</a>
           <a class="btn btn-line" id="heroEmail" href="#contact">Get in touch</a>
         </div>
-        <div class="fan rise" id="fan" style="--i:9" aria-label="A glimpse of my projects"></div>
       </div>
 
       <div class="container">
@@ -153,25 +137,9 @@
     <section class="contact" id="contact">
       <div class="container">
         <p class="sec-num light fade">05 Contact</p>
-        <div class="contact-grid">
-          <div>
-            <h2 class="contact-title fade">Let's build something useful.</h2>
-            <a class="contact-mail fade" id="contactMail" href="#"></a>
-            <div class="contact-actions fade" id="contactActions"></div>
-          </div>
-          <form class="composer fade" id="composer" novalidate style="--d:0.1s">
-            <h3>Send me a message</h3>
-            <label for="cName">Your name</label>
-            <input id="cName" type="text" autocomplete="name" placeholder="Jane Doe">
-            <label for="cMsg">Message</label>
-            <textarea id="cMsg" rows="5" placeholder="Hi Chakshit, I'd like to talk about..."></textarea>
-            <p class="composer-err" id="cErr" role="alert" hidden></p>
-            <div class="composer-actions">
-              <button class="btn btn-light" id="cGmail" type="button">Open in Gmail</button>
-            </div>
-            <p class="composer-note">This opens a ready-written Gmail draft addressed to me. Nothing is sent until you press send.</p>
-          </form>
-        </div>
+        <h2 class="contact-title fade">Let's build something useful.</h2>
+        <a class="contact-mail fade" id="contactMail" href="#"></a>
+        <div class="contact-actions fade" id="contactActions"></div>
       </div>
     </section>
   </main>
