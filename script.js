@@ -249,7 +249,13 @@
       })();
     })();
   }
-  if (termRows.length && !REDUCED) { setTimeout(typeTerminal, 900); }
+  // The terminal now lives in About, so it types itself when it scrolls into view.
+  if (termRows.length && !REDUCED) {
+    if ("IntersectionObserver" in window) {
+      var termIO = new IntersectionObserver(function (en) { if (en[0].isIntersecting) { termIO.disconnect(); typeTerminal(); } }, { threshold: 0.4 });
+      termIO.observe($("term"));
+    } else { setTimeout(typeTerminal, 900); }
+  }
 
   /* ---------- skills: core cards + grouped chips ---------- */
   var coreEl = $("core");
@@ -361,6 +367,36 @@
   });
   if (!projectList.length) { $("projects").hidden = true; }
 
+  /* ---------- hero: fan of project cards + golden spiral ---------- */
+  var fan = $("fan");
+  var fanProjects = projectList.slice(0, 3);
+  var fanOrder = fanProjects.length === 3 ? [1, 0, 2] : fanProjects.length === 2 ? [1, 0] : [0];
+  var fanPos = fanProjects.length === 3 ? ["l", "c", "r"] : fanProjects.length === 2 ? ["l", "c"] : ["c"];
+  fan.setAttribute("role", "group");
+  fanOrder.forEach(function (pi, slot) {
+    var p = fanProjects[pi];
+    var artWrap = el("div", { cls: "fan-art" });
+    artWrap.appendChild(art(p.visual || ["scatter", "graph", "bars"][pi % 3], pi + 1));
+    var card = el("a", { cls: "fan-card " + fanPos[slot], attrs: { href: "#projects", "aria-label": "See the project: " + p.name } }, [
+      artWrap,
+      el("div", { cls: "fan-cap" }, [el("small", { text: show(p.category) ? p.category : "Project" }), el("strong", { text: p.name })]),
+    ]);
+    card.style.setProperty("--n", slot);
+    fan.appendChild(card);
+  });
+  if (!fanProjects.length) { fan.hidden = true; }
+
+  // Golden spiral drawn behind the headline
+  (function () {
+    var svg = $("spiral"), phi = (1 + Math.sqrt(5)) / 2, b = Math.log(phi) / (Math.PI / 2), a = 3.2, d = "";
+    for (var t = 0; t <= 14.6; t += 0.05) {
+      var r = a * Math.exp(b * t);
+      d += (t === 0 ? "M" : "L") + (r * Math.cos(t)).toFixed(1) + " " + (r * Math.sin(t)).toFixed(1) + " ";
+    }
+    svg.appendChild(svgEl("path", { d: d, pathLength: 1, class: "spiral-path" }));
+    svg.appendChild(svgEl("circle", { cx: 0, cy: 0, r: 3.5, class: "acc" }));
+  })();
+
   /* ---------- experience ---------- */
   var timeline = $("timeline");
   (C.experience || []).forEach(function (job) {
@@ -413,8 +449,12 @@
   var SUBJECT = "Hello from your portfolio";
   var mail = $("contactMail");
   if (email) {
+    // Clicking the address opens a Gmail compose window with it already in the "To" field.
     mail.textContent = email;
-    mail.setAttribute("href", "mailto:" + email + "?subject=" + encodeURIComponent(SUBJECT));
+    mail.setAttribute("href", gmailUrl(SUBJECT));
+    mail.setAttribute("target", "_blank");
+    mail.setAttribute("rel", "noopener noreferrer");
+    mail.setAttribute("title", "Opens Gmail with " + email + " in the To field");
   } else { mail.hidden = true; $("composer").hidden = true; }
 
   function copyEmail() {
@@ -439,26 +479,11 @@
     sparksAt(x, y);
   }
 
-  // One click to email: try the visitor's mail app; if nothing opens, fall back to a Gmail draft in a new tab.
+  // Gmail compose link: the recipient (To) is always filled in.
   function gmailUrl(subject, body) {
     return "https://mail.google.com/mail/?view=cm&fs=1&to=" + encodeURIComponent(email) + "&su=" + encodeURIComponent(subject) + (body ? "&body=" + encodeURIComponent(body) : "");
   }
-  function smartMail(subject, body) {
-    var left = false;
-    function mark() { left = true; }
-    window.addEventListener("blur", mark);
-    document.addEventListener("visibilitychange", mark);
-    var a = el("a", { attrs: { href: "mailto:" + email + "?subject=" + encodeURIComponent(subject) + (body ? "&body=" + encodeURIComponent(body) : "") } });
-    document.body.appendChild(a); a.click(); a.remove();
-    setTimeout(function () {
-      window.removeEventListener("blur", mark);
-      document.removeEventListener("visibilitychange", mark);
-      if (!left) { toast("No mail app found, opening Gmail"); window.open(gmailUrl(subject, body), "_blank", "noopener"); }
-    }, 1200);
-  }
-  if (email) {
-    mail.addEventListener("click", function (e) { e.preventDefault(); smartMail(SUBJECT); burstAt(e); });
-  }
+  if (email) { mail.addEventListener("click", burstAt); }
 
   var actions = $("contactActions");
   if (email) {
@@ -467,7 +492,7 @@
     actions.appendChild(copyBtn);
   }
 
-  // Message box: builds a draft for Gmail or the visitor's mail app. Nothing is sent from this page.
+  // Message box: builds a Gmail draft addressed to you. Nothing is sent from this page.
   var cName = $("cName"), cMsg = $("cMsg"), cErr = $("cErr");
   cMsg.maxLength = 1500;
   function draft() {
@@ -481,11 +506,6 @@
   $("cGmail").addEventListener("click", function (e) {
     var d = draft(); if (!d || !email) { return; }
     window.open(gmailUrl(d.subject, d.body), "_blank", "noopener");
-    burstAt(e);
-  });
-  $("cMail").addEventListener("click", function (e) {
-    var d = draft(); if (!d || !email) { return; }
-    smartMail(d.subject, d.body);
     burstAt(e);
   });
 
@@ -548,73 +568,13 @@
   window.addEventListener("resize", onProgress);
   onProgress();
 
-  /* ---------- toast + command palette ---------- */
+  /* ---------- toast ---------- */
   function toast(msg) {
     var t = el("div", { text: msg, attrs: { role: "status" } });
     t.style.cssText = "position:fixed;left:50%;bottom:28px;transform:translateX(-50%);z-index:300;padding:10px 18px;border-radius:999px;background:var(--inv-bg);color:var(--inv-ink);font-size:0.9rem;box-shadow:0 10px 30px rgba(0,0,0,.25)";
     document.body.appendChild(t);
     setTimeout(function () { t.remove(); }, 1800);
   }
-  function goTo(id) { var s = $(id); if (s) { s.scrollIntoView({ behavior: REDUCED ? "auto" : "smooth", block: "start" }); } }
-
-  var commands = [
-    { label: "Go to Skills", tag: "Section", run: function () { goTo("skills"); } },
-    { label: "Go to Projects", tag: "Section", run: function () { goTo("projects"); } },
-    { label: "Go to Experience", tag: "Section", run: function () { goTo("experience"); } },
-    { label: "Go to About", tag: "Section", run: function () { goTo("about"); } },
-    { label: "Go to Contact", tag: "Section", run: function () { goTo("contact"); } },
-    { label: "Write me a message", tag: "Action", run: function () { goTo("contact"); setTimeout(function () { $("cMsg").focus({ preventScroll: true }); }, 700); } }
-  ];
-  if (show(C.links.email) && !isPh(C.links.email)) {
-    commands.push({ label: "Copy email address", tag: "Action", run: function () {
-      if (navigator.clipboard && navigator.clipboard.writeText) {
-        navigator.clipboard.writeText(C.links.email).then(function () { toast("Email copied"); }, function () { toast(C.links.email); });
-      } else { toast(C.links.email); }
-    } });
-  }
-  commands.push({ label: "Download resume", tag: "Action", run: function () {
-    var a = el("a", { attrs: { href: C.resumeFile, download: C.name.replace(/\s+/g, "") + "_Resume.pdf" } });
-    document.body.appendChild(a); a.click(); a.remove();
-  } });
-  if (show(C.links.linkedin) && !isPh(C.links.linkedin)) { commands.push({ label: "Open LinkedIn", tag: "Link", run: function () { window.open(C.links.linkedin, "_blank", "noopener"); } }); }
-  if (show(C.links.github) && !isPh(C.links.github)) { commands.push({ label: "Open GitHub", tag: "Link", run: function () { window.open(C.links.github, "_blank", "noopener"); } }); }
-  commands.push({ label: "Switch light / dark theme", tag: "Action", run: toggleTheme });
-
-  var palette = $("palette"), pInput = $("paletteInput"), pList = $("paletteList");
-  var pItems = [], pIndex = 0, pLast = null;
-  function pRender() {
-    var q = pInput.value.trim().toLowerCase();
-    pItems = commands.filter(function (c) { return !q || c.label.toLowerCase().indexOf(q) > -1; });
-    pIndex = clamp(pIndex, 0, Math.max(0, pItems.length - 1));
-    pList.textContent = "";
-    if (!pItems.length) { pList.appendChild(el("li", { cls: "palette-empty", text: "No matching command." })); return; }
-    pItems.forEach(function (c, i) {
-      var li = el("li", { attrs: { role: "option", "aria-selected": String(i === pIndex) } }, [el("span", { text: c.label }), el("small", { text: c.tag })]);
-      li.addEventListener("click", function () { pRun(i); });
-      li.addEventListener("mousemove", function () { if (pIndex !== i) { pIndex = i; pMark(); } });
-      pList.appendChild(li);
-    });
-  }
-  function pMark() {
-    Array.prototype.forEach.call(pList.children, function (li, i) { li.setAttribute("aria-selected", String(i === pIndex)); });
-    var sel = pList.children[pIndex];
-    if (sel && sel.scrollIntoView) { sel.scrollIntoView({ block: "nearest" }); }
-  }
-  function pOpen() { pLast = document.activeElement; pInput.value = ""; pIndex = 0; pRender(); palette.hidden = false; pInput.focus(); }
-  function pClose() { palette.hidden = true; if (pLast && pLast.focus) { pLast.focus(); } }
-  function pRun(i) { var c = pItems[i]; if (!c) { return; } pClose(); setTimeout(c.run, 60); }
-  $("paletteBtn").addEventListener("click", pOpen);
-  palette.addEventListener("mousedown", function (e) { if (e.target === palette) { pClose(); } });
-  pInput.addEventListener("input", function () { pIndex = 0; pRender(); });
-  pInput.addEventListener("keydown", function (e) {
-    if (e.key === "ArrowDown") { e.preventDefault(); pIndex = Math.min(pItems.length - 1, pIndex + 1); pMark(); }
-    else if (e.key === "ArrowUp") { e.preventDefault(); pIndex = Math.max(0, pIndex - 1); pMark(); }
-    else if (e.key === "Enter") { e.preventDefault(); pRun(pIndex); }
-  });
-  document.addEventListener("keydown", function (e) {
-    if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "k") { e.preventDefault(); if (palette.hidden) { pOpen(); } else { pClose(); } }
-    else if (e.key === "Escape" && !palette.hidden) { pClose(); }
-  });
 
   /* ---------- creative layer ---------- */
   // Skills ticker (decorative; the real skills list is above)

@@ -16,7 +16,7 @@ Everything you change lives in **`content.js`**.
 | What | Where in `content.js` |
 |---|---|
 | Hero headline, accent words, scrambling words | `hero` |
-| Terminal in the hero (facts only) | `terminal` |
+| Terminal in About (facts only) | `terminal` |
 | Five headline skills with a proof line each | `core` |
 | All skills, in groups | `skills` |
 | What you did since June 2024 | first item in `experience` |
@@ -28,15 +28,12 @@ Everything you change lives in **`content.js`**.
 Only add numbers and claims that are true.
 
 ## Extras built in
+- **Hero:** a centred headline with a golden spiral that draws itself behind it, and your first three projects fanned out as cards underneath (they spread on hover and link to Projects). Ideas adapted from the 21st.dev hero components "Centered Hero with Image Fan" and "Hero Golden Spiral".
+- **Terminal in About:** types a short Python script about you when it scrolls into view (edit `terminal` in `content.js`).
+- **Email:** clicking your address opens a Gmail compose window with your address already in the "To" field. The "Send me a message" box does the same with the visitor's name and message filled in. Nothing is sent from the page, and no server is involved. (To receive messages without the visitor pressing send, you would add a form service such as Formspree; that needs your own account.)
 - **Light/dark theme:** follows the visitor's system setting; the moon/sun button switches and remembers it.
-- **Command palette:** press `Ctrl+K` (or `Cmd+K`) to jump to a section, copy the email, or download the resume.
-- **Contact message box:** visitors type a message and choose "Open in Gmail" or "Use my mail app"; it opens a ready-written draft addressed to your email. Nothing is sent from the page itself, and no server is involved. (For messages that arrive without the visitor pressing send, you would add a form service such as Formspree; that needs your own account.)
-- **One-click email:** clicking the email address tries the visitor's mail app first; if nothing opens, it opens a Gmail draft to you in a new tab.
-- **More motion:** an intro splash (once per tab session), an aurora glow behind the terminal, a sliding highlight in the nav, project artwork that draws itself in, parallax on the outlined numbers, tilt on the skill cards, and a hidden Konami-code easter egg (up up down down left right left right B A).
-- **Extra motion:** floating tech badges near the terminal, a skills band that slides as you scroll, chips that pop in, animated project artwork on hover, a headline shimmer, a back-to-top button with a progress ring, and confetti when someone copies your email or opens a draft.
-- **Scroll progress bar** along the top, and a "Skip to content" link for keyboard users.
-- **Creative layer:** spotlight glow on cards, a light beam around the terminal, 3D tilt on project cards, magnetic buttons, a soft cursor follower, a skills ticker, masked word reveals on headings, and an animated highlighter for phrases wrapped in `**double asterisks**` in the `about` text. All of it switches off for visitors who prefer reduced motion, and the cursor effects are desktop-only.
-
+- **Motion:** an intro splash (once per tab session), word-by-word headline reveals, a skills ticker and a scroll-driven band, a sliding nav highlight, parallax on the outlined numbers, project artwork that draws itself in, spotlight glow and tilt on cards, magnetic buttons, a cursor follower, a back-to-top button with a progress ring, confetti on email actions, a hidden Konami-code easter egg, and an animated highlighter for phrases wrapped in `**double asterisks**` in the `about` text.
+- **Accessibility:** a "Skip to content" link, keyboard focus outlines, labelled form fields, and everything animated switches off for visitors who prefer reduced motion. Cursor effects are desktop-only.
 ## Files
 - `index.html`: page structure
 - `styles.css`: light editorial theme and layout
