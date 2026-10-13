@@ -415,6 +415,47 @@ mark { color: inherit; background: linear-gradient(var(--accent-soft), var(--acc
 .pcard:hover .pcard-art circle.acc { animation: blip 1.5s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
 @keyframes blip { 50% { transform: scale(1.6); } }
 
+/* ==========================================================================
+   Even more motion: intro splash, aurora, sliding nav highlight, art draw-in,
+   outlined-number parallax
+   ========================================================================== */
+:root { --aurora1: rgba(47, 75, 255, 0.4); --aurora2: rgba(255, 154, 77, 0.38); }
+:root[data-theme="dark"] { --aurora1: rgba(142, 160, 255, 0.34); --aurora2: rgba(255, 154, 77, 0.26); }
+
+/* Intro splash (once per tab). While html.splash is set, the hero animations wait. */
+.splash { position: fixed; inset: 0; z-index: 1000; display: none; place-items: center; background: var(--inv-bg); color: var(--inv-ink); transition: transform 0.85s var(--ease); }
+html.splash-run .splash { display: grid; }
+.splash.out { transform: translateY(-100%); }
+.splash span { font-size: clamp(2.4rem, 9vw, 6rem); font-weight: 600; letter-spacing: -0.045em; animation: splashIn 0.9s var(--ease) both; }
+.splash i { font-style: normal; color: var(--accent); }
+@keyframes splashIn { from { opacity: 0; transform: translateY(28px) scale(0.96); } }
+html.splash .rise, html.splash .hero-title .w > span { animation-play-state: paused !important; }
+
+/* Aurora glow breathing behind the terminal */
+.term-wrap { isolation: isolate; }
+.term-wrap::before {
+  content: ""; position: absolute; inset: -16% -10%; z-index: -1; pointer-events: none; filter: blur(34px);
+  background: radial-gradient(circle 250px at 9% 12%, var(--aurora1), transparent 70%), radial-gradient(circle 270px at 91% 90%, var(--aurora2), transparent 70%);
+  animation: aurora 11s ease-in-out infinite alternate;
+}
+@keyframes aurora { from { transform: translate3d(-3%, -2%, 0) scale(1); } to { transform: translate3d(3%, 4%, 0) scale(1.1); } }
+
+/* Nav: sliding highlight */
+.nav-links { position: relative; }
+.nav-ind { position: absolute; left: 0; top: 0; bottom: 0; border-radius: 999px; background: var(--accent-soft); opacity: 0; pointer-events: none; transition: transform 0.4s var(--ease), width 0.4s var(--ease), opacity 0.25s; }
+.nav-links:has(.nav-ind) a:not(.nav-cta):hover, .nav-links:has(.nav-ind) a.active:not(.nav-cta) { background: transparent; }
+@media (max-width: 720px) { .nav-ind { display: none; } .nav-links:has(.nav-ind) a:not(.nav-cta):hover, .nav-links:has(.nav-ind) a.active:not(.nav-cta) { background: rgba(20, 19, 15, 0.06); } }
+
+/* Project art draws itself in when the card scrolls into view */
+@keyframes artIn { from { opacity: 0; transform: scale(0.3); } }
+@keyframes artFade { from { opacity: 0; } }
+.pcard.in .pcard-art svg > * { animation: artIn 0.6s var(--ease) backwards; animation-delay: calc(var(--k, 0) * 16ms + 0.25s); transform-box: fill-box; transform-origin: center; }
+.pcard.in .pcard-art svg > circle[transform] { animation-name: artFade; }
+.pcard.in .pcard-art svg > line { animation-name: artFade; }
+
+/* Outlined section numbers drift at their own speed */
+.sec-head::before { transform: translateY(calc(var(--par, 0) * 1px)); will-change: transform; }
+
 /* ---------- Preview mode (placeholders) ---------- */
 .preview-banner { position: relative; z-index: 120; background: #fff3cc; color: #5c4400; text-align: center; font-size: 0.85rem; padding: 8px 16px; border-bottom: 1px solid #e6cf85; }
 .ph { outline: 1.5px dashed #d98a00; outline-offset: 3px; border-radius: 2px; color: #a86500 !important; background: rgba(217, 138, 0, 0.08); }

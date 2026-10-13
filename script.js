@@ -327,6 +327,7 @@
         svg.appendChild(svgEl("circle", { cx: 300 + (r() - 0.5) * 130, cy: 85 + (r() - 0.65) * 110, r: 3.4, class: "acc", "fill-opacity": 0.9 }));
       }
     }
+    Array.prototype.forEach.call(svg.children, function (n, k) { n.style.setProperty("--k", k); });
     return svg;
   }
 
@@ -421,18 +422,42 @@
       navigator.clipboard.writeText(email).then(function () { toast("Email copied"); }, function () { toast(email); });
     } else { toast(email); }
   }
-  // Confetti burst from a click (or from the element's centre when triggered by keyboard)
+  // Confetti: sparksAt draws a burst at a point; burstAt uses a click (or the element's centre for keyboard clicks)
+  function sparksAt(x, y, count) {
+    var colors = ["#2f4bff", "#ff9a4d", "#e070dc", "#1fb26b", "#ffd166"], n = count || 18;
+    for (var i = 0; i < n; i++) {
+      var a = (i / n) * Math.PI * 2 + Math.random() * 0.4, d = 46 + Math.random() * 60, s = el("i", { cls: "spark" });
+      s.style.cssText = "left:" + x + "px;top:" + y + "px;--dx:" + (Math.cos(a) * d).toFixed(1) + "px;--dy:" + (Math.sin(a) * d).toFixed(1) + "px;background:" + colors[i % colors.length];
+      document.body.appendChild(s);
+      setTimeout((function (node) { return function () { node.remove(); }; })(s), 800);
+    }
+  }
   function burstAt(e) {
     if (REDUCED) { return; }
     var x = e.clientX, y = e.clientY;
     if (!e.detail && e.currentTarget) { var r = e.currentTarget.getBoundingClientRect(); x = r.left + r.width / 2; y = r.top + r.height / 2; }
-    var colors = ["#2f4bff", "#ff9a4d", "#e070dc", "#1fb26b", "#ffd166"];
-    for (var i = 0; i < 18; i++) {
-      var a = (i / 18) * Math.PI * 2 + Math.random() * 0.4, d = 46 + Math.random() * 60, s = el("i", { cls: "spark" });
-      s.style.cssText = "left:" + x + "px;top:" + y + "px;--dx:" + (Math.cos(a) * d).toFixed(1) + "px;--dy:" + (Math.sin(a) * d).toFixed(1) + "px;background:" + colors[i % colors.length];
-      document.body.appendChild(s);
-      setTimeout((function (n) { return function () { n.remove(); }; })(s), 800);
-    }
+    sparksAt(x, y);
+  }
+
+  // One click to email: try the visitor's mail app; if nothing opens, fall back to a Gmail draft in a new tab.
+  function gmailUrl(subject, body) {
+    return "https://mail.google.com/mail/?view=cm&fs=1&to=" + encodeURIComponent(email) + "&su=" + encodeURIComponent(subject) + (body ? "&body=" + encodeURIComponent(body) : "");
+  }
+  function smartMail(subject, body) {
+    var left = false;
+    function mark() { left = true; }
+    window.addEventListener("blur", mark);
+    document.addEventListener("visibilitychange", mark);
+    var a = el("a", { attrs: { href: "mailto:" + email + "?subject=" + encodeURIComponent(subject) + (body ? "&body=" + encodeURIComponent(body) : "") } });
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(function () {
+      window.removeEventListener("blur", mark);
+      document.removeEventListener("visibilitychange", mark);
+      if (!left) { toast("No mail app found, opening Gmail"); window.open(gmailUrl(subject, body), "_blank", "noopener"); }
+    }, 1200);
+  }
+  if (email) {
+    mail.addEventListener("click", function (e) { e.preventDefault(); smartMail(SUBJECT); burstAt(e); });
   }
 
   var actions = $("contactActions");
@@ -455,13 +480,12 @@
   cMsg.addEventListener("input", function () { cErr.hidden = true; });
   $("cGmail").addEventListener("click", function (e) {
     var d = draft(); if (!d || !email) { return; }
-    window.open("https://mail.google.com/mail/?view=cm&fs=1&to=" + encodeURIComponent(email) + "&su=" + encodeURIComponent(d.subject) + "&body=" + encodeURIComponent(d.body), "_blank", "noopener");
+    window.open(gmailUrl(d.subject, d.body), "_blank", "noopener");
     burstAt(e);
   });
   $("cMail").addEventListener("click", function (e) {
     var d = draft(); if (!d || !email) { return; }
-    var a = el("a", { attrs: { href: "mailto:" + email + "?subject=" + encodeURIComponent(d.subject) + "&body=" + encodeURIComponent(d.body) } });
-    document.body.appendChild(a); a.click(); a.remove();
+    smartMail(d.subject, d.body);
     burstAt(e);
   });
 
@@ -703,6 +727,77 @@
     }
   }
 
+  // Skill cards lean toward the cursor
+  if (HOVER && !REDUCED) {
+    document.querySelectorAll(".core-card").forEach(function (card) {
+      card.addEventListener("pointermove", function (e) {
+        var r = card.getBoundingClientRect();
+        var px = (e.clientX - r.left) / r.width - 0.5, py = (e.clientY - r.top) / r.height - 0.5;
+        card.style.transition = "transform 0.12s ease-out, border-color 0.25s, box-shadow 0.3s";
+        card.style.transform = "perspective(700px) rotateX(" + (-py * 8).toFixed(2) + "deg) rotateY(" + (px * 10).toFixed(2) + "deg) translateY(-3px)";
+      });
+      card.addEventListener("pointerleave", function () { card.style.transition = ""; card.style.transform = ""; });
+    });
+  }
+
+  // Parallax: the big outlined numbers drift slower than the page
+  var secHeads = document.querySelectorAll(".sec-head"), parTick = false;
+  function parallax() {
+    parTick = false;
+    var vh = window.innerHeight;
+    secHeads.forEach(function (h) { var r = h.getBoundingClientRect(); h.style.setProperty("--par", ((r.top + r.height / 2 - vh / 2) * -0.14).toFixed(1)); });
+  }
+  if (!REDUCED) {
+    window.addEventListener("scroll", function () { if (!parTick) { parTick = true; requestAnimationFrame(parallax); } }, { passive: true });
+    parallax();
+  }
+
+  // Nav: a highlight that slides to the hovered or current link
+  var navLinksEl = $("navLinks"), ind = null, navHover = false;
+  function moveInd(target) {
+    if (!ind) { return; }
+    if (!target && navHover) { return; }
+    var t = target || navLinksEl.querySelector("a.active:not(.nav-cta)");
+    if (!t || window.innerWidth <= 720) { ind.style.opacity = "0"; return; }
+    ind.style.width = t.offsetWidth + "px";
+    ind.style.transform = "translateX(" + t.offsetLeft + "px)";
+    ind.style.opacity = "1";
+  }
+  if (!REDUCED) {
+    ind = el("span", { cls: "nav-ind", attrs: { "aria-hidden": "true" } });
+    navLinksEl.insertBefore(ind, navLinksEl.firstChild);
+    navLinksEl.querySelectorAll("a:not(.nav-cta)").forEach(function (a) {
+      a.addEventListener("mouseenter", function () { navHover = true; moveInd(a); });
+      a.addEventListener("focus", function () { moveInd(a); });
+    });
+    navLinksEl.addEventListener("mouseleave", function () { navHover = false; moveInd(null); });
+    window.addEventListener("resize", function () { moveInd(null); });
+  }
+
+  // Konami code easter egg: a confetti shower
+  var konami = [38, 38, 40, 40, 37, 39, 37, 39, 66, 65], kPos = 0;
+  document.addEventListener("keydown", function (e) {
+    kPos = e.keyCode === konami[kPos] ? kPos + 1 : (e.keyCode === konami[0] ? 1 : 0);
+    if (kPos === konami.length) {
+      kPos = 0;
+      toast("Nice. You found the secret.");
+      if (!REDUCED) {
+        for (var k = 0; k < 14; k++) {
+          (function (kk) { setTimeout(function () { sparksAt(60 + Math.random() * (window.innerWidth - 120), 80 + Math.random() * 220, 14); }, kk * 120); })(k);
+        }
+      }
+    }
+  });
+
+  // Intro splash: lifts away, then the hero animates in
+  var splash = $("splash"), rootEl = document.documentElement;
+  if (splash) {
+    if (rootEl.classList.contains("splash")) {
+      setTimeout(function () { splash.classList.add("out"); rootEl.classList.remove("splash"); }, 1150);
+      setTimeout(function () { rootEl.classList.remove("splash-run"); splash.remove(); }, 2000);
+    } else { splash.remove(); }
+  }
+
   /* ---------- scroll: fades, active nav ---------- */
   var fades = document.querySelectorAll(".fade");
   if ("IntersectionObserver" in window && !REDUCED) {
@@ -719,6 +814,7 @@
       entries.forEach(function (en) {
         if (!en.isIntersecting) { return; }
         Object.keys(map).forEach(function (k) { map[k].classList.toggle("active", k === en.target.id); });
+        moveInd(null);
       });
     }, { rootMargin: "-45% 0px -50% 0px" });
     Object.keys(map).concat(["hero"]).forEach(function (id) { var s = $(id); if (s) { so.observe(s); } });

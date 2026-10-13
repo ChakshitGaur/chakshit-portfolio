@@ -18,9 +18,23 @@
       document.documentElement.setAttribute("data-theme", t);
     })();
   </script>
+  <script>
+    /* Intro splash: once per browser tab, never with reduced motion. A failsafe removes it if scripts fail. */
+    (function () {
+      var r = document.documentElement;
+      try {
+        if (window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches) { return; }
+        if (sessionStorage.getItem("seen")) { return; }
+        sessionStorage.setItem("seen", "1");
+      } catch (e) { return; }
+      r.classList.add("splash", "splash-run");
+      setTimeout(function () { r.classList.remove("splash", "splash-run"); }, 3200);
+    })();
+  </script>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+  <div class="splash" id="splash" aria-hidden="true"><span>Chakshit Gaur<i>.</i></span></div>
   <a class="skip" href="#skills">Skip to content</a>
   <div class="progress" id="progress" aria-hidden="true"></div>
   <div class="cursor" id="cursor" aria-hidden="true"></div>
