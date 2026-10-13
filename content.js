@@ -43,7 +43,7 @@ window.CONTENT = {
   // A proof line left as a [[ placeholder ]] is shown dashed in preview mode and hidden otherwise.
   core: [
     { name: "Python", proof: "Automation tool, ATS, video pipeline", match: ["python"] },
-    { name: "Django", proof: "[[ Add a Django project here ]]", match: ["django"] },
+    { name: "Django", proof: "Expense tracker web app", match: ["django"] },
     { name: "SQL", proof: "ATS with 5,000+ applicants", match: ["sql"] },
     { name: "Pandas", proof: "Data cleaning, book recommender", match: ["pandas"] },
     { name: "Machine learning", proof: "Disease prediction, recommender", match: ["machine learning", "svm", "logistic", "recommender"] },
@@ -72,8 +72,8 @@ window.CONTENT = {
   // Only facts taken from the resume. Add more numbers here once you have real ones.
   stats: [
     { value: "1+ yr", label: "Professional experience" },
-    { value: "5,000+", label: "Applicants managed in the ATS" },
     { value: "3", label: "Projects built at Isourse" },
+    { value: "3", label: "Personal projects" },
   ],
 
   experience: [
@@ -150,9 +150,21 @@ window.CONTENT = {
       github: "[[ GitHub repo URL ]]",
       demo: "[[ Live demo URL (optional) ]]",
     },
+    {
+      name: "Expense Tracker",
+      category: "Web app · Django",
+      visual: "donut",
+      // Check these lines against what you actually built, and add real features (categories, charts, login...) below.
+      problem: "Keeping track of everyday spending in one place.",
+      approach: "A Django web app for recording and reviewing personal expenses, built with Django's models, views and templates.",
+      stack: ["Python", "Django"],
+      metric: "[[ optional: a real feature or number, e.g. 'Expenses grouped by category' ]]",
+      github: "[[ GitHub repo URL ]]",
+      demo: "[[ Live demo URL (optional) ]]",
+    },
     // ---- Extra project slots: hidden until you fill the name ----
     {
-      name: "[[ Project 3 name ]]",
+      name: "[[ Project 4 name ]]",
       category: "[[ Category ]]",
       problem: "[[ One line: what problem does it solve? ]]",
       approach: "[[ How you built it, in 1-2 sentences ]]",
@@ -162,7 +174,7 @@ window.CONTENT = {
       demo: "[[ Live demo URL (optional) ]]",
     },
     {
-      name: "[[ Project 4 name ]]",
+      name: "[[ Project 5 name ]]",
       category: "[[ Category ]]",
       problem: "[[ One line: what problem does it solve? ]]",
       approach: "[[ How you built it, in 1-2 sentences ]]",

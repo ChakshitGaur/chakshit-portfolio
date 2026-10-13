@@ -274,7 +274,7 @@
       if (isPh(n)) { c.classList.add("ph"); }
       return c;
     }));
-    groupsEl.appendChild(fade(el("div", { cls: "group" + (g.group === "Tools" ? " plain" : "") }, [el("h3", { text: g.group }), chips]), i * 0.04));
+    groupsEl.appendChild(fade(el("div", { cls: "group" }, [el("h3", { text: g.group }), chips]), i * 0.04));
   });
 
   /* ---------- projects (bento) ---------- */
@@ -303,6 +303,20 @@
     } else if (kind === "bars") {
       for (i = 0; i < 12; i++) { var h = 30 + r() * 120; svg.appendChild(svgEl("rect", { x: 40 + i * 28, y: 180 - h, width: 18, height: h, rx: 4, class: i === 8 ? "acc" : "", fill: ink, "fill-opacity": i === 8 ? 1 : 0.8 })); }
       svg.appendChild(svgEl("line", { x1: 30, y1: 181, x2: 380, y2: 181, stroke: ink, "stroke-opacity": 0.3 }));
+    } else if (kind === "donut") {
+      var raw = [0.4 + r() * 0.1, 0.24 + r() * 0.06, 0.18 + r() * 0.05, 0.12 + r() * 0.04], sum = raw.reduce(function (a, b) { return a + b; }, 0);
+      var vals = raw.map(function (v) { return v / sum; }), circ = 2 * Math.PI * 58, acc = 0, ops = [1, 0.8, 0.5, 0.25];
+      svg.appendChild(svgEl("circle", { cx: 125, cy: 105, r: 58, fill: "none", stroke: ink, "stroke-opacity": 0.08, "stroke-width": 30 }));
+      vals.forEach(function (v, k) {
+        svg.appendChild(svgEl("circle", {
+          cx: 125, cy: 105, r: 58, fill: "none", "stroke-width": 30, transform: "rotate(-90 125 105)",
+          "stroke-dasharray": (v * circ - 3).toFixed(2) + " " + (circ - v * circ + 3).toFixed(2), "stroke-dashoffset": (-acc * circ).toFixed(2),
+          class: k === 0 ? "accl" : "", stroke: ink, "stroke-opacity": k === 0 ? 1 : ops[k] * 0.8
+        }));
+        acc += v;
+        svg.appendChild(svgEl("rect", { x: 232, y: 58 + k * 30, width: 10, height: 10, rx: 3, class: k === 0 ? "acc" : "", fill: ink, "fill-opacity": k === 0 ? 1 : ops[k] * 0.8 }));
+        svg.appendChild(svgEl("rect", { x: 252, y: 61 + k * 30, width: Math.round(v * 150), height: 5, rx: 2.5, fill: ink, "fill-opacity": 0.22 }));
+      });
     } else {
       svg.appendChild(svgEl("line", { x1: 40, y1: 190, x2: 40, y2: 24, stroke: ink, "stroke-opacity": 0.25 }));
       svg.appendChild(svgEl("line", { x1: 40, y1: 190, x2: 372, y2: 190, stroke: ink, "stroke-opacity": 0.25 }));
@@ -340,6 +354,7 @@
         links.childNodes.length ? links : null,
       ]),
     ]);
+    if (i === projectList.length - 1 && i % 2 === 0 && projectList.length > 1) { card.classList.add("wide"); }
     bento.appendChild(fade(card, (i % 2) * 0.08));
   });
   if (!projectList.length) { $("projects").hidden = true; }
@@ -525,6 +540,20 @@
     for (var rep = 0; rep < 2; rep++) { tickerItems.forEach(function (n) { track.appendChild(el("span", { text: n })); }); }
   } else { track.parentNode.hidden = true; }
   if (REDUCED) { track.style.animation = "none"; }
+
+  // Big outlined marquee band between sections
+  var bandTrack = $("bandTrack");
+  var bandWords = (C.core || []).map(function (c) { return c.name; });
+  if (bandWords.length) {
+    for (var br = 0; br < 4; br++) { bandWords.forEach(function (w, wi) { bandTrack.appendChild(el("span", { cls: wi % 2 ? "solid" : "", text: w })); }); }
+    if (REDUCED) { bandTrack.style.animation = "none"; }
+  } else { bandTrack.parentNode.hidden = true; }
+
+  // Big outlined section numbers behind headings
+  document.querySelectorAll(".sec-head").forEach(function (h) {
+    var n = h.querySelector(".sec-num");
+    if (n) { h.setAttribute("data-n", n.textContent.replace(/\D/g, "")); }
+  });
 
   // Word reveal on headings
   document.querySelectorAll(".sec-head h2, .contact-title").forEach(function (h) {

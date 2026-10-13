@@ -145,7 +145,10 @@ body.preview .nav { top: calc(14px + var(--banner-h, 0px)); }
    Sections
    ========================================================================== */
 .section { padding: 110px 0 20px; }
-.sec-head { margin-bottom: 44px; max-width: 640px; }
+.sec-head { margin-bottom: 44px; position: relative; isolation: isolate; }
+.sec-head > * { max-width: 640px; }
+.sec-head::before { content: attr(data-n); position: absolute; z-index: -1; right: 0; top: -0.22em; font-size: clamp(6rem, 17vw, 13rem); font-weight: 600; letter-spacing: -0.06em; line-height: 1; color: transparent; -webkit-text-stroke: 1px var(--line-strong); opacity: 0.55; pointer-events: none; user-select: none; }
+.about-grid .sec-head::before { font-size: clamp(5rem, 11vw, 9rem); }
 .sec-num { font-family: var(--mono); font-size: 0.8rem; letter-spacing: 0.08em; color: var(--accent); margin-bottom: 10px; }
 .sec-head h2 { font-size: clamp(2.2rem, 4.8vw, 3.6rem); font-weight: 600; letter-spacing: -0.04em; line-height: 1.05; }
 .sec-sub { margin-top: 14px; color: var(--muted); font-size: 1.05rem; }
@@ -164,8 +167,6 @@ body.preview .nav { top: calc(14px + var(--banner-h, 0px)); }
 .chips { display: flex; flex-wrap: wrap; gap: 8px; }
 .chip { padding: 5px 14px; border: 1px solid var(--line); border-radius: 999px; font-size: 0.93rem; background: var(--surface); transition: border-color 0.2s, background 0.2s; }
 .chip:hover { border-color: var(--accent); background: var(--accent-soft); }
-.group.plain .chips { color: var(--muted); font-size: 0.95rem; gap: 6px 18px; }
-.group.plain .chip { border: 0; background: none; padding: 0; }
 @media (max-width: 720px) { .group { grid-template-columns: 1fr; gap: 10px; } }
 
 /* Highlight link between skills and projects */
@@ -326,6 +327,33 @@ mark { color: inherit; background: linear-gradient(var(--accent-soft), var(--acc
 .ticker-track span::after { content: ""; width: 5px; height: 5px; border-radius: 50%; background: var(--accent); }
 .ticker:hover .ticker-track { animation-play-state: paused; }
 @keyframes tick { to { transform: translateX(-50%); } }
+
+/* Wide last project card: art on the left, text on the right */
+.bento .pcard.wide { grid-column: span 12; flex-direction: row; }
+.bento .pcard.wide .pcard-art { width: 42%; height: auto; min-height: 280px; border-bottom: 0; border-right: 1px solid var(--line); flex: none; }
+.bento .pcard.wide .pcard-body { justify-content: center; }
+@media (max-width: 900px) {
+  .bento .pcard.wide { flex-direction: column; }
+  .bento .pcard.wide .pcard-art { width: 100%; height: 180px; min-height: 0; border-right: 0; border-bottom: 1px solid var(--line); }
+}
+
+/* Big outlined marquee band */
+.band { margin-top: 90px; overflow: hidden; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 22px 0; }
+.band-track { display: flex; gap: 0.5em; width: max-content; font-size: clamp(3rem, 9vw, 7.5rem); font-weight: 600; letter-spacing: -0.045em; line-height: 1; animation: band 60s linear infinite; }
+.band-track span { display: inline-flex; align-items: center; gap: 0.5em; white-space: nowrap; color: transparent; -webkit-text-stroke: 1.5px var(--ink); }
+.band-track span.solid { color: var(--ink); -webkit-text-stroke: 0; }
+.band-track span::after { content: "\2726"; font-size: 0.45em; color: var(--accent); -webkit-text-stroke: 0; }
+.band:hover .band-track { animation-play-state: paused; }
+@keyframes band { to { transform: translateX(-50%); } }
+
+/* Soft glow that follows the cursor in the hero */
+:root { --glow: rgba(47, 75, 255, 0.07); }
+:root[data-theme="dark"] { --glow: rgba(142, 160, 255, 0.1); }
+.hero::before { content: ""; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(520px circle at var(--mx) var(--my), var(--glow), transparent 70%); }
+
+/* Chips pop a little on hover */
+.chip { transition: border-color 0.2s, background 0.2s, transform 0.25s var(--ease); }
+.chip:hover { transform: translateY(-2px); }
 
 /* ---------- Preview mode (placeholders) ---------- */
 .preview-banner { position: relative; z-index: 120; background: #fff3cc; color: #5c4400; text-align: center; font-size: 0.85rem; padding: 8px 16px; border-bottom: 1px solid #e6cf85; }
