@@ -30,7 +30,7 @@ Everything you change lives in **`content.js`**.
 Only add numbers and claims that are true.
 
 ## Extras built in
-- **Hero:** a calm, centred headline with rotating words, two buttons, count-up stats and a slow skills ticker.
+- **Hero:** a slow, interactive WebGL gradient behind the headline that leans toward the cursor (`hero-gradient.js`; colours are the `--g-a`, `--g-b`, `--g-c` and `--g-strength` tokens in `styles.css`). It pauses off-screen, shows one still frame for reduced motion, and the hero falls back to its plain look without WebGL. Also a calm, centred headline with rotating words, two buttons, count-up stats and a slow skills ticker.
 - **Terminal in About:** types a short Python script about you when it scrolls into view (edit `terminal` in `content.js`).
 - **Email:** the address is a normal email link (opens the visitor's own mail app, with a subject filled in), and a "Copy email" button sits next to it for visitors with no mail app. No third-party service is involved.
 - **Light/dark theme:** follows the visitor's system setting; the moon/sun button switches and remembers it.
@@ -41,6 +41,7 @@ Only add numbers and claims that are true.
 - `styles.css`: light editorial theme and layout
 - `content.js`: all your text and links
 - `script.js`: builds the page and runs the effects
+- `hero-gradient.js`: the hero's WebGL gradient
 - `assets/ChakshitGaur_resume.pdf`: copy of your resume for the Resume buttons (replace this file when your resume changes)
 - `tests/check.js`: checks content, links and rendering; run `node tests/check.js`
 - `versions/atelier/`: an earlier design, kept for comparison

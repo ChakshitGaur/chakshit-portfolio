@@ -20,7 +20,7 @@ function isUrl(v) { return /^https:\/\/[^\s]+$/.test(v); }
 
 /* ---------- syntax ---------- */
 var html = read("index.html");
-["content.js", "script.js"].forEach(function (f) {
+["content.js", "script.js", "hero-gradient.js"].forEach(function (f) {
   try { new vm.Script(read(f), { filename: f }); check(f + " parses", true); }
   catch (e) { check(f + " parses", false, e.message); }
 });
@@ -113,6 +113,17 @@ html.replace(/(?:src|href)="([^"#][^"]*)"/g, function (_, f) {
   check("local file " + f + " exists", fs.existsSync(path.join(ROOT, f)));
 });
 check("index.html loads content.js before script.js", html.indexOf('src="content.js"') > -1 && html.indexOf('src="content.js"') < html.indexOf('src="script.js"'));
+
+/* ---------- hero gradient ---------- */
+// hero-gradient.js parses these tokens as hex colours, in both themes.
+var css = read("styles.css");
+["--bg", "--g-a", "--g-b", "--g-c"].forEach(function (t) {
+  var re = new RegExp(t + ":\s*([^;]+);", "g"), m, n = 0;
+  while ((m = re.exec(css))) { n++; check("styles.css " + t + " is a hex colour", /^#([0-9a-f]{3}|[0-9a-f]{6})$/i.test(m[1].trim()), m[1]); }
+  check("styles.css defines " + t + " for light and dark", n >= 2, n + " definition(s)");
+});
+check("index.html has the hero gradient canvas", /<canvas[^>]+id="heroGl"/.test(html));
+check("hero-gradient.js loads after script.js", html.indexOf('src="hero-gradient.js"') > html.indexOf('src="script.js"'));
 
 /* ---------- optional: external links ---------- */
 function done() {
