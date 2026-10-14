@@ -20,7 +20,7 @@ window.CONTENT = {
     accent: "working software.", // the part of the headline shown in the accent colour
     // Line under the headline: the last words scramble from one phrase to the next.
     rotatingPrefix: "Currently into",
-    rotating: ["automation", "data pipelines", "machine learning", "Django back ends"],
+    rotating: ["automation", "web scraping", "computer vision", "machine learning", "Django back ends"],
   },
 
   // Terminal in the hero. t: "cmd" (typed after a $ prompt), "code" (a line of Python), "out" (program output).
@@ -30,7 +30,7 @@ window.CONTENT = {
     { t: "code", s: 'name = "Chakshit Gaur"' },
     { t: "code", s: 'role = "Python Developer & AI/ML Engineer"' },
     { t: "code", s: 'location = "New Delhi, India"' },
-    { t: "code", s: 'stack = ["Python", "Django", "SQL", "Pandas", "TensorFlow"]' },
+    { t: "code", s: 'stack = ["Python", "Django", "SQL", "Selenium", "OCR", "Scikit-learn"]' },
     { t: "code", s: 'experience = "AI/ML Engineer @ Isourse Technologies"' },
     { t: "code", s: "applicants_managed = 5000  # in the ATS I built" },
     { t: "code", s: 'print(f"{name} | {role} | {location}")' },
@@ -42,11 +42,11 @@ window.CONTENT = {
   // "match" words are compared with project tags: hovering a card highlights the projects that use it.
   // A proof line left as a [[ placeholder ]] is shown dashed in preview mode and hidden otherwise.
   core: [
-    { name: "Python", proof: "Automation tool, ATS, video pipeline", match: ["python"] },
-    { name: "Django", proof: "Expense tracker web app", match: ["django"] },
+    { name: "Python", proof: "ATS, video sync system, employee monitoring", match: ["python"] },
+    { name: "Django", proof: "Multi-user Expense Tracker, 43 tests + CI", match: ["django"] },
     { name: "SQL", proof: "ATS with 5,000+ applicants", match: ["sql"] },
-    { name: "Pandas", proof: "Data cleaning, book recommender", match: ["pandas"] },
-    { name: "Machine learning", proof: "Disease prediction, recommender", match: ["machine learning", "svm", "logistic", "recommender"] },
+    { name: "Selenium & scraping", proof: "LinkedIn applicant extraction for HR", match: ["selenium", "scraping"] },
+    { name: "Machine learning & CV", proof: "Disease prediction, recommender, OCR video sync", match: ["machine learning", "svm", "logistic", "recommender", "computer vision", "ocr"] },
   ],
 
   // Optional status shown in the hero, e.g. "Open to work". Leave as placeholder to hide.
@@ -56,17 +56,19 @@ window.CONTENT = {
 
   links: {
     email: "chakshitgaur25@gmail.com",
-    linkedin: "[[ paste your LinkedIn profile URL ]]",
+    linkedin: "https://www.linkedin.com/in/chakshit-gaur",
     github: "https://github.com/ChakshitGaur", // taken from the GitHub account signed in on this PC; change it if you want another profile
   },
 
   resumeFile: "assets/ChakshitGaur_resume.pdf",
 
   about: [
-    "I'm a Computer Science graduate (B.Tech, 2023) based in New Delhi. I started my career as an **AI/ML Engineer**, " +
-      "where I built **internal tools and client systems end to end**, from data collection and storage to packaging and documentation.",
-    "My core toolkit is **Python, Django and SQL**, with Pandas and NumPy for cleaning data and machine-learning frameworks such as " +
-      "TensorFlow, PyTorch and YOLO. I'm comfortable with object-oriented design and enjoy turning **messy data and manual processes into reliable software**.",
+    "I'm a Python developer and Computer Science graduate (B.Tech, 2023) based in New Delhi, with experience in " +
+      "**automation, web scraping and computer vision**. As an AI/ML Engineer I built an applicant tracking system for 5,000+ applicants, " +
+      "a client video processing system and an employee monitoring tool, **end to end**, from data collection and storage to packaging and documentation.",
+    "I also build **Django web apps**, such as a multi-user Expense Tracker with automated tests and CI. My core toolkit is " +
+      "**Python, SQL (MySQL, Oracle SQL) and Git**, with Pandas and NumPy for data and Scikit-learn, TensorFlow and PyTorch for machine learning. " +
+      "I enjoy turning **messy data and manual processes into reliable software**.",
   ],
 
   // Only facts taken from the resume. Add more numbers here once you have real ones.
@@ -74,6 +76,7 @@ window.CONTENT = {
     { value: "1+ yr", label: "Professional experience" },
     { value: "3", label: "Projects built at Isourse" },
     { value: "3", label: "Personal projects" },
+    { value: "5,000+", label: "Applicants managed by my ATS" },
   ],
 
   experience: [
@@ -99,26 +102,26 @@ window.CONTENT = {
       bullets: [],
       projects: [
         {
-          name: "Employee Management System",
+          name: "Live-stream video sync for FM Logistics",
           text:
-            "Built a system that monitors workforce productivity through keyboard-activity tracking and idle-time detection. " +
-            "Packaged it as a standalone executable for simple deployment across machines, with full documentation and user support.",
-          tags: ["Python", "Desktop executable", "Activity tracking"],
+            "Built the FM Logistics client video system in Python, using OCR and computer vision to read timestamps and synchronise " +
+            "two live-stream videos, then stitch them into one combined video.",
+          tags: ["Python", "OCR", "Computer Vision", "Video processing"],
         },
         {
           name: "Applicant Tracking System (ATS)",
           text:
-            "Developed an ATS that uses Selenium to extract LinkedIn data, designed to meet GDPR and CCPA requirements. " +
-            "Built the storage layer in Python and SQL and integrated it with HR systems to manage 5,000+ applicants, " +
-            "then documented it and trained HR staff to use it.",
-          tags: ["Python", "Selenium", "SQL", "GDPR / CCPA"],
+            "Built an ATS using Selenium automation to extract applicant details for open jobs from LinkedIn and export them to CSV for HR. " +
+            "Designed the data storage in Python and SQL, integrated with HR systems, to manage 5,000+ applicants, " +
+            "and trained HR staff to use it.",
+          tags: ["Python", "Selenium", "Web Scraping", "SQL", "CSV export"],
         },
         {
-          name: "Live-stream video sync for FM Logistics",
+          name: "Employee Management System",
           text:
-            "Built a pipeline for FM Logistics that collects live-stream data, captures two video feeds and synchronises them. " +
-            "Videos are stitched by matching timestamps, so users receive one seamless combined video.",
-          tags: ["Python", "Video processing", "Stream synchronisation"],
+            "Built an Employee Management System (EMS) that measures productivity by tracking keyboard activity and idle time. " +
+            "Delivered it as a standalone executable with documentation and user support.",
+          tags: ["Python", "Desktop executable", "Activity tracking"],
         },
       ],
       tags: [],
@@ -127,15 +130,28 @@ window.CONTENT = {
 
   projects: [
     {
+      name: "Expense Tracker",
+      category: "Web app · Django",
+      visual: "donut", // card artwork: "scatter", "graph", "bars" or "donut"
+      problem: "Keeping track of everyday spending and staying within a monthly budget.",
+      approach:
+        "A multi-user Django web app to log expenses by category, set monthly budgets with threshold warnings and track spending on a dashboard; each user sees only their own data. " +
+        "Includes CSV import/export with per-row error reports.",
+      stack: ["Python", "Django", "SQLite"],
+      metric: "43 automated tests running on GitHub Actions CI",
+      github: "https://github.com/ChakshitGaur/expense-tracker",
+      demo: "[[ Live demo URL (optional) ]]",
+    },
+    {
       name: "Multiple Disease Prediction System",
       category: "Machine Learning",
-      visual: "scatter", // card artwork: "scatter", "graph" or "bars"
+      visual: "scatter",
       problem: "Early detection of Parkinson's disease, heart disease and diabetes from patient data.",
       approach:
-        "Trained machine-learning classifiers for each condition, using logistic regression and support vector machines for predictive modelling.",
+        "Built classification models for each condition using logistic regression and support vector machines.",
       stack: ["Python", "Machine Learning", "Logistic Regression", "SVM"],
       metric: "[[ e.g. 'Reached 8x% accuracy on the heart-disease model': only if true ]]",
-      github: "[[ GitHub repo URL ]]",
+      github: "https://github.com/ChakshitGaur/Multiple-Disease-Prediction-System",
       demo: "[[ Live demo URL (optional) ]]",
     },
     {
@@ -144,22 +160,10 @@ window.CONTENT = {
       visual: "graph",
       problem: "Suggesting books readers are likely to enjoy, based on their ratings and similar readers.",
       approach:
-        "Collaborative filtering on a book-ratings dataset: preprocessed and analysed the data, then computed user and item similarities to produce personalised recommendations.",
+        "A collaborative filtering recommender: preprocessed book-rating datasets, then used user preferences and item similarity to generate personalised recommendations.",
       stack: ["Python", "NumPy", "Pandas", "Scikit-learn"],
       metric: "[[ optional: dataset size or an evaluation score ]]",
-      github: "[[ GitHub repo URL ]]",
-      demo: "[[ Live demo URL (optional) ]]",
-    },
-    {
-      name: "Expense Tracker",
-      category: "Web app · Django",
-      visual: "donut",
-      // Check these lines against what you actually built, and add real features (categories, charts, login...) below.
-      problem: "Keeping track of everyday spending in one place.",
-      approach: "A Django web app for recording and reviewing personal expenses, built with Django's models, views and templates.",
-      stack: ["Python", "Django"],
-      metric: "[[ optional: a real feature or number, e.g. 'Expenses grouped by category' ]]",
-      github: "[[ GitHub repo URL ]]",
+      github: "https://github.com/ChakshitGaur/BookPilot",
       demo: "[[ Live demo URL (optional) ]]",
     },
     // ---- Extra project slots: hidden until you fill the name ----
@@ -186,30 +190,40 @@ window.CONTENT = {
   ],
 
   skills: [
-    { group: "Languages", items: ["Python", "SQL"] },
-    { group: "Backend", items: ["Django", "Django REST Framework", "REST APIs"] },
-    { group: "Data cleaning & analysis", items: ["Pandas", "NumPy", "Matplotlib", "Seaborn"] },
-    { group: "ML & automation", items: ["TensorFlow", "PyTorch", "YOLO", "Selenium"] },
-    { group: "Databases", items: ["Oracle SQL", "MySQL", "SQL joins & query optimisation"] },
-    { group: "Tools", items: ["Git & GitHub", "VS Code", "Jupyter Notebook", "Power BI"] },
+    { group: "Programming languages", items: ["Python", "SQL", "Core Java"] },
+    { group: "Web & backend", items: ["Django", "Django REST Framework", "REST APIs"] },
+    { group: "Databases", items: ["MySQL", "Oracle SQL"] },
+    { group: "Automation & data", items: ["Selenium", "Web Scraping", "Pandas", "NumPy", "Matplotlib", "Power BI"] },
+    { group: "ML & computer vision", items: ["Computer Vision", "OCR", "Scikit-learn", "TensorFlow", "PyTorch", "YOLO"] },
+    { group: "Tools & version control", items: ["Git", "GitHub", "VS Code", "PyCharm", "Jupyter Notebook"] },
   ],
 
+  // "score" is optional and shown under the school name.
   education: [
     {
       title: "B.Tech, Computer Science & Engineering",
       org: "D.P.G Institute of Technology and Management, Gurugram",
-      period: "2019 – 2023",
+      score: "78%",
+      period: "Jul 2019 – Jun 2023",
     },
     {
       title: "Class XII",
       org: "Shri Krishna Parnami Sr. Sec. School, Karnal",
+      score: "89%",
       period: "2018",
     },
     {
       title: "Class X",
       org: "V.P International School, Karnal",
+      score: "9.0/10 CGPA",
       period: "2016",
     },
+  ],
+
+  // Shown under Education. Hidden if the list is empty.
+  achievements: [
+    "Gold Prize, Annual CSSRI Sports-meet, in Football and 100-M race",
+    "Silver Prize, Intra-college Kabaddi Competition",
   ],
 
   // Hidden until you fill in at least a name.
