@@ -44,4 +44,3 @@ Only add numbers and claims that are true.
 - `hero-gradient.js`: the hero's WebGL gradient
 - `assets/ChakshitGaur_resume.pdf`: copy of your resume for the Resume buttons (replace this file when your resume changes)
 - `tests/check.js`: checks content, links and rendering; run `node tests/check.js`
-- `versions/atelier/`: an earlier design, kept for comparison
