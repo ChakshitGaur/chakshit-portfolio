@@ -323,6 +323,23 @@ mark { color: inherit; background: linear-gradient(var(--accent-soft), var(--acc
   .bento .pcard.wide .pcard-art { width: 100%; height: 180px; min-height: 0; border-right: 0; border-bottom: 1px solid var(--line); }
 }
 
+/* Stacked project cards: one wide card per row; on big screens each sticks under the nav
+   and the next slides over it (script.js sets --p, how covered a card is, and its transform). */
+.bento { display: flex; flex-direction: column; gap: 16px; }
+.pslot { position: relative; border-radius: 26px; transform-origin: 50% 0; }
+.pslot > .pcard { height: 100%; }
+.pslot::after { content: ""; position: absolute; inset: 0; z-index: 2; border-radius: inherit; background: var(--bg); opacity: calc(var(--p, 0) * 0.5); pointer-events: none; }
+@media (min-width: 900px) and (min-height: 600px) {
+  /* Scroll room between cards is the flex gap, not a margin: a sticky element's margin
+     must fit inside its container, so a margin would push stuck cards off too early. */
+  .bento.stack { gap: 26vh; }
+  .bento.stack .pslot { position: sticky; top: calc(104px + var(--i, 0) * 18px); }
+  .bento.stack .pslot.no-stick { position: relative; top: auto; }
+  .bento.stack .pslot > .pcard { min-height: var(--stack-h, 0); }
+  .bento.stack .pcard { box-shadow: 0 -10px 40px rgba(20, 19, 15, 0.06); }
+  :root[data-theme="dark"] .bento.stack .pcard { box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.45); }
+}
+
 /* Big outlined marquee band */
 .band { margin-top: 90px; overflow: hidden; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 22px 0; }
 .band-track { display: flex; gap: 0.5em; width: max-content; font-size: clamp(3rem, 9vw, 7.5rem); font-weight: 600; letter-spacing: -0.045em; line-height: 1; animation: band 60s linear infinite; }

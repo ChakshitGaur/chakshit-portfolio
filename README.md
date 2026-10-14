@@ -34,7 +34,7 @@ Only add numbers and claims that are true.
 - **Terminal in About:** types a short Python script about you when it scrolls into view (edit `terminal` in `content.js`).
 - **Email:** the address is a normal email link (opens the visitor's own mail app, with a subject filled in), and a "Copy email" button sits next to it for visitors with no mail app. No third-party service is involved.
 - **Light/dark theme:** follows the visitor's system setting; the moon/sun button switches and remembers it.
-- **Motion:** word-by-word headline reveals, a scroll-driven skills band, a sliding nav highlight, parallax on the outlined numbers, project artwork that draws itself in, spotlight glow and tilt on cards, magnetic buttons, a cursor follower, a back-to-top button with a progress ring, confetti on "Copy email", a hidden Konami-code easter egg, and an animated highlighter for phrases wrapped in `**double asterisks**` in the `about` text.
+- **Motion:** word-by-word headline reveals, a scroll-driven skills band, a sliding nav highlight, parallax on the outlined numbers, project artwork that draws itself in, stacked project cards that pin under the nav and slide over each other as you scroll (on screens at least 900×600; a plain list otherwise), spotlight glow and tilt on cards, magnetic buttons, a cursor follower, a back-to-top button with a progress ring, confetti on "Copy email", a hidden Konami-code easter egg, and an animated highlighter for phrases wrapped in `**double asterisks**` in the `about` text.
 - **Accessibility:** a "Skip to content" link, keyboard focus outlines, and everything animated switches off for visitors who prefer reduced motion. Cursor effects are desktop-only.
 ## Files
 - `index.html`: page structure
