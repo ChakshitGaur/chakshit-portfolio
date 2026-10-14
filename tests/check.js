@@ -102,7 +102,7 @@ C.education.forEach(function (e) { check("education '" + e.title + "' complete",
 /* ---------- stacked project cards ---------- */
 var stackCss = read("styles.css");
 check("styles.css makes project slots sticky", /\.bento\.stack \.pslot \{[^}]*position: sticky/.test(stackCss));
-check("stacking only on large screens", /@media \(min-width: 900px\) and \(min-height: 600px\) \{\s*\.bento\.stack/.test(stackCss));
+check("stacking only on large screens", /@media \(min-width: 900px\) and \(min-height: 600px\) \{(?:\s|\/\*[\s\S]*?\*\/)*\.bento\.stack/.test(stackCss));
 check("script.js uses the same breakpoint as the CSS", read("script.js").indexOf('matchMedia("(min-width: 900px) and (min-height: 600px)")') > -1);
 
 /* ---------- index.html <-> script.js ---------- */
