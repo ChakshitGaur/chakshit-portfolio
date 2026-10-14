@@ -362,10 +362,64 @@
         links.childNodes.length ? links : null,
       ]),
     ]);
-    if (i === projectList.length - 1 && i % 2 === 0 && projectList.length > 1) { card.classList.add("wide"); }
-    bento.appendChild(fade(card, (i % 2) * 0.08));
+    card.classList.add("wide");
+    var slot = el("div", { cls: "pslot" }, [fade(card)]);
+    slot.style.setProperty("--i", i);
+    bento.appendChild(slot);
   });
   if (!projectList.length) { $("projects").hidden = true; }
+
+  /* ---------- projects: stacked cards ----------
+     On big enough screens each card sticks under the nav (CSS) and the next one slides over it.
+     Here we work out how far each card is covered (--p, 0 to 1) so it can shrink, lean back and dim. */
+  var slots = Array.prototype.slice.call(bento.querySelectorAll(".pslot"));
+  var stackMQ = window.matchMedia("(min-width: 900px) and (min-height: 600px)");
+  var stackTick = false;
+  function stackActive() { return slots.length > 1 && stackMQ.matches; }
+  function fitSlots() {
+    // Cards in a stack share the tallest card's height, so a covered card never pokes out below the one on top.
+    bento.style.removeProperty("--stack-h");
+    if (stackActive()) {
+      var tallest = slots.reduce(function (m, s) { return Math.max(m, s.firstChild.offsetHeight); }, 0);
+      bento.style.setProperty("--stack-h", tallest + "px");
+    }
+    // A card taller than the space under the nav would hide its own text, so it scrolls normally instead.
+    slots.forEach(function (s) {
+      s.classList.remove("no-stick");
+      if (stackActive() && s.offsetHeight > window.innerHeight - parseFloat(getComputedStyle(s).top || 0) - 24) { s.classList.add("no-stick"); }
+    });
+    updateStack();
+  }
+  function updateStack() {
+    stackTick = false;
+    slots.forEach(function (s, i) {
+      var next = slots[i + 1], p = 0;
+      if (next && stackActive() && !s.classList.contains("no-stick")) {
+        var a = s.getBoundingClientRect(), b = next.getBoundingClientRect();
+        p = clamp((a.bottom - b.top) / a.height, 0, 1);
+      }
+      s.style.setProperty("--p", p.toFixed(3));
+      s.style.transform = p > 0 && !REDUCED ? "perspective(1400px) translateY(" + (-p * 6).toFixed(1) + "px) scale(" + (1 - p * 0.05).toFixed(4) + ") rotateX(" + (p * 3).toFixed(2) + "deg)" : "";
+    });
+  }
+  if (slots.length > 1) {
+    bento.classList.add("stack");
+    window.addEventListener("scroll", function () { if (!stackTick) { stackTick = true; requestAnimationFrame(updateStack); } }, { passive: true });
+    var fitTimer = 0;
+    window.addEventListener("resize", function () {
+      fitSlots();
+      clearTimeout(fitTimer);
+      fitTimer = setTimeout(fitSlots, 200); // again once layout and media queries have settled
+    });
+    if (stackMQ.addEventListener) { stackMQ.addEventListener("change", fitSlots); }
+    if ("ResizeObserver" in window) {
+      // Card heights follow the container's width; watch width only, since fitSlots itself changes the height.
+      var lastW = 0;
+      new ResizeObserver(function () { var w = bento.clientWidth; if (w !== lastW) { lastW = w; fitSlots(); } }).observe(bento);
+    }
+    window.addEventListener("load", fitSlots); // fonts and layout settle after load
+    fitSlots();
+  }
 
   /* ---------- experience ---------- */
   var timeline = $("timeline");
