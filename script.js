@@ -402,8 +402,14 @@
   });
   var edu = $("eduList");
   (C.education || []).forEach(function (e) {
-    edu.appendChild(el("li", {}, [el("div", {}, [el("h3", { text: e.title }), el("p", { text: e.org })]), el("span", { cls: "meta", text: e.period })]));
+    edu.appendChild(el("li", {}, [el("div", {}, [el("h3", { text: e.title }), el("p", { text: e.org }), show(e.score) ? el("p", { cls: "score" }, [span(e.score)]) : null]), el("span", { cls: "meta", text: e.period })]));
   });
+  var achievements = (C.achievements || []).filter(show);
+  if (achievements.length) {
+    var al = $("achList");
+    achievements.forEach(function (a) { al.appendChild(el("li", {}, [el("div", {}, [el("h4", {}, [span(a)])])])); });
+    $("achWrap").hidden = false;
+  }
   var certs = (C.certifications || []).filter(function (c) { return show(c.name); });
   if (certs.length) {
     var cl = $("certList");

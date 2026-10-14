@@ -20,9 +20,11 @@ Everything you change lives in **`content.js`**.
 | Five headline skills with a proof line each | `core` |
 | All skills, in groups | `skills` |
 | What you did since June 2024 | first item in `experience` |
-| LinkedIn / GitHub URLs, email | `links` (LinkedIn is still a `[[ placeholder ]]`, so it is hidden until you paste your URL) |
+| LinkedIn / GitHub URLs, email | `links` |
 | Projects (card art is `visual`: scatter, graph or bars) | `projects` |
 | Courses & certifications | `certifications` |
+| Achievements (shown under Education) | `achievements` |
+| Education scores (optional) | `score` on each `education` item |
 | Count-up numbers | `stats` |
 
 Only add numbers and claims that are true.
@@ -39,5 +41,6 @@ Only add numbers and claims that are true.
 - `styles.css`: light editorial theme and layout
 - `content.js`: all your text and links
 - `script.js`: builds the page and runs the effects
-- `assets/ChakshitGaur_resume.pdf`: copy of your resume for the Resume buttons
+- `assets/ChakshitGaur_resume.pdf`: copy of your resume for the Resume buttons (replace this file when your resume changes)
+- `tests/check.js`: checks content, links and rendering; run `node tests/check.js`
 - `versions/atelier/`: an earlier design, kept for comparison
