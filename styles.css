@@ -337,6 +337,15 @@ mark { color: inherit; background: linear-gradient(var(--accent-soft), var(--acc
 :root[data-theme="dark"] { --glow: rgba(142, 160, 255, 0.1); }
 .hero::before { content: ""; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(520px circle at var(--mx) var(--my), var(--glow), transparent 70%); }
 
+/* Interactive WebGL gradient behind the hero (hero-gradient.js). Colours: --g-a/b/c over --bg. */
+:root { --g-a: #2f4bff; --g-b: #ff9a4d; --g-c: #8ea0ff; --g-strength: 0.26; }
+:root[data-theme="dark"] { --g-a: #2f4bff; --g-b: #ff7a2e; --g-c: #8ea0ff; --g-strength: 0.24; }
+.hero { isolation: isolate; }
+.hero-gl { position: absolute; inset: 0; z-index: -1; width: 100%; height: 100%; display: block; pointer-events: none; opacity: 0; transition: opacity 1.2s var(--ease);
+  -webkit-mask-image: linear-gradient(180deg, #000 55%, transparent 100%); mask-image: linear-gradient(180deg, #000 55%, transparent 100%); }
+.hero.has-gl .hero-gl { opacity: 1; }
+.hero.has-gl::before { display: none; } /* the gradient already reacts to the cursor */
+
 /* Chips pop a little on hover */
 .chip { transition: border-color 0.2s, background 0.2s, transform 0.25s var(--ease); }
 .chip:hover { transform: translateY(-2px); }
