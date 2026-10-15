@@ -20,7 +20,7 @@ function isUrl(v) { return /^https:\/\/[^\s]+$/.test(v); }
 
 /* ---------- syntax ---------- */
 var html = read("index.html");
-["content.js", "script.js", "hero-gradient.js"].forEach(function (f) {
+["content.js", "script.js", "hero-gradient.js", "hero-api.js", "hero-dots.js"].forEach(function (f) {
   try { new vm.Script(read(f), { filename: f }); check(f + " parses", true); }
   catch (e) { check(f + " parses", false, e.message); }
 });
@@ -98,6 +98,38 @@ C.skills.forEach(function (g) {
 });
 C.education.forEach(function (e) { check("education '" + e.title + "' complete", isStr(e.title) && isStr(e.org) && isStr(e.period)); });
 (C.achievements || []).forEach(function (a, i) { check("achievement " + i + " is text", isStr(a)); });
+
+/* ---------- Python-first hero ---------- */
+check("role leads with Python, not AI/ML", /^Python Developer/.test(C.role) && C.role.indexOf("AI/ML") === -1, C.role);
+check("hero eyebrow leads with Python", /^Python developer/i.test(C.hero.eyebrow), C.hero.eyebrow);
+var heroHtml = read("index.html");
+["apiCard", "apiTabs", "apiPath", "apiTime", "apiBody", "heroDots"].forEach(function (id) {
+  check("index.html has #" + id + " for the hero", heroHtml.indexOf('id="' + id + '"') > -1);
+});
+check("Inter Tight loads as a variable font (needed for the bolding headline)", /Inter\+Tight:wght@\d+\.\.\d+/.test(heroHtml));
+check("hero-api.js and hero-dots.js load after content.js", heroHtml.indexOf('src="hero-api.js"') > heroHtml.indexOf('src="content.js"') && heroHtml.indexOf('src="hero-dots.js"') > heroHtml.indexOf('src="content.js"'));
+
+// The API card builds JSON from content.js: run it against the real content and parse what it renders.
+(function () {
+  var src = read("hero-api.js"), texts = [];
+  var stub = function () {
+    return { appendChild: function () {}, setAttribute: function () {}, addEventListener: function () {}, classList: { add: function () {}, remove: function () {} }, style: {},
+      set textContent(v) { texts.push(v); }, get textContent() { return ""; } };
+  };
+  var doc = { getElementById: stub, createElement: stub };
+  var win = { CONTENT: C, matchMedia: function () { return { matches: true }; } }; // reduced motion: renders instantly
+  try {
+    vm.runInNewContext(src, { window: win, document: doc, JSON: JSON, Math: Math, setTimeout: setTimeout, requestAnimationFrame: function () {}, cancelAnimationFrame: function () {} });
+    var headAt = -1;
+    texts.forEach(function (t, i) { if (typeof t === "string" && t.indexOf("HTTP 200 OK") === 0) { headAt = i; } });
+    var body = texts.slice(headAt + 1).filter(function (t) { return typeof t === "string"; }).join("");
+    var data = JSON.parse(body);
+    check("API card 'me' response is valid JSON", true);
+    check("API card shows the name from content.js", data.name === C.name, data.name);
+    check("API card hides placeholder values", body.indexOf("[[") === -1);
+    check("API card stack matches the core skills", JSON.stringify(data.stack) === JSON.stringify(C.core.map(function (c) { return c.name; })));
+  } catch (e) { check("API card renders valid JSON from content.js", false, e.message); }
+})();
 
 /* ---------- stacked project cards ---------- */
 var stackCss = read("styles.css");
