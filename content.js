@@ -12,15 +12,15 @@
 
 window.CONTENT = {
   name: "Chakshit Gaur",
-  role: "Python Developer · AI/ML Engineer",
+  role: "Python Developer · Django, APIs & Automation",
   // Hero (top of the page).
   hero: {
-    eyebrow: "Python developer · AI/ML engineer",
+    eyebrow: "Python developer · Django, APIs & automation",
     headline: "Python developer turning messy data into working software.",
     accent: "working software.", // the part of the headline shown in the accent colour
     // Line under the headline: the last words scramble from one phrase to the next.
     rotatingPrefix: "Currently into",
-    rotating: ["automation", "web scraping", "computer vision", "machine learning", "Django back ends"],
+    rotating: ["Django back ends", "REST APIs", "automation", "web scraping", "data pipelines"],
   },
 
   // Terminal in the hero. t: "cmd" (typed after a $ prompt), "code" (a line of Python), "out" (program output).
@@ -28,14 +28,14 @@ window.CONTENT = {
   terminal: [
     { t: "cmd", s: "cat about.py" },
     { t: "code", s: 'name = "Chakshit Gaur"' },
-    { t: "code", s: 'role = "Python Developer & AI/ML Engineer"' },
+    { t: "code", s: 'role = "Python Developer (Django, APIs & Automation)"' },
     { t: "code", s: 'location = "New Delhi, India"' },
     { t: "code", s: 'stack = ["Python", "Django", "SQL", "Selenium", "OCR", "Scikit-learn"]' },
     { t: "code", s: 'experience = "AI/ML Engineer @ Isourse Technologies"' },
     { t: "code", s: "applicants_managed = 5000  # in the ATS I built" },
     { t: "code", s: 'print(f"{name} | {role} | {location}")' },
     { t: "cmd", s: "python about.py" },
-    { t: "out", s: "Chakshit Gaur | Python Developer & AI/ML Engineer | New Delhi, India" },
+    { t: "out", s: "Chakshit Gaur | Python Developer (Django, APIs & Automation) | New Delhi, India" },
   ],
 
   // Core stack: your five headline skills, each with one line of proof.

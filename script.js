@@ -54,7 +54,7 @@
   }
   function lc(list) { return (list || []).filter(show).join("|").toLowerCase(); }
 
-  document.title = C.name + " | " + C.role.replace(/ · /g, " & ");
+  document.title = C.name + " | " + C.role.replace(/ · /g, " | ");
 
   if (PREVIEW) {
     document.body.classList.add("preview");
@@ -84,14 +84,42 @@
   var accentAt = H.accent ? headline.indexOf(H.accent) : -1;
   var title = $("heroTitle");
   title.setAttribute("aria-label", headline);
-  var offset = 0;
+  var offset = 0, chars = [];
   headline.split(" ").forEach(function (word, i, arr) {
-    var inner = el("span", { text: word, attrs: { style: "--i:" + i } });
+    var inner = el("span", { attrs: { style: "--i:" + i } });
+    word.split("").forEach(function (ch) { var c = el("span", { cls: "ch", text: ch }); inner.appendChild(c); chars.push(c); });
     if (accentAt > -1 && offset >= accentAt) { inner.classList.add("accent"); }
     title.appendChild(el("span", { cls: "w", attrs: { "aria-hidden": "true" } }, [inner]));
     if (i < arr.length - 1) { title.appendChild(document.createTextNode(" ")); }
     offset += word.length + 1;
   });
+
+  /* Headline letters get bolder as the cursor comes near (Inter Tight is a variable font) */
+  if (HOVER && !REDUCED && chars.length) {
+    var W_BASE = 600, W_MAX = 800, W_RADIUS = 170;
+    var centres = [], wDirty = true, wx = -1e4, wy = -1e4, wRaf = 0;
+    var measureW = function () {
+      centres = chars.map(function (c) { var r = c.getBoundingClientRect(); return [r.left + r.width / 2 + window.scrollX, r.top + r.height / 2 + window.scrollY]; });
+      wDirty = false;
+    };
+    var paintW = function () {
+      wRaf = 0;
+      if (wDirty) { measureW(); }
+      chars.forEach(function (c, k) {
+        var dx = centres[k][0] - wx, dy = centres[k][1] - wy;
+        var t = Math.max(0, 1 - Math.sqrt(dx * dx + dy * dy) / W_RADIUS);
+        t = t * t * (3 - 2 * t); // smoothstep: a soft falloff instead of a hard edge
+        c.style.fontWeight = t > 0.01 ? String(Math.round(W_BASE + (W_MAX - W_BASE) * t)) : "";
+      });
+    };
+    var queueW = function () { if (!wRaf) { wRaf = requestAnimationFrame(paintW); } };
+    $("hero").addEventListener("pointermove", function (e) { if (e.pointerType !== "mouse") { return; } wx = e.pageX; wy = e.pageY; queueW(); }, { passive: true });
+    $("hero").addEventListener("pointerleave", function () { wx = wy = -1e4; queueW(); });
+    window.addEventListener("resize", function () { wDirty = true; });
+    if (document.fonts && document.fonts.ready) { document.fonts.ready.then(function () { wDirty = true; }); }
+    // The words rise in on load (a transform), so measure again once that has finished.
+    setTimeout(function () { wDirty = true; }, 1600);
+  }
 
   /* Rotating words (scramble effect) */
   var phrases = (H.rotating || []).filter(function (p) { return typeof p === "string" && p.trim(); });

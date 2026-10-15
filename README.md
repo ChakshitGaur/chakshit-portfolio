@@ -30,7 +30,7 @@ Everything you change lives in **`content.js`**.
 Only add numbers and claims that are true.
 
 ## Extras built in
-- **Hero:** a slow, interactive WebGL gradient behind the headline that leans toward the cursor (`hero-gradient.js`; colours are the `--g-a`, `--g-b`, `--g-c` and `--g-strength` tokens in `styles.css`). It pauses off-screen, shows one still frame for reduced motion, and the hero falls back to its plain look without WebGL. Also a calm, centred headline with rotating words, two buttons, count-up stats and a slow skills ticker.
+- **Hero:** a live API card beside the headline (a Django REST Framework-style `GET /api/chakshit/` response with tabs for projects, skills and experience, all built from `content.js`), headline letters that get bolder near the cursor, and a dot grid that bends toward the cursor and ripples on click. Also: a slow, interactive WebGL gradient behind the headline that leans toward the cursor (`hero-gradient.js`; colours are the `--g-a`, `--g-b`, `--g-c` and `--g-strength` tokens in `styles.css`). It pauses off-screen, shows one still frame for reduced motion, and the hero falls back to its plain look without WebGL. Also a calm, centred headline with rotating words, two buttons, count-up stats and a slow skills ticker.
 - **Terminal in About:** types a short Python script about you when it scrolls into view (edit `terminal` in `content.js`).
 - **Email:** the address is a normal email link (opens the visitor's own mail app, with a subject filled in), and a "Copy email" button sits next to it for visitors with no mail app. No third-party service is involved.
 - **Light/dark theme:** follows the visitor's system setting; the moon/sun button switches and remembers it.
@@ -42,5 +42,7 @@ Only add numbers and claims that are true.
 - `content.js`: all your text and links
 - `script.js`: builds the page and runs the effects
 - `hero-gradient.js`: the hero's WebGL gradient
+- `hero-api.js`: the live API card in the hero (its JSON is built from `content.js`)
+- `hero-dots.js`: the interactive dot grid behind the hero
 - `assets/ChakshitGaur_resume.pdf`: copy of your resume for the Resume buttons (replace this file when your resume changes)
 - `tests/check.js`: checks content, links and rendering; run `node tests/check.js`

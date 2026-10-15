@@ -443,6 +443,50 @@ mark { color: inherit; background: linear-gradient(var(--accent-soft), var(--acc
 .hero-center .hero-title { font-size: clamp(2.6rem, 7vw, 6.2rem); max-width: 17ch; }
 .hero-center .hero-actions { justify-content: center; }
 
+.hero-copy { display: flex; flex-direction: column; align-items: center; }
+/* Centred layout: keep the green dot attached to the text when the eyebrow wraps on small screens */
+@media (max-width: 1079px) {
+  .hero-center .eyebrow { display: block; text-align: center; }
+  .hero-center .eyebrow::before { display: inline-block; margin-right: 10px; vertical-align: 1px; }
+}
+/* Interactive dot grid (hero-dots.js); the CSS .dots stay as the fallback */
+.hero-dots { position: absolute; inset: 0; z-index: -1; width: 100%; height: 100%; pointer-events: none;
+  -webkit-mask-image: linear-gradient(180deg, #000 30%, transparent 95%); mask-image: linear-gradient(180deg, #000 30%, transparent 95%); }
+.hero.has-dots .dots { display: none; }
+/* Headline letters (script.js sets font-weight on the ones near the cursor) */
+.hero-title .ch { transition: font-weight 0.25s var(--ease); }
+
+/* Live API card (hero-api.js): a DRF-style JSON response built from content.js */
+.api-card { width: min(540px, 100%); margin-top: 44px; text-align: left; border-radius: 18px; overflow: hidden; background: var(--term-bg); color: #e8e6e0; font-family: var(--mono); box-shadow: 0 30px 70px rgba(20, 19, 15, 0.2), 0 0 0 1px rgba(20, 19, 15, 0.9); }
+:root[data-theme="dark"] .api-card { box-shadow: 0 30px 70px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.1); }
+.api-bar { display: flex; align-items: center; gap: 10px; padding: 12px 16px; font-size: 0.78rem; background: rgba(255, 255, 255, 0.05); border-bottom: 1px solid rgba(255, 255, 255, 0.08); }
+.api-method { padding: 2px 8px; border-radius: 6px; font-weight: 500; color: #0d2a17; background: #5fd39a; }
+.api-path { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: #e8e6e0; }
+.api-time { color: #8a877f; }
+.api-time::before { content: "200 OK · "; color: #5fd39a; }
+.api-tabs { display: flex; gap: 4px; padding: 8px 10px 0; overflow-x: auto; scrollbar-width: none; }
+.api-tab { padding: 7px 12px; border-radius: 8px 8px 0 0; font: inherit; font-size: 0.76rem; color: #8a877f; background: transparent; border: 0; border-bottom: 2px solid transparent; cursor: pointer; transition: color 0.2s, border-color 0.2s, background 0.2s; }
+.api-tab:hover { color: #e8e6e0; background: rgba(255, 255, 255, 0.04); }
+.api-tab[aria-selected="true"] { color: #e8e6e0; border-bottom-color: #8aa0ff; }
+.api-tab:focus-visible { outline: 2px solid #8aa0ff; outline-offset: -2px; }
+.api-body { height: 300px; margin: 0; padding: 14px 18px 18px; overflow: auto; font-size: clamp(0.7rem, 1.4vw, 0.8rem); line-height: 1.7; white-space: pre-wrap; word-break: break-word; border-top: 1px solid rgba(255, 255, 255, 0.08); transition: opacity 0.15s; }
+.api-body:focus-visible { outline: 2px solid #8aa0ff; outline-offset: -2px; }
+.api-card.loading .api-body { opacity: 0.35; }
+.api-head { color: #6c7280; }
+.api-k { color: #8aa0ff; } .api-s { color: #ffb36b; } .api-n { color: #e070dc; } .api-p { color: #a8a498; }
+.api-caret { display: inline-block; width: 7px; height: 1.05em; margin-left: 1px; vertical-align: text-bottom; background: #e8e6e0; animation: blink 1s steps(1) infinite; }
+
+/* Wide screens: headline on the left, API card on the right */
+@media (min-width: 1080px) {
+  .hero-center { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr); gap: 56px; align-items: center; text-align: left; }
+  .hero-copy { align-items: flex-start; }
+  .hero-center .eyebrow, .hero-center .hero-actions { justify-content: flex-start; }
+  .hero-center .hero-title { font-size: clamp(2.8rem, 5.2vw, 5rem); max-width: 14ch; }
+  .api-card { margin-top: 0; justify-self: end; }
+  /* Left-aligned text doesn't shift when the word changes, so it needs no reserved width (script.js sets one for centred text) */
+  .rotate .rot-live { min-width: 0 !important; }
+}
+
 .term-about { margin-top: 34px; }
 #about { overflow-x: clip; }
 @media (max-width: 920px) { .hero-center .hero-title { max-width: 14ch; } }
