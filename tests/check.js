@@ -19,7 +19,7 @@ function isStr(v) { return typeof v === "string" && v.trim() !== ""; }
 function isUrl(v) { return /^https:\/\/[^\s]+$/.test(v); }
 
 /* ---------- syntax ---------- */
-var html = read("index.html");
+var html = read("index.html").replace(/(src|href)="([^"?]+)\?v=\d+"/g, '$1="$2"'); // ignore ?v= cache-busting suffixes
 ["content.js", "script.js", "hero-gradient.js", "hero-api.js", "hero-dots.js"].forEach(function (f) {
   try { new vm.Script(read(f), { filename: f }); check(f + " parses", true); }
   catch (e) { check(f + " parses", false, e.message); }
@@ -71,7 +71,7 @@ visible.forEach(function (p) {
   ["category", "problem", "approach"].forEach(function (k) { check(n + " has " + k, isStr(p[k]) && !isPh(p[k])); });
   check(n + " has a stack", Array.isArray(p.stack) && p.stack.length > 0);
   check(n + " github is URL or placeholder", isPh(p.github) || isUrl(p.github), p.github);
-  check(n + " demo is URL or placeholder", isPh(p.demo) || isUrl(p.demo), p.demo);
+  check(n + " demo is a URL, a placeholder or left out", p.demo == null || isPh(p.demo) || isUrl(p.demo), p.demo);
   if (p.visual) { check(n + " visual is known", VISUALS.indexOf(p.visual) > -1, p.visual); }
 });
 var names = visible.map(function (p) { return p.name; });
@@ -102,7 +102,7 @@ C.education.forEach(function (e) { check("education '" + e.title + "' complete",
 /* ---------- Python-first hero ---------- */
 check("role leads with Python, not AI/ML", /^Python Developer/.test(C.role) && C.role.indexOf("AI/ML") === -1, C.role);
 check("hero eyebrow leads with Python", /^Python developer/i.test(C.hero.eyebrow), C.hero.eyebrow);
-var heroHtml = read("index.html");
+var heroHtml = html;
 ["apiCard", "apiTabs", "apiPath", "apiTime", "apiBody", "heroDots"].forEach(function (id) {
   check("index.html has #" + id + " for the hero", heroHtml.indexOf('id="' + id + '"') > -1);
 });

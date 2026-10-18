@@ -65,7 +65,7 @@
 
   /* ---------- nav ---------- */
   $("navResume").setAttribute("href", C.resumeFile);
-  $("navResume").setAttribute("download", C.name.replace(/\s+/g, "") + "_Resume.pdf");
+  $("navResume").setAttribute("download", C.resumeFile.split("/").pop());
   var navLinks = $("navLinks"), navToggle = $("navToggle");
   navToggle.addEventListener("click", function () {
     var open = !navLinks.classList.contains("open");
@@ -543,7 +543,7 @@
 
   if (show(C.links.linkedin)) { actions.appendChild(link(C.links.linkedin, "LinkedIn", "btn btn-outline-light", true)); }
   if (show(C.links.github)) { actions.appendChild(link(C.links.github, "GitHub", "btn btn-outline-light", true)); }
-  actions.appendChild(el("a", { cls: "btn btn-light", text: "Download resume", attrs: { href: C.resumeFile, download: C.name.replace(/\s+/g, "") + "_Resume.pdf" } }));
+  actions.appendChild(el("a", { cls: "btn btn-light", text: "Download resume", attrs: { href: C.resumeFile, download: C.resumeFile.split("/").pop() } }));
   $("copy").textContent = "© " + new Date().getFullYear() + " " + C.name + " · " + C.location;
 
   /* ---------- skills <-> projects link ---------- */
