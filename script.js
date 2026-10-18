@@ -504,7 +504,7 @@
 
   /* ---------- contact + footer ---------- */
   var email = show(C.links.email) && !isPh(C.links.email) ? C.links.email : null;
-  var SUBJECT = "Hello from your portfolio";
+  var SUBJECT = "Reaching out via your portfolio";
   var mail = $("contactMail");
   if (email) {
     // A plain email link: clicking opens the visitor's own mail app. The address stays visible and can be copied.
