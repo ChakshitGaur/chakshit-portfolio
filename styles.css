@@ -93,8 +93,8 @@ body.preview .nav { top: calc(14px + var(--banner-h, 0px)); }
 .eyebrow { font-family: var(--mono); font-size: 0.8rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin-bottom: 22px; display: flex; align-items: center; gap: 10px; }
 .eyebrow::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: #1fb26b; box-shadow: 0 0 0 4px rgba(31, 178, 107, 0.18); }
 .hero-title { font-size: clamp(2.5rem, 6.4vw, 5.5rem); font-weight: 600; line-height: 1.02; letter-spacing: -0.04em; }
-.hero-title .w { display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: 0.22em; margin-bottom: -0.22em; }
-.hero-title .w > span { display: inline-block; padding-bottom: 0.22em; margin-bottom: -0.22em; animation: word 1s var(--ease) both; animation-delay: calc(var(--i) * 0.07s + 0.15s); }
+.hero-title .w { display: inline-block; overflow: hidden; vertical-align: top; padding: 0 0.14em 0.22em 0.06em; margin: 0 -0.14em -0.22em -0.06em; }
+.hero-title .w > span { display: inline-block; padding: 0 0.14em 0.22em 0.06em; margin: 0 -0.14em -0.22em -0.06em; animation: word 1s var(--ease) both; animation-delay: calc(var(--i) * 0.07s + 0.15s); }
 @keyframes word { from { transform: translateY(105%); } to { transform: none; } }
 .hero-title .accent { color: var(--accent); }
 .rotate { margin-top: 26px; font-family: var(--mono); font-size: 0.95rem; color: var(--muted); }
@@ -322,8 +322,8 @@ mark { color: inherit; background: linear-gradient(var(--accent-soft), var(--acc
 .in mark, mark.in { background-size: 100% 62%; }
 
 /* Word reveal: headings rise out of a mask */
-.rw { display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: 0.22em; margin-bottom: -0.22em; }
-.rw > span { display: inline-block; padding-bottom: 0.22em; margin-bottom: -0.22em; transform: translateY(108%); transition: transform 0.9s var(--ease) calc(var(--k, 0) * 0.07s + 0.1s); }
+.rw { display: inline-block; overflow: hidden; vertical-align: top; padding: 0 0.14em 0.22em 0.06em; margin: 0 -0.14em -0.22em -0.06em; }
+.rw > span { display: inline-block; padding: 0 0.14em 0.22em 0.06em; margin: 0 -0.14em -0.22em -0.06em; transform: translateY(108%); transition: transform 0.9s var(--ease) calc(var(--k, 0) * 0.07s + 0.1s); }
 .in .rw > span, .rw-host.in .rw > span { transform: none; }
 
 /* Skills ticker under the hero */
