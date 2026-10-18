@@ -58,7 +58,7 @@ window.CONTENT = {
     github: "https://github.com/ChakshitGaur", // taken from the GitHub account signed in on this PC; change it if you want another profile
   },
 
-  resumeFile: "assets/ChakshitGaur_resume.pdf",
+  resumeFile: "assets/ChakshitGaur_resume.pdf?v=2",
 
   about: [
     "I'm a Python developer and Computer Science graduate (B.Tech, 2023) based in New Delhi, with experience in " +
