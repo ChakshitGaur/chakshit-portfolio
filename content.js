@@ -160,8 +160,8 @@ window.CONTENT = {
       visual: "graph",
       problem: "Suggesting books readers are likely to enjoy, based on their ratings and similar readers.",
       approach:
-        "A collaborative filtering recommender: preprocessed book-rating datasets, then used user preferences and item similarity to generate personalised recommendations.",
-      stack: ["Python", "NumPy", "Pandas", "Scikit-learn"],
+        "A Flask-based machine learning recommender: preprocessed book-rating datasets, then used collaborative filtering and cosine similarity to recommend similar books.",
+      stack: ["Python", "Flask", "NumPy", "Pandas", "Scikit-learn", "Cosine similarity"],
       metric: "[[ optional: dataset size or an evaluation score ]]",
       github: "https://github.com/ChakshitGaur/BookPilot",
       demo: "[[ Live demo URL (optional) ]]",
