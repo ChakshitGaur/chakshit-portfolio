@@ -44,5 +44,5 @@ Only add numbers and claims that are true.
 - `hero-gradient.js`: the hero's WebGL gradient
 - `hero-api.js`: the live API card in the hero (its JSON is built from `content.js`)
 - `hero-dots.js`: the interactive dot grid behind the hero
-- `assets/ChakshitGaur_resume.pdf`: copy of your resume for the Resume buttons (replace this file when your resume changes)
+- `assets/ChakshitGaurResume.pdf`: copy of your resume for the Resume buttons (replace this file when your resume changes)
 - `tests/check.js`: checks content, links and rendering; run `node tests/check.js`

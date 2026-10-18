@@ -58,11 +58,11 @@ window.CONTENT = {
     github: "https://github.com/ChakshitGaur", // taken from the GitHub account signed in on this PC; change it if you want another profile
   },
 
-  resumeFile: "assets/ChakshitGaur_resume.pdf?v=2",
+  resumeFile: "assets/ChakshitGaurResume.pdf",
 
   about: [
     "I'm a Python developer and Computer Science graduate (B.Tech, 2023) based in New Delhi, with experience in " +
-      "**automation, web scraping and computer vision**. As an AI/ML Engineer I built an applicant tracking system for 5,000+ applicants, " +
+      "**automation, web scraping, computer vision and video processing**. As an AI/ML Engineer I built an applicant tracking system for 5,000+ applicants, " +
       "a client video processing system and an employee monitoring tool, **end to end**, from data collection and storage to packaging and documentation.",
     "I also build **Django web apps**, such as a multi-user Expense Tracker with automated tests and CI. My core toolkit is " +
       "**Python, SQL (MySQL, Oracle SQL) and Git**, with Pandas and NumPy for data and Scikit-learn, TensorFlow and PyTorch for machine learning. " +
