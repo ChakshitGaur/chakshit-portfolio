@@ -512,18 +512,6 @@
     mail.setAttribute("href", "mailto:" + email + "?subject=" + encodeURIComponent(SUBJECT));
   } else { mail.hidden = true; }
 
-  // Webmail fallbacks for visitors whose device has no mail app: each opens a ready-to-send draft in that service.
-  var mailOptions = $("mailOptions");
-  if (email) {
-    var to = encodeURIComponent(email), su = encodeURIComponent(SUBJECT);
-    [["Gmail", "https://mail.google.com/mail/?view=cm&fs=1&to=" + to + "&su=" + su],
-     ["Outlook", "https://outlook.live.com/mail/0/deeplink/compose?to=" + to + "&subject=" + su],
-     ["Yahoo Mail", "https://compose.mail.yahoo.com/?to=" + to + "&subject=" + su]].forEach(function (o) {
-      mailOptions.appendChild(link(o[1], o[0], "", true));
-    });
-    mailOptions.hidden = false;
-  }
-
   function copyEmail() {
     if (navigator.clipboard && navigator.clipboard.writeText) {
       navigator.clipboard.writeText(email).then(function () { toast("Email copied"); }, function () { toast(email); });
@@ -546,8 +534,46 @@
     sparksAt(x, y);
   }
 
+  // "Send me an email": a small dialog that asks which mail app to use (device default app, Gmail, Outlook, Yahoo, or copy).
+  function mailChooser() {
+    var to = encodeURIComponent(email), su = encodeURIComponent(SUBJECT);
+    var dlg = el("dialog", { cls: "mail-dialog", attrs: { "aria-labelledby": "mailDlgTitle" } });
+    var x = el("button", { cls: "mail-dlg-x", text: "×", attrs: { type: "button", "aria-label": "Close" } });
+    x.addEventListener("click", function () { dlg.close(); });
+    var list = el("ul", { cls: "mail-dlg-list" });
+    function opt(name, hint, node) {
+      node.classList.add("mail-opt");
+      node.appendChild(el("div", {}, [el("strong", { text: name }), el("small", { text: hint })]));
+      node.appendChild(el("span", { text: "→", attrs: { "aria-hidden": "true" } }));
+      node.addEventListener("click", function () { setTimeout(function () { dlg.close(); }, 60); });
+      list.appendChild(el("li", {}, [node]));
+      return node;
+    }
+    opt("Mail app on this device", "Opens your default mail app", el("a", { attrs: { href: "mailto:" + email + "?subject=" + su } }));
+    opt("Gmail", "Opens a draft in your browser", el("a", { attrs: { href: "https://mail.google.com/mail/?view=cm&fs=1&to=" + to + "&su=" + su, target: "_blank", rel: "noopener noreferrer" } }));
+    opt("Outlook", "Opens a draft in your browser", el("a", { attrs: { href: "https://outlook.live.com/mail/0/deeplink/compose?to=" + to + "&subject=" + su, target: "_blank", rel: "noopener noreferrer" } }));
+    opt("Yahoo Mail", "Opens a draft in your browser", el("a", { attrs: { href: "https://compose.mail.yahoo.com/?to=" + to + "&subject=" + su, target: "_blank", rel: "noopener noreferrer" } }));
+    var cp = opt("Copy email address", "Paste it into any mail app", el("button", { attrs: { type: "button" } }));
+    cp.addEventListener("click", copyEmail);
+    dlg.appendChild(el("div", { cls: "mail-dlg-head" }, [el("h3", { text: "Send me an email", attrs: { id: "mailDlgTitle" } }), x]));
+    dlg.appendChild(el("p", { cls: "mail-dlg-sub", text: "Choose how you want to write to " + email }));
+    dlg.appendChild(list);
+    dlg.addEventListener("click", function (e) { if (e.target === dlg) { dlg.close(); } });
+    document.body.appendChild(dlg);
+    return dlg;
+  }
+
   var actions = $("contactActions");
   if (email) {
+    var sendBtn = el("button", { cls: "btn btn-light", text: "Send me an email", attrs: { type: "button", "aria-haspopup": "dialog" } });
+    var dlg = null;
+    sendBtn.addEventListener("click", function (e) {
+      if (typeof HTMLDialogElement !== "function") { location.href = "mailto:" + email + "?subject=" + encodeURIComponent(SUBJECT); return; }
+      if (!dlg) { dlg = mailChooser(); }
+      dlg.showModal();
+      burstAt(e);
+    });
+    actions.appendChild(sendBtn);
     var copyBtn = el("button", { cls: "btn btn-outline-light", text: "Copy email", attrs: { type: "button" } });
     copyBtn.addEventListener("click", function (e) { copyEmail(); burstAt(e); });
     actions.appendChild(copyBtn);
@@ -555,7 +581,7 @@
 
   if (show(C.links.linkedin)) { actions.appendChild(link(C.links.linkedin, "LinkedIn", "btn btn-outline-light", true)); }
   if (show(C.links.github)) { actions.appendChild(link(C.links.github, "GitHub", "btn btn-outline-light", true)); }
-  actions.appendChild(el("a", { cls: "btn btn-light", text: "Download resume", attrs: { href: C.resumeFile, download: C.resumeFile.split("/").pop() } }));
+  actions.appendChild(el("a", { cls: "btn btn-outline-light", text: "Download resume", attrs: { href: C.resumeFile, download: C.resumeFile.split("/").pop() } }));
   $("copy").textContent = "© " + new Date().getFullYear() + " " + C.name + " · " + C.location;
 
   /* ---------- skills <-> projects link ---------- */
