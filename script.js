@@ -512,6 +512,18 @@
     mail.setAttribute("href", "mailto:" + email + "?subject=" + encodeURIComponent(SUBJECT));
   } else { mail.hidden = true; }
 
+  // Webmail fallbacks for visitors whose device has no mail app: each opens a ready-to-send draft in that service.
+  var mailOptions = $("mailOptions");
+  if (email) {
+    var to = encodeURIComponent(email), su = encodeURIComponent(SUBJECT);
+    [["Gmail", "https://mail.google.com/mail/?view=cm&fs=1&to=" + to + "&su=" + su],
+     ["Outlook", "https://outlook.live.com/mail/0/deeplink/compose?to=" + to + "&subject=" + su],
+     ["Yahoo Mail", "https://compose.mail.yahoo.com/?to=" + to + "&subject=" + su]].forEach(function (o) {
+      mailOptions.appendChild(link(o[1], o[0], "", true));
+    });
+    mailOptions.hidden = false;
+  }
+
   function copyEmail() {
     if (navigator.clipboard && navigator.clipboard.writeText) {
       navigator.clipboard.writeText(email).then(function () { toast("Email copied"); }, function () { toast(email); });

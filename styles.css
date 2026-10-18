@@ -230,6 +230,11 @@ body.preview .nav { top: calc(14px + var(--banner-h, 0px)); }
 .contact-title { font-size: clamp(2.4rem, 7.6vw, 6.6rem); font-weight: 600; letter-spacing: -0.045em; line-height: 1; max-width: 12em; }
 .contact-mail { display: inline-block; margin-top: 34px; font-size: clamp(1.1rem, 2.6vw, 1.8rem); letter-spacing: -0.02em; border-bottom: 1px solid rgba(244, 242, 236, 0.4); padding-bottom: 4px; transition: border-color 0.2s, color 0.2s; word-break: break-all; }
 .contact-mail:hover { color: #9fb0ff; border-color: #9fb0ff; }
+.mail-options { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; margin-top: 18px; font-size: 0.95rem; color: rgba(244, 242, 236, 0.62); }
+.mail-options[hidden] { display: none; }
+.mail-options a { color: var(--block-ink); border-bottom: 1px solid rgba(244, 242, 236, 0.35); padding-bottom: 1px; transition: color 0.2s, border-color 0.2s; }
+.mail-options a:hover { color: #9fb0ff; border-color: #9fb0ff; }
+@media (max-width: 560px) { .mail-options span { flex-basis: 100%; } }
 .contact-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 36px; }
 .footer { padding: 28px 24px 40px; text-align: center; font-size: 0.85rem; color: var(--muted); }
 
