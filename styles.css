@@ -244,6 +244,9 @@ body.preview .nav { top: calc(14px + var(--banner-h, 0px)); }
 .mail-dlg-list { margin-top: 18px; display: grid; gap: 8px; list-style: none; padding: 0; }
 .mail-opt { display: flex; align-items: center; justify-content: space-between; gap: 12px; width: 100%; padding: 13px 16px; border: 1px solid var(--line); border-radius: 14px; text-align: left; background: transparent; transition: border-color 0.2s, background 0.2s, transform 0.25s var(--ease); }
 .mail-opt:hover, .mail-opt:focus-visible { border-color: var(--ink); background: var(--bg-deep); transform: translateY(-1px); }
+.mail-dlg-sub-list { margin: 8px 0 0 14px; padding: 0 0 0 12px; display: grid; gap: 8px; list-style: none; border-left: 2px solid var(--line); }
+.mail-dlg-sub-list[hidden] { display: none; }
+.mail-dlg-sub-list .mail-opt { padding: 10px 14px; }
 .mail-opt strong { font-weight: 600; }
 .mail-opt small { display: block; margin-top: 1px; color: var(--muted); font-size: 0.82rem; }
 .mail-opt span { color: var(--muted); }
