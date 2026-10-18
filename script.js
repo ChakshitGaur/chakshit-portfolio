@@ -344,9 +344,9 @@
       svg.appendChild(svgEl("circle", { cx: 125, cy: 105, r: 58, fill: "none", stroke: ink, "stroke-opacity": 0.08, "stroke-width": 30 }));
       vals.forEach(function (v, k) {
         svg.appendChild(svgEl("circle", {
-          cx: 125, cy: 105, r: 58, fill: "none", "stroke-width": 30, transform: "rotate(-90 125 105)",
-          "stroke-dasharray": (v * circ - 3).toFixed(2) + " " + (circ - v * circ + 3).toFixed(2), "stroke-dashoffset": (-acc * circ).toFixed(2),
-          class: k === 0 ? "accd" : "", stroke: ink, "stroke-opacity": k === 0 ? 1 : ops[k] * 0.8
+          cx: 125, cy: 105, r: 58, fill: "none", "stroke-width": 30,
+          "stroke-dasharray": (v * circ - 3).toFixed(2) + " " + (circ - v * circ + 3).toFixed(2), "stroke-dashoffset": ((0.25 - acc) * circ).toFixed(2),
+          class: k === 0 ? "arc accd" : "arc", stroke: ink, "stroke-opacity": k === 0 ? 1 : ops[k] * 0.8
         }));
         acc += v;
         svg.appendChild(svgEl("rect", { x: 232, y: 58 + k * 30, width: 10, height: 10, rx: 3, class: k === 0 ? "acc" : "", fill: ink, "fill-opacity": k === 0 ? 1 : ops[k] * 0.8 }));

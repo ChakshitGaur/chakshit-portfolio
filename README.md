@@ -11,7 +11,7 @@ Everything you change lives in **`content.js`**.
 
 - `[[ ... ]]` = placeholder. On the public page placeholders are **hidden**.
 - Open `index.html?preview` to see them with dashed orange outlines.
-- To fill one in: replace the whole `"[[ ... ]]"` text with your real text (remove the brackets).
+- There are no placeholders at the moment, so the page shows only real content. Copy blocks from the TEMPLATES comment at the bottom of `content.js` to add more.
 
 | What | Where in `content.js` |
 |---|---|
