@@ -534,29 +534,54 @@
     sparksAt(x, y);
   }
 
-  // "Send me an email": a small dialog that asks which mail app to use (device default app, Gmail, Outlook, Yahoo, or copy).
+  // "Send me an email": a small dialog with three ways to write: the device's default mail app, a mail service you choose, or copy the address.
   function mailChooser() {
     var to = encodeURIComponent(email), su = encodeURIComponent(SUBJECT);
     var dlg = el("dialog", { cls: "mail-dialog", attrs: { "aria-labelledby": "mailDlgTitle" } });
     var x = el("button", { cls: "mail-dlg-x", text: "×", attrs: { type: "button", "aria-label": "Close" } });
     x.addEventListener("click", function () { dlg.close(); });
-    var list = el("ul", { cls: "mail-dlg-list" });
-    function opt(name, hint, node) {
+    function close() { setTimeout(function () { dlg.close(); }, 60); }
+    function row(name, hint, node, mark) {
       node.classList.add("mail-opt");
       node.appendChild(el("div", {}, [el("strong", { text: name }), el("small", { text: hint })]));
-      node.appendChild(el("span", { text: "→", attrs: { "aria-hidden": "true" } }));
-      node.addEventListener("click", function () { setTimeout(function () { dlg.close(); }, 60); });
-      list.appendChild(el("li", {}, [node]));
+      node.appendChild(el("span", { text: mark || "→", attrs: { "aria-hidden": "true" } }));
       return node;
     }
-    opt("Mail app on this device", "Opens your default mail app", el("a", { attrs: { href: "mailto:" + email + "?subject=" + su } }));
-    opt("Gmail", "Opens a draft in your browser", el("a", { attrs: { href: "https://mail.google.com/mail/?view=cm&fs=1&to=" + to + "&su=" + su, target: "_blank", rel: "noopener noreferrer" } }));
-    opt("Outlook", "Opens a draft in your browser", el("a", { attrs: { href: "https://outlook.live.com/mail/0/deeplink/compose?to=" + to + "&subject=" + su, target: "_blank", rel: "noopener noreferrer" } }));
-    opt("Yahoo Mail", "Opens a draft in your browser", el("a", { attrs: { href: "https://compose.mail.yahoo.com/?to=" + to + "&subject=" + su, target: "_blank", rel: "noopener noreferrer" } }));
-    var cp = opt("Copy email address", "Paste it into any mail app", el("button", { attrs: { type: "button" } }));
-    cp.addEventListener("click", copyEmail);
+    function webmail(name, url) {
+      var a = row(name, "Opens a draft in your browser", el("a", { attrs: { href: url, target: "_blank", rel: "noopener noreferrer" } }));
+      a.addEventListener("click", close);
+      return el("li", {}, [a]);
+    }
+    var list = el("ul", { cls: "mail-dlg-list" });
+
+    // 1. default mail app
+    var def = row("Open my default mail app", "Your device's own mail app", el("a", { attrs: { href: "mailto:" + email + "?subject=" + su } }));
+    def.addEventListener("click", close);
+    list.appendChild(el("li", {}, [def]));
+
+    // 2. choose a mail service yourself (expands to Gmail / Outlook / Yahoo)
+    var choose = row("Choose a mail service", "Gmail, Outlook or Yahoo Mail", el("button", { attrs: { type: "button", "aria-expanded": "false" } }), "+");
+    var subList = el("ul", { cls: "mail-dlg-sub-list" }, [
+      webmail("Gmail", "https://mail.google.com/mail/?view=cm&fs=1&to=" + to + "&su=" + su),
+      webmail("Outlook", "https://outlook.live.com/mail/0/deeplink/compose?to=" + to + "&subject=" + su),
+      webmail("Yahoo Mail", "https://compose.mail.yahoo.com/?to=" + to + "&subject=" + su)
+    ]);
+    subList.hidden = true;
+    choose.addEventListener("click", function () {
+      var open = subList.hidden;
+      subList.hidden = !open;
+      choose.setAttribute("aria-expanded", open ? "true" : "false");
+      choose.lastChild.textContent = open ? "−" : "+";
+    });
+    list.appendChild(el("li", {}, [choose, subList]));
+
+    // 3. copy the address
+    var cp = row("Copy email address", "Paste it into any mail app", el("button", { attrs: { type: "button" } }), "⧉");
+    cp.addEventListener("click", function () { copyEmail(); close(); });
+    list.appendChild(el("li", {}, [cp]));
+
     dlg.appendChild(el("div", { cls: "mail-dlg-head" }, [el("h3", { text: "Send me an email", attrs: { id: "mailDlgTitle" } }), x]));
-    dlg.appendChild(el("p", { cls: "mail-dlg-sub", text: "Choose how you want to write to " + email }));
+    dlg.appendChild(el("p", { cls: "mail-dlg-sub", text: "How do you want to write to " + email + "?" }));
     dlg.appendChild(list);
     dlg.addEventListener("click", function (e) { if (e.target === dlg) { dlg.close(); } });
     document.body.appendChild(dlg);
@@ -574,9 +599,6 @@
       burstAt(e);
     });
     actions.appendChild(sendBtn);
-    var copyBtn = el("button", { cls: "btn btn-outline-light", text: "Copy email", attrs: { type: "button" } });
-    copyBtn.addEventListener("click", function (e) { copyEmail(); burstAt(e); });
-    actions.appendChild(copyBtn);
   }
 
   if (show(C.links.linkedin)) { actions.appendChild(link(C.links.linkedin, "LinkedIn", "btn btn-outline-light", true)); }
