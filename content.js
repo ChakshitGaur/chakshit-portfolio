@@ -43,7 +43,7 @@ window.CONTENT = {
   // Short list of headline skills: feeds the hero API card and the marquee band.
   stack: ["Python", "Django", "SQL", "Selenium & scraping", "Machine learning & CV"],
 
-  // Skills section, part 1: what I can build. "match" words are compared with project tags:
+  // Skills section: what I can build. "match" words are compared with project tags:
   // hovering a card highlights the projects that use it. "icon": code, bolt, chart or spark.
   core: [
     { name: "Backends and APIs", icon: "code", tools: "Python · Django · REST framework · MySQL", proof: "Multi-user Expense Tracker, 43 tests + CI", match: ["python", "django", "sql"] },
@@ -51,19 +51,6 @@ window.CONTENT = {
     { name: "Data and ML models", icon: "chart", tools: "Pandas · NumPy · Scikit-learn · TensorFlow · PyTorch · OCR", proof: "Disease prediction, recommender, OCR video sync", match: ["machine learning", "svm", "logistic", "recommender", "computer vision", "ocr"] },
     { name: "Faster delivery with AI agents", icon: "spark", tools: "Claude Code · Codex · Cursor", proof: "I review everything I ship." },
   ],
-
-  // Skills section, part 2: how I build, with the tools at each step.
-  workflow: {
-    title: "How I build",
-    steps: [
-      { label: "Design", tools: "Django, REST framework" },
-      { label: "Store", tools: "MySQL, SQL" },
-      { label: "Automate", tools: "Selenium, Python scripts" },
-      { label: "Ship", tools: "Git, GitHub Actions CI" },
-    ],
-    ai: "AI agents help at every step: Claude Code, Codex, Cursor.",
-  },
-
 
   // Optional status shown in the hero, e.g. status: "Open to work". Leave it out to hide it.
 

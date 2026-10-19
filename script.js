@@ -285,7 +285,7 @@
     } else { setTimeout(typeTerminal, 900); }
   }
 
-  /* ---------- skills: what I can build (cards) + how I build (workflow) ---------- */
+  /* ---------- skills: what I can build (cards) ---------- */
   var ICONS = {
     code: "M8 7l-5 5 5 5M16 7l5 5-5 5M14 4l-4 16",
     bolt: "M13 3L4 14h7l-1 7 9-11h-7l1-7z",
@@ -314,17 +314,6 @@
     coreEl.appendChild(fade(card, i * 0.06));
     coreCards.push(card);
   });
-
-  var flowEl = $("flow"), W = C.workflow;
-  if (W && (W.steps || []).filter(function (s) { return show(s.label); }).length) {
-    if (show(W.title)) { flowEl.appendChild(el("h3", { cls: "flow-title" }, [span(W.title)])); }
-    var steps = el("ol", { cls: "flow-steps" });
-    W.steps.filter(function (s) { return show(s.label); }).forEach(function (s, i) {
-      steps.appendChild(el("li", {}, [el("small", { text: String(i + 1) + " \u00b7 " + s.label }), show(s.tools) ? el("strong", {}, [span(s.tools)]) : null]));
-    });
-    flowEl.appendChild(steps);
-    if (show(W.ai)) { flowEl.appendChild(el("p", { cls: "flow-ai" }, [icon("spark"), span(W.ai)])); }
-  } else { flowEl.hidden = true; }
 
   /* ---------- projects (bento) ---------- */
   function rng(seed) {
