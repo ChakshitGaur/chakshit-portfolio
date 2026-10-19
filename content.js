@@ -79,18 +79,20 @@ window.CONTENT = {
 
   experience: [
     {
-      title: "Freelance Python Developer",
+      title: "Freelancing",
       org: "Independent",
       location: "Remote",
       period: "Feb 2026 – Present",
       bullets: [
-        "Worked as a remote Python backend engineer with several companies, including clients based outside India.",
-        "Built and maintained the APIs and backend structure that run client dashboards.",
-        "Delivered projects on time, working directly with each client across time zones.",
+        "Worked as a remote Python backend engineer with several companies, including clients based outside India, taking on projects and working with each client directly.",
+        "Built and maintained the APIs and the backend structure that run and support client dashboards, helping keep them up and running day to day.",
+        "Delivered projects on time while staying in regular contact with each client and adapting to their needs across different time zones.",
       ],
+      // Used only for the skill-card hover highlight; not shown on the page.
+      tags: ["Python", "REST APIs"],
     },
     {
-      title: "Career Break · Upskilling",
+      title: "Career Break",
       org: "Self-directed learning",
       period: "Oct 2025 – Jan 2026",
       bullets: [
@@ -102,41 +104,25 @@ window.CONTENT = {
       org: "Stealth Startup (Full-time)",
       period: "Jul 2024 – Sep 2025",
       bullets: [
-        "Joined an early-stage startup in stealth mode as a full-time Python developer, working on the backend of its dashboard product.",
+        "Joined an early-stage startup in stealth mode as a full-time Python developer, working on the backend side of its dashboard product.",
         "Built backend features and APIs using Python, Django and Django REST Framework, with MySQL for data storage and Git for version control.",
-        "Worked in a small, fast-moving team, helping turn early ideas into working features as priorities changed.",
+        "Worked in a small, fast-moving team, helping turn early ideas into working features and adapting quickly as priorities changed.",
       ],
+      // Used only for the skill-card hover highlight; not shown on the page.
+      tags: ["Python", "Django", "Django REST Framework", "MySQL", "Git"],
     },
     {
       title: "AI/ML Engineer",
       org: "Isourse Technologies Pvt. Ltd.",
       location: "Delhi",
       period: "May 2023 – Jun 2024",
-      bullets: [],
-      projects: [
-        {
-          name: "Live-stream video sync for FM Logistics",
-          text:
-            "Built the FM Logistics client video system in Python, using OCR and computer vision to read timestamps and synchronise " +
-            "two live-stream videos, then stitch them into one combined video.",
-          tags: ["Python", "OCR", "Computer Vision", "Video processing"],
-        },
-        {
-          name: "Applicant Tracking System (ATS)",
-          text:
-            "Built an ATS using Selenium automation to extract applicant details for open jobs from LinkedIn and export them to CSV for HR. " +
-            "Designed the data storage in Python and SQL, integrated with HR systems, to manage 5,000+ applicants, " +
-            "and trained HR staff to use it.",
-          tags: ["Python", "Selenium", "Web Scraping", "SQL", "CSV export"],
-        },
-        {
-          name: "Employee Management System",
-          text:
-            "Built an Employee Management System (EMS) that measures productivity by tracking keyboard activity and idle time. " +
-            "Delivered it as a standalone executable with documentation and user support.",
-          tags: ["Python", "Desktop executable", "Activity tracking"],
-        },
+      bullets: [
+        "Built the FM Logistics client video system in Python, using OCR and computer vision to read timestamps and synchronise two live-stream videos, then stitch them into one combined video.",
+        "Built an applicant tracking system with Selenium that pulls applicant details from LinkedIn into CSV for HR, with Python and SQL storage managing 5,000+ applicants, and trained HR staff to use it.",
+        "Built an Employee Management System that measures productivity by tracking keyboard activity and idle time, delivered as a standalone executable with documentation and user support.",
       ],
+      // Used only for the skill-card hover highlight; not shown on the page.
+      tags: ["Python", "OCR", "Computer Vision", "Video processing", "Selenium", "Web Scraping", "SQL", "CSV export", "Activity tracking"],
     },
   ],
 
