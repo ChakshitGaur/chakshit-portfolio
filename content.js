@@ -88,7 +88,6 @@ window.CONTENT = {
         "Built and maintained the APIs and backend structure that run client dashboards.",
         "Delivered projects on time, working directly with each client across time zones.",
       ],
-      tags: ["Python", "REST APIs"],
     },
     {
       title: "Career Break · Upskilling",
@@ -97,7 +96,6 @@ window.CONTENT = {
       bullets: [
         "Took a planned career break to deepen my Python backend skills, studying backend development and the tools and practices around it.",
       ],
-      tags: [],
     },
     {
       title: "Python Developer",
@@ -108,7 +106,6 @@ window.CONTENT = {
         "Built backend features and APIs using Python, Django and Django REST Framework, with MySQL for data storage and Git for version control.",
         "Worked in a small, fast-moving team, helping turn early ideas into working features as priorities changed.",
       ],
-      tags: ["Python", "Django", "Django REST Framework", "MySQL", "Git"],
     },
     {
       title: "AI/ML Engineer",
@@ -140,7 +137,6 @@ window.CONTENT = {
           tags: ["Python", "Desktop executable", "Activity tracking"],
         },
       ],
-      tags: [],
     },
   ],
 
@@ -187,34 +183,6 @@ window.CONTENT = {
     { group: "ML & computer vision", items: ["Computer Vision", "OCR", "Scikit-learn", "TensorFlow", "PyTorch", "YOLO"] },
     { group: "Tools & version control", items: ["Git", "GitHub", "VS Code", "PyCharm", "Jupyter Notebook"] },
   ],
-
-  // "score" is optional and shown under the school name.
-  education: [
-    {
-      title: "B.Tech, Computer Science & Engineering",
-      org: "D.P.G Institute of Technology and Management, Gurugram",
-      period: "Jul 2019 – Jun 2023",
-    },
-    {
-      title: "Class XII",
-      org: "Shri Krishna Parnami Sr. Sec. School, Karnal",
-      period: "2018",
-    },
-    {
-      title: "Class X",
-      org: "V.P International School, Karnal",
-      period: "2016",
-    },
-  ],
-
-  // Shown under Education. Hidden if the list is empty.
-  achievements: [
-    "Gold Prize, Annual CSSRI Sports-meet, in Football and 100-M race",
-    "Silver Prize, Intra-college Kabaddi Competition",
-  ],
-
-  // Shown under Education once you add at least a name. Leave empty to hide.
-  certifications: [],
 };
 
 /* ==========================================================================
@@ -222,13 +190,10 @@ window.CONTENT = {
 
    Experience entry:
      { title: "Role", org: "Organisation", location: "City / Remote", period: "Jun 2024 – Present",
-       bullets: ["What you built or learned: lead with the result, then the tools used"], tags: ["tech"] },
+       bullets: ["What you built or learned: lead with the result, then the tools used"] },
 
    Project:
      { name: "Name", category: "Category", visual: "scatter", problem: "One line: what problem does it solve?",
        approach: "How you built it, in 1-2 sentences", stack: ["tech"], metric: "optional, only if true",
        github: "https://github.com/ChakshitGaur/repo", demo: "https://..." },
-
-   Certification:
-     { name: "Course or certification name", issuer: "Issuer", year: "2025" },
    ========================================================================== */

@@ -22,9 +22,6 @@ Everything you change lives in **`content.js`**.
 | What you did since June 2024 | first item in `experience` |
 | LinkedIn / GitHub URLs, email | `links` |
 | Projects (card art is `visual`: scatter, graph or bars) | `projects` |
-| Courses & certifications | `certifications` |
-| Achievements (shown under Education) | `achievements` |
-| Education scores (optional) | `score` on each `education` item |
 | Count-up numbers | `stats` |
 
 Only add numbers and claims that are true.

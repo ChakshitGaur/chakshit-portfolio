@@ -223,6 +223,7 @@ body.preview .nav { top: calc(14px + var(--banner-h, 0px)); }
 .edu p.score { font-family: var(--mono); font-size: 0.78rem; color: var(--ink); }
 .edu .meta { font-family: var(--mono); font-size: 0.78rem; color: var(--muted); white-space: nowrap; }
 @media (max-width: 860px) { .about-grid { grid-template-columns: 1fr; gap: 40px; } }
+@media (min-width: 861px) { .about-side { align-self: end; } .about-side .term-about { margin-top: 0; } }
 
 /* Contact */
 .contact { margin: 120px 14px 0; padding: clamp(64px, 10vw, 120px) 0; border-radius: 34px; background: var(--block-bg); color: var(--block-ink); }
