@@ -17,7 +17,7 @@
   var base = "/api/" + C.name.split(" ")[0].toLowerCase() + "/";
   function me() {
     var o = { name: C.name, role: C.role.replace(/ · /g, ", "), location: C.location };
-    o.stack = (C.core || []).map(function (c) { return c.name; });
+    o.stack = (C.stack || []).slice();
     if (real(C.status)) { o.status = C.status; }
     var links = {};
     ["github", "linkedin"].forEach(function (k) { if (real(C.links[k])) { links[k] = C.links[k]; } });
