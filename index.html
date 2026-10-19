@@ -21,7 +21,7 @@
   <link rel="icon" href="favicon.svg?v=5" type="image/svg+xml">
   <link rel="icon" href="favicon-48.png?v=5" type="image/png" sizes="48x48">
   <link rel="apple-touch-icon" href="apple-touch-icon.png?v=5">
-  <link rel="stylesheet" href="styles.css?v=9">
+  <link rel="stylesheet" href="styles.css?v=10">
 </head>
 <body>
   <a class="skip" href="#skills">Skip to content</a>
@@ -35,10 +35,10 @@
     <a class="nav-brand" href="#top" aria-label="Chakshit Gaur, back to top"><span>CG</span></a>
     <button class="nav-toggle" id="navToggle" type="button" aria-expanded="false" aria-controls="navLinks">Menu</button>
     <nav class="nav-links" id="navLinks" aria-label="Primary">
-      <a href="#skills">Skills</a>
-      <a href="#projects">Projects</a>
-      <a href="#experience">Experience</a>
       <a href="#about">About</a>
+      <a href="#experience">Experience</a>
+      <a href="#projects">Projects</a>
+      <a href="#skills">Skills</a>
       <a class="nav-cta" id="navResume" href="#" download>Resume</a>
     </nav>
     <div class="nav-tools">
@@ -83,16 +83,36 @@
       <div class="ticker rise" style="--i:11" aria-hidden="true"><div class="ticker-track" id="tickerTrack"></div></div>
     </section>
 
-    <!-- SKILLS -->
-    <section class="section" id="skills">
+    <!-- ABOUT -->
+    <section class="section" id="about">
+      <div class="container about-grid">
+        <div class="fade">
+          <header class="sec-head">
+            <p class="sec-num">01</p>
+            <h2>About</h2>
+          </header>
+          <div class="prose" id="aboutText"></div>
+        </div>
+        <div class="about-side fade" style="--d:0.1s">
+          <div class="term-wrap term-about">
+            <div class="term" id="term" role="region" aria-label="Terminal: about Chakshit">
+              <div class="term-bar" aria-hidden="true"><i></i><i></i><i></i><span>about.py &mdash; python</span></div>
+              <div class="term-body" id="termBody" aria-hidden="true"></div>
+              <pre class="sr-only" id="termText"></pre>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section class="section" id="experience">
       <div class="container">
         <header class="sec-head fade">
-          <p class="sec-num">01</p>
-          <h2>Skills</h2>
-          <p class="sec-sub">What I use most, with the work that proves it. Hover a card to see where it shows up.</p>
+          <p class="sec-num">02</p>
+          <h2>Experience</h2>
         </header>
-        <div class="core" id="core"></div>
-        <div class="groups" id="groups"></div>
+        <ol class="timeline" id="timeline"></ol>
       </div>
     </section>
 
@@ -100,7 +120,7 @@
     <section class="section" id="projects">
       <div class="container">
         <header class="sec-head fade">
-          <p class="sec-num">02</p>
+          <p class="sec-num">03</p>
           <h2>Projects</h2>
           <p class="sec-sub">Web and machine-learning work, each with the problem, the approach and the tools.</p>
         </header>
@@ -110,46 +130,16 @@
 
     <div class="band" aria-hidden="true"><div class="band-track" id="bandTrack"></div></div>
 
-    <!-- EXPERIENCE -->
-    <section class="section" id="experience">
+    <!-- SKILLS -->
+    <section class="section" id="skills">
       <div class="container">
         <header class="sec-head fade">
-          <p class="sec-num">03</p>
-          <h2>Experience</h2>
+          <p class="sec-num">04</p>
+          <h2>Skills</h2>
+          <p class="sec-sub">What I use most, with the work that proves it. Hover a card to see where it shows up.</p>
         </header>
-        <ol class="timeline" id="timeline"></ol>
-      </div>
-    </section>
-
-    <!-- ABOUT + EDUCATION -->
-    <section class="section" id="about">
-      <div class="container about-grid">
-        <div class="fade">
-          <header class="sec-head">
-            <p class="sec-num">04</p>
-            <h2>About</h2>
-          </header>
-          <div class="prose" id="aboutText"></div>
-          <div class="term-wrap term-about">
-            <div class="term" id="term" role="region" aria-label="Terminal: about Chakshit">
-              <div class="term-bar" aria-hidden="true"><i></i><i></i><i></i><span>about.py &mdash; python</span></div>
-              <div class="term-body" id="termBody" aria-hidden="true"></div>
-              <pre class="sr-only" id="termText"></pre>
-            </div>
-          </div>
-        </div>
-        <div class="fade" style="--d:0.1s">
-          <h3 class="mini-title">Education</h3>
-          <ul class="edu" id="eduList"></ul>
-          <div id="certWrap" hidden>
-            <h3 class="mini-title">Courses &amp; certifications</h3>
-            <ul class="edu" id="certList"></ul>
-          </div>
-          <div id="achWrap" hidden>
-            <h3 class="mini-title">Achievements</h3>
-            <ul class="edu" id="achList"></ul>
-          </div>
-        </div>
+        <div class="core" id="core"></div>
+        <div class="groups" id="groups"></div>
       </div>
     </section>
 
@@ -172,8 +162,8 @@
     <svg viewBox="0 0 44 44" aria-hidden="true"><circle class="ring-bg" cx="22" cy="22" r="19"/><circle class="ring" id="ring" cx="22" cy="22" r="19"/><path d="M22 28V16M16 21l6-6 6 6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
   </button>
 
-  <script src="content.js?v=6"></script>
-  <script src="script.js?v=8"></script>
+  <script src="content.js?v=7"></script>
+  <script src="script.js?v=9"></script>
   <script src="hero-gradient.js?v=3"></script>
   <script src="hero-api.js?v=3"></script>
   <script src="hero-dots.js?v=3"></script>

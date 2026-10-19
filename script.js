@@ -466,12 +466,10 @@
         return el("article", { cls: "mini", attrs: { "data-tags": [p.name].concat(p.tags || []).join("|").toLowerCase() } }, [el("h4", {}, [span(p.name)]), el("p", { text: p.text }), tagList(p.tags)]);
       })));
     }
-    var tags = tagList(job.tags);
-    if (tags) { right.appendChild(tags); }
     timeline.appendChild(fade(el("li", { cls: "tl-item" }, [el("div", { cls: "tl-when" }, [show(job.period) ? span(job.period) : null]), right])));
   });
 
-  /* ---------- about + education ---------- */
+  /* ---------- about ---------- */
   var aboutText = $("aboutText");
   // **phrase** in content.js becomes an animated highlighter mark.
   (C.about || []).forEach(function (t) {
@@ -482,25 +480,6 @@
     });
     aboutText.appendChild(p);
   });
-  var edu = $("eduList");
-  (C.education || []).forEach(function (e) {
-    edu.appendChild(el("li", {}, [el("div", {}, [el("h3", { text: e.title }), el("p", { text: e.org }), show(e.score) ? el("p", { cls: "score" }, [span(e.score)]) : null]), el("span", { cls: "meta", text: e.period })]));
-  });
-  var achievements = (C.achievements || []).filter(show);
-  if (achievements.length) {
-    var al = $("achList");
-    achievements.forEach(function (a) { al.appendChild(el("li", {}, [el("div", {}, [el("h4", {}, [span(a)])])])); });
-    $("achWrap").hidden = false;
-  }
-  var certs = (C.certifications || []).filter(function (c) { return show(c.name); });
-  if (certs.length) {
-    var cl = $("certList");
-    certs.forEach(function (c) {
-      var sub = [c.issuer, c.year].filter(show);
-      cl.appendChild(el("li", {}, [el("div", {}, [el("h4", {}, [span(c.name)]), sub.length ? el("p", {}, [span(sub.join(" · "))]) : null])]));
-    });
-    $("certWrap").hidden = false;
-  }
 
   /* ---------- contact + footer ---------- */
   var email = show(C.links.email) && !isPh(C.links.email) ? C.links.email : null;

@@ -96,8 +96,6 @@ C.skills.forEach(function (g) {
   check("skill group '" + g.group + "' has items", Array.isArray(g.items) && g.items.length > 0);
   check("skill group '" + g.group + "' has no duplicates", new Set(g.items).size === g.items.length);
 });
-C.education.forEach(function (e) { check("education '" + e.title + "' complete", isStr(e.title) && isStr(e.org) && isStr(e.period)); });
-(C.achievements || []).forEach(function (a, i) { check("achievement " + i + " is text", isStr(a)); });
 
 /* ---------- Python-first hero ---------- */
 check("role leads with Python, not AI/ML", /^Python Developer/.test(C.role) && C.role.indexOf("AI/ML") === -1, C.role);
