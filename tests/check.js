@@ -90,7 +90,7 @@ C.experience.forEach(function (j) {
   (j.projects || []).forEach(function (p) { tagSets.push([p.name].concat(p.tags || []).join("|").toLowerCase()); });
   if ((j.tags || []).length) { tagSets.push([j.title].concat(j.tags).join("|").toLowerCase()); } // job-level hidden tags, same as script.js
 });
-C.core.forEach(function (c) {
+C.core.filter(function (c) { return (c.match || []).length; }).forEach(function (c) {
   var hit = (c.match || []).some(function (w) { return tagSets.some(function (t) { return t.indexOf(w.toLowerCase()) > -1; }); });
   check("core skill '" + c.name + "' matches a project", hit, (c.match || []).join(", "));
 });
@@ -128,7 +128,7 @@ check("hero-api.js and hero-dots.js load after content.js", heroHtml.indexOf('sr
     check("API card 'me' response is valid JSON", true);
     check("API card shows the name from content.js", data.name === C.name, data.name);
     check("API card hides placeholder values", body.indexOf("[[") === -1);
-    check("API card stack matches the core skills", JSON.stringify(data.stack) === JSON.stringify(C.core.map(function (c) { return c.name; })));
+    check("API card stack matches content.js stack", JSON.stringify(data.stack) === JSON.stringify(C.stack));
   } catch (e) { check("API card renders valid JSON from content.js", false, e.message); }
 })();
 

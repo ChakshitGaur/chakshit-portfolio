@@ -285,13 +285,29 @@
     } else { setTimeout(typeTerminal, 900); }
   }
 
-  /* ---------- skills: core cards + grouped chips ---------- */
+  /* ---------- skills: what I can build (cards) + how I build (workflow) ---------- */
+  var ICONS = {
+    code: "M8 7l-5 5 5 5M16 7l5 5-5 5M14 4l-4 16",
+    bolt: "M13 3L4 14h7l-1 7 9-11h-7l1-7z",
+    chart: "M4 20V11M10 20V4M16 20v-6M2 20h20",
+    spark: "M12 3l2.2 5.8L20 11l-5.8 2.2L12 19l-2.2-5.8L4 11l5.8-2.2z"
+  };
+  function icon(name) {
+    var svg = document.createElementNS(SVGNS, "svg");
+    [["viewBox", "0 0 24 24"], ["fill", "none"], ["stroke", "currentColor"], ["stroke-width", "1.7"], ["stroke-linecap", "round"], ["stroke-linejoin", "round"], ["aria-hidden", "true"], ["class", "ico"]].forEach(function (a) { svg.setAttribute(a[0], a[1]); });
+    var path = document.createElementNS(SVGNS, "path");
+    path.setAttribute("d", ICONS[name] || ICONS.code);
+    svg.appendChild(path);
+    return svg;
+  }
   var coreEl = $("core");
   var coreCards = [];
   (C.core || []).forEach(function (c, i) {
     var proofOk = show(c.proof);
     var card = el("button", { cls: "core-card" + (proofOk && isPh(c.proof) ? " empty" : ""), attrs: { type: "button", "aria-pressed": "false" } }, [
+      icon(c.icon),
       el("strong", { text: c.name }),
+      show(c.tools) ? el("p", { cls: "core-tools" }, [span(c.tools)]) : null,
       proofOk ? el("span", {}, [span(c.proof)]) : null,
     ]);
     card.setAttribute("data-match", (c.match || []).join("|").toLowerCase());
@@ -299,18 +315,16 @@
     coreCards.push(card);
   });
 
-  var groupsEl = $("groups");
-  (C.skills || []).forEach(function (g, i) {
-    var items = (g.items || []).filter(show);
-    if (!items.length) { return; }
-    var chips = el("div", { cls: "chips" }, items.map(function (n, ci) {
-      var c = el("span", { cls: "chip", text: n });
-      c.style.setProperty("--c", ci);
-      if (isPh(n)) { c.classList.add("ph"); }
-      return c;
-    }));
-    groupsEl.appendChild(fade(el("div", { cls: "group" }, [el("h3", { text: g.group }), chips]), i * 0.04));
-  });
+  var flowEl = $("flow"), W = C.workflow;
+  if (W && (W.steps || []).filter(function (s) { return show(s.label); }).length) {
+    if (show(W.title)) { flowEl.appendChild(el("h3", { cls: "flow-title" }, [span(W.title)])); }
+    var steps = el("ol", { cls: "flow-steps" });
+    W.steps.filter(function (s) { return show(s.label); }).forEach(function (s, i) {
+      steps.appendChild(el("li", {}, [el("small", { text: String(i + 1) + " \u00b7 " + s.label }), show(s.tools) ? el("strong", {}, [span(s.tools)]) : null]));
+    });
+    flowEl.appendChild(steps);
+    if (show(W.ai)) { flowEl.appendChild(el("p", { cls: "flow-ai" }, [icon("spark"), span(W.ai)])); }
+  } else { flowEl.hidden = true; }
 
   /* ---------- projects (bento) ---------- */
   function rng(seed) {
@@ -659,7 +673,7 @@
 
   // Big outlined marquee band between sections
   var bandTrack = $("bandTrack");
-  var bandWords = (C.core || []).map(function (c) { return c.name; });
+  var bandWords = (C.stack || []).slice();
   if (bandWords.length) {
     for (var br = 0; br < 4; br++) { bandWords.forEach(function (w, wi) { bandTrack.appendChild(el("span", { cls: wi % 2 ? "solid" : "", text: w })); }); }
     // The band slides with the scroll position (no timer), looping seamlessly.
