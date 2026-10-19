@@ -466,7 +466,7 @@
         return el("article", { cls: "mini", attrs: { "data-tags": [p.name].concat(p.tags || []).join("|").toLowerCase() } }, [el("h4", {}, [span(p.name)]), el("p", { text: p.text }), tagList(p.tags)]);
       })));
     }
-    timeline.appendChild(fade(el("li", { cls: "tl-item" }, [el("div", { cls: "tl-when" }, [show(job.period) ? span(job.period) : null]), right])));
+    timeline.appendChild(fade(el("li", { cls: "tl-item", attrs: job.tags && job.tags.length ? { "data-tags": [job.title].concat(job.tags).join("|").toLowerCase() } : {} }, [el("div", { cls: "tl-when" }, [show(job.period) ? span(job.period) : null]), right])));
   });
 
   /* ---------- about ---------- */

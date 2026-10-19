@@ -86,7 +86,10 @@ C.experience.filter(function (j) { return !isPh(j.title); }).forEach(function (j
 // Each core skill card should highlight at least one project when hovered (same rule as script.js).
 var tagSets = [];
 visible.forEach(function (p) { tagSets.push([p.name, p.category].concat(p.stack || []).join("|").toLowerCase()); });
-C.experience.forEach(function (j) { (j.projects || []).forEach(function (p) { tagSets.push([p.name].concat(p.tags || []).join("|").toLowerCase()); }); });
+C.experience.forEach(function (j) {
+  (j.projects || []).forEach(function (p) { tagSets.push([p.name].concat(p.tags || []).join("|").toLowerCase()); });
+  if ((j.tags || []).length) { tagSets.push([j.title].concat(j.tags).join("|").toLowerCase()); } // job-level hidden tags, same as script.js
+});
 C.core.forEach(function (c) {
   var hit = (c.match || []).some(function (w) { return tagSets.some(function (t) { return t.indexOf(w.toLowerCase()) > -1; }); });
   check("core skill '" + c.name + "' matches a project", hit, (c.match || []).join(", "));
