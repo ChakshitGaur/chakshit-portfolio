@@ -61,7 +61,7 @@ window.CONTENT = {
   resumeFile: "assets/ChakshitGaurResume.pdf",
 
   about: [
-    "I'm a Python developer and Computer Science graduate (B.Tech, 2023) based in New Delhi, with experience in " +
+    "I'm a Python developer and Computer Science graduate (B.Tech) based in New Delhi, with experience in " +
       "**automation, web scraping, computer vision and video processing**. As an AI/ML Engineer I built an applicant tracking system for 5,000+ applicants, " +
       "a client video processing system and an employee monitoring tool, **end to end**, from data collection and storage to packaging and documentation.",
     "I also build **Django web apps**, such as a multi-user Expense Tracker with automated tests and CI. My core toolkit is " +
@@ -71,13 +71,45 @@ window.CONTENT = {
 
   // Only facts taken from the resume. Add more numbers here once you have real ones.
   stats: [
-    { value: "1+ yr", label: "Professional experience" },
+    { value: "3+ yrs", label: "Professional experience" },
     { value: "3", label: "Projects built at Isourse" },
     { value: "3", label: "Personal projects" },
     { value: "5,000+", label: "Applicants managed by my ATS" },
   ],
 
   experience: [
+    {
+      title: "Freelance Python Developer",
+      org: "Independent",
+      location: "Remote",
+      period: "Feb 2026 – Present",
+      bullets: [
+        "Worked as a remote Python backend engineer with several companies, including clients based outside India.",
+        "Built and maintained the APIs and backend structure that run client dashboards.",
+        "Delivered projects on time, working directly with each client across time zones.",
+      ],
+      tags: ["Python", "REST APIs"],
+    },
+    {
+      title: "Career Break · Upskilling",
+      org: "Self-directed learning",
+      period: "Oct 2025 – Jan 2026",
+      bullets: [
+        "Took a planned career break to deepen my Python backend skills, studying backend development and the tools and practices around it.",
+      ],
+      tags: [],
+    },
+    {
+      title: "Python Developer",
+      org: "Stealth Startup (Full-time)",
+      period: "Jul 2024 – Sep 2025",
+      bullets: [
+        "Joined an early-stage startup in stealth mode as a full-time Python developer, working on the backend of its dashboard product.",
+        "Built backend features and APIs using Python, Django and Django REST Framework, with MySQL for data storage and Git for version control.",
+        "Worked in a small, fast-moving team, helping turn early ideas into working features as priorities changed.",
+      ],
+      tags: ["Python", "Django", "Django REST Framework", "MySQL", "Git"],
+    },
     {
       title: "AI/ML Engineer",
       org: "Isourse Technologies Pvt. Ltd.",
@@ -161,19 +193,16 @@ window.CONTENT = {
     {
       title: "B.Tech, Computer Science & Engineering",
       org: "D.P.G Institute of Technology and Management, Gurugram",
-      score: "78%",
       period: "Jul 2019 – Jun 2023",
     },
     {
       title: "Class XII",
       org: "Shri Krishna Parnami Sr. Sec. School, Karnal",
-      score: "89%",
       period: "2018",
     },
     {
       title: "Class X",
       org: "V.P International School, Karnal",
-      score: "9.0/10 CGPA",
       period: "2016",
     },
   ],
