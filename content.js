@@ -43,64 +43,65 @@ window.CONTENT = {
   // Short list of headline skills: feeds the hero API card and the marquee band.
   stack: ["Python", "Django", "SQL", "Selenium & scraping", "Machine learning & CV"],
 
-  // Skills section: what I can build. Clicking a card opens a popup listing "skills". "match" words are compared with project tags:
+  // Skills section: what I can build. Cards show only a generic tagline; clicking one opens a popup listing every skill in "skills". "match" words are compared with project tags:
   // hovering a card highlights the projects that use it. "icon": code, bolt, chart, merge or spark.
   core: [
     {
       name: "Backends and APIs",
       icon: "code",
-      tools: "Python · Django · REST framework · MySQL",
+      tagline: "Web servers, APIs and databases",
       match: ["python", "django", "sql"],
+      // Shown in the popup when the card is clicked.
       skills: [
-        { name: "Python", text: "My main language for backend, automation and machine learning work." },
-        { name: "Django", text: "The web framework behind my Expense Tracker and my backend work at a stealth startup." },
-        { name: "Django REST Framework", text: "Used to build the REST APIs that power dashboards." },
-        { name: "REST APIs", text: "Designing and building the endpoints that dashboards and apps use to read and write data." },
-        { name: "MySQL", text: "The relational database I use to store application data. I have also worked with Oracle SQL." },
+        "Python", "Django", "Django REST Framework", "REST APIs",
+        "Flask", "SQL", "MySQL", "Oracle SQL",
+        "SQLite",
       ],
     },
     {
       name: "Automation and scraping",
       icon: "bolt",
-      tools: "Selenium · Web scraping · Python scripts",
+      tagline: "Scripts, bots and data collection",
       match: ["selenium", "scraping"],
+      // Shown in the popup when the card is clicked.
       skills: [
-        { name: "Selenium", text: "Browser automation. I used it to build an applicant tracking system that collects applicant details from LinkedIn for HR." },
-        { name: "Web scraping", text: "Collecting data from web pages and exporting it to CSV or a database." },
-        { name: "Python scripts", text: "Small scripts that replace repetitive manual work." },
+        "Selenium", "Web scraping", "Python scripts", "CSV import and export",
       ],
     },
     {
       name: "Data and ML models",
       icon: "chart",
-      tools: "Pandas · NumPy · Scikit-learn · TensorFlow · PyTorch · OCR",
+      tagline: "Analysis, modelling and dashboards",
       match: ["machine learning", "svm", "logistic", "recommender", "computer vision", "ocr"],
+      // Shown in the popup when the card is clicked.
       skills: [
-        { name: "Pandas and NumPy", text: "Cleaning, exploring and preparing data for analysis and models." },
-        { name: "Scikit-learn", text: "Used for classification models such as disease prediction, and for recommender systems." },
-        { name: "XGBoost and SHAP", text: "Used in my churn project: a boosted-tree model, with SHAP explaining each customer's top churn drivers." },
-        { name: "TensorFlow and PyTorch", text: "Deep learning frameworks I am familiar with." },
-        { name: "OCR and computer vision", text: "Used at Isourse to read timestamps from video so two live streams could be synchronised." },
+        "NumPy", "Pandas", "Matplotlib", "Seaborn",
+        "Power BI", "Scikit-learn", "XGBoost", "LightGBM",
+        "SHAP", "TensorFlow", "PyTorch", "Logistic regression",
+        "SVM", "Collaborative filtering", "Cosine similarity", "OCR",
+        "Computer vision", "YOLO", "Streamlit",
       ],
     },
     {
       name: "Testing, CI/CD and Docker",
       icon: "merge",
-      tools: "GitHub Actions · Automated tests · Docker · Git",
+      tagline: "Quality, pipelines and delivery",
       match: ["django"],
+      // Shown in the popup when the card is clicked.
       skills: [
-        { name: "GitHub Actions", text: "Runs the automated tests on every pull request in my Expense Tracker." },
-        { name: "Automated tests", text: "43 tests in Expense Tracker and 80+ pytest tests in my churn project." },
-        { name: "Docker", text: "Packaging an app and its dependencies so it runs the same way anywhere." },
-        { name: "Git and GitHub", text: "Version control and a pull-request workflow for all my projects." },
+        "GitHub Actions", "pytest", "Automated tests", "Docker",
+        "Git", "GitHub", "VS Code", "PyCharm",
+        "Jupyter Notebook",
       ],
     },
     {
       name: "Faster delivery with AI agents",
       icon: "spark",
-      tools: "Claude Code · Codex · Cursor" ,
+      tagline: "Coding with AI assistants",
+      // Shown in the popup when the card is clicked.
       skills: [
-        { name: "Claude Code, Codex and Cursor", text: "AI coding agents I work with to help write, test and refactor code." },
+        "Claude Code", "Codex", "Cursor", "Claude",
+        "ChatGPT",
       ],
     },
   ],
