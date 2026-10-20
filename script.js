@@ -481,49 +481,22 @@
 
   /* ---------- experience ---------- */
   var timeline = $("timeline");
-  // "Feb 2026 - Present" -> "9 mo"; "Jul 2024 - Sep 2025" -> "1 yr 3 mo" (both months count)
-  var MONTHS = { jan: 0, feb: 1, mar: 2, apr: 3, may: 4, jun: 5, jul: 6, aug: 7, sep: 8, oct: 9, nov: 10, dec: 11 };
-  function tenure(period) {
-    var m = String(period || "").match(/([A-Za-z]{3})[a-z]*\.?\s+(\d{4})\s*[\u2013\u2014-]\s*(?:([A-Za-z]{3})[a-z]*\.?\s+(\d{4})|(Present))/i);
-    if (!m) { return ""; }
-    var sm = MONTHS[m[1].toLowerCase()], sy = +m[2], em, ey;
-    if (m[5]) { var now = new Date(); em = now.getMonth(); ey = now.getFullYear(); } else { em = MONTHS[m[3].toLowerCase()]; ey = +m[4]; }
-    if (sm == null || em == null) { return ""; }
-    var total = (ey - sy) * 12 + (em - sm) + 1;
-    if (total < 1) { return ""; }
-    var y = Math.floor(total / 12), mo = total % 12, out = [];
-    if (y) { out.push(y + (y > 1 ? " yrs" : " yr")); }
-    if (mo) { out.push(mo + " mo"); }
-    return out.join(" ");
-  }
-
   (C.experience || []).forEach(function (job) {
     if (!show(job.title)) { return; }
-    var current = /present/i.test(job.period || "");
-    var meta = [job.org, job.location].filter(show);
-    var metaLine = el("p", { cls: "tl-meta" });
-    meta.forEach(function (m, k) { if (k) { metaLine.appendChild(document.createTextNode(" \u00b7 ")); } metaLine.appendChild(span(m)); });
+    var meta = [job.org, job.type, job.location].filter(show);
+    var orgLine = el("p", { cls: "tl-org" });
+    meta.forEach(function (m, i) { if (i) { orgLine.appendChild(document.createTextNode(" · ")); } orgLine.appendChild(span(m)); });
 
-    var head = el("div", { cls: "tl-head" }, [el("h3", {}, [span(job.title)]), current ? el("span", { cls: "tl-now", text: "Present" }) : null]);
-    var body = el("div", { cls: "tl-body" }, [head, meta.length ? metaLine : null]);
+    var right = el("div", {}, [el("h3", {}, [span(job.title)]), meta.length ? orgLine : null]);
     var bullets = (job.bullets || []).filter(show);
-    if (bullets.length) { body.appendChild(el("ul", { cls: "tl-bullets" }, bullets.map(function (b) { return el("li", {}, [span(b)]); }))); }
+    if (bullets.length) { right.appendChild(el("ul", { cls: "tl-bullets" }, bullets.map(function (b) { return el("li", {}, [span(b)]); }))); }
     var projects = (job.projects || []).filter(function (p) { return show(p.name); });
     if (projects.length) {
-      body.appendChild(el("div", { cls: "mini-grid" }, projects.map(function (p) {
+      right.appendChild(el("div", { cls: "mini-grid" }, projects.map(function (p) {
         return el("article", { cls: "mini", attrs: { "data-tags": [p.name].concat(p.tags || []).join("|").toLowerCase() } }, [el("h4", {}, [span(p.name)]), el("p", { text: p.text }), tagList(p.tags)]);
       })));
     }
-    if (show(job.highlight)) { body.appendChild(el("p", { cls: "tl-chip" }, [span(job.highlight)])); }
-    // Right-hand column (or a row on narrow screens): dates, time spent, type.
-    var spent = tenure(job.period);
-    body.appendChild(el("div", { cls: "tl-side" }, [
-      show(job.period) ? el("span", { cls: "tl-period" }, [span(job.period)]) : null,
-      spent ? el("span", { cls: "tl-tenure", text: spent }) : null,
-      show(job.type) ? el("span", { cls: "tl-type", text: job.type }) : null,
-    ]));
-    var rail = el("div", { cls: "tl-rail", attrs: { "aria-hidden": "true" } }, [el("span", { cls: "tl-dot" }), el("span", { cls: "tl-line" })]);
-    timeline.appendChild(fade(el("li", { cls: "tl-item" + (current ? " current" : ""), attrs: job.tags && job.tags.length ? { "data-tags": [job.title].concat(job.tags).join("|").toLowerCase() } : {} }, [rail, body])));
+    timeline.appendChild(fade(el("li", { cls: "tl-item", attrs: job.tags && job.tags.length ? { "data-tags": [job.title].concat(job.tags).join("|").toLowerCase() } : {} }, [el("div", { cls: "tl-when" }, [show(job.period) ? span(job.period) : null]), right])));
   });
 
   /* ---------- about ---------- */
