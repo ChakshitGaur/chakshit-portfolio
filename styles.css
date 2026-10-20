@@ -243,6 +243,11 @@ body.preview .nav { top: calc(14px + var(--banner-h, 0px)); }
 .mail-dlg-sub-list { margin: 8px 0 0 14px; padding: 0 0 0 12px; display: grid; gap: 8px; list-style: none; border-left: 2px solid var(--line); }
 .mail-dlg-sub-list[hidden] { display: none; }
 .mail-dlg-sub-list .mail-opt { padding: 10px 14px; }
+.skill-dialog { width: min(560px, calc(100vw - 28px)); }
+.skill-list { margin-top: 16px; padding: 0; list-style: none; border-top: 1px solid var(--line); }
+.skill-list li { padding: 13px 0; border-bottom: 1px solid var(--line); }
+.skill-list strong { display: block; font-weight: 600; }
+.skill-list span { display: block; margin-top: 3px; color: var(--muted); font-size: 0.92rem; line-height: 1.5; }
 .mail-opt strong { font-weight: 600; }
 .mail-opt small { display: block; margin-top: 1px; color: var(--muted); font-size: 0.82rem; }
 .mail-opt span { color: var(--muted); }

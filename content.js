@@ -43,14 +43,66 @@ window.CONTENT = {
   // Short list of headline skills: feeds the hero API card and the marquee band.
   stack: ["Python", "Django", "SQL", "Selenium & scraping", "Machine learning & CV"],
 
-  // Skills section: what I can build. "match" words are compared with project tags:
+  // Skills section: what I can build. Clicking a card opens a popup listing "skills". "match" words are compared with project tags:
   // hovering a card highlights the projects that use it. "icon": code, bolt, chart, merge or spark.
   core: [
-    { name: "Backends and APIs", icon: "code", tools: "Python · Django · REST framework · MySQL", match: ["python", "django", "sql"] },
-    { name: "Automation and scraping", icon: "bolt", tools: "Selenium · Web scraping · Python scripts", match: ["selenium", "scraping"] },
-    { name: "Data and ML models", icon: "chart", tools: "Pandas · NumPy · Scikit-learn · TensorFlow · PyTorch · OCR", match: ["machine learning", "svm", "logistic", "recommender", "computer vision", "ocr"] },
-    { name: "Testing, CI/CD and Docker", icon: "merge", tools: "GitHub Actions · Automated tests · Docker · Git", match: ["django"] },
-    { name: "Faster delivery with AI agents", icon: "spark", tools: "Claude Code · Codex · Cursor" },
+    {
+      name: "Backends and APIs",
+      icon: "code",
+      tools: "Python · Django · REST framework · MySQL",
+      match: ["python", "django", "sql"],
+      skills: [
+        { name: "Python", text: "My main language for backend, automation and machine learning work." },
+        { name: "Django", text: "The web framework behind my Expense Tracker and my backend work at a stealth startup." },
+        { name: "Django REST Framework", text: "Used to build the REST APIs that power dashboards." },
+        { name: "REST APIs", text: "Designing and building the endpoints that dashboards and apps use to read and write data." },
+        { name: "MySQL", text: "The relational database I use to store application data. I have also worked with Oracle SQL." },
+      ],
+    },
+    {
+      name: "Automation and scraping",
+      icon: "bolt",
+      tools: "Selenium · Web scraping · Python scripts",
+      match: ["selenium", "scraping"],
+      skills: [
+        { name: "Selenium", text: "Browser automation. I used it to build an applicant tracking system that collects applicant details from LinkedIn for HR." },
+        { name: "Web scraping", text: "Collecting data from web pages and exporting it to CSV or a database." },
+        { name: "Python scripts", text: "Small scripts that replace repetitive manual work." },
+      ],
+    },
+    {
+      name: "Data and ML models",
+      icon: "chart",
+      tools: "Pandas · NumPy · Scikit-learn · TensorFlow · PyTorch · OCR",
+      match: ["machine learning", "svm", "logistic", "recommender", "computer vision", "ocr"],
+      skills: [
+        { name: "Pandas and NumPy", text: "Cleaning, exploring and preparing data for analysis and models." },
+        { name: "Scikit-learn", text: "Used for classification models such as disease prediction, and for recommender systems." },
+        { name: "XGBoost and SHAP", text: "Used in my churn project: a boosted-tree model, with SHAP explaining each customer's top churn drivers." },
+        { name: "TensorFlow and PyTorch", text: "Deep learning frameworks I am familiar with." },
+        { name: "OCR and computer vision", text: "Used at Isourse to read timestamps from video so two live streams could be synchronised." },
+      ],
+    },
+    {
+      name: "Testing, CI/CD and Docker",
+      icon: "merge",
+      tools: "GitHub Actions · Automated tests · Docker · Git",
+      match: ["django"],
+      skills: [
+        { name: "GitHub Actions", text: "Runs the automated tests on every pull request in my Expense Tracker." },
+        { name: "Automated tests", text: "43 tests in Expense Tracker and 80+ pytest tests in my churn project." },
+        { name: "Docker", text: "Packaging an app and its dependencies so it runs the same way anywhere." },
+        { name: "Git and GitHub", text: "Version control and a pull-request workflow for all my projects." },
+      ],
+    },
+    {
+      name: "Faster delivery with AI agents",
+      icon: "spark",
+      tools: "Claude Code · Codex · Cursor" ,
+      skills: [
+        { name: "Claude Code, Codex and Cursor", text: "AI coding agents I work with to help write, test and refactor code." },
+      ],
+    },
   ],
 
   // Optional status shown in the hero, e.g. status: "Open to work". Leave it out to hide it.
@@ -89,9 +141,9 @@ window.CONTENT = {
       location: "Remote",
       period: "Feb 2026 – Present",
       bullets: [
-        "Worked as a remote Python backend engineer with several companies, including clients based outside India, taking on projects and working with each client directly.",
-        "Built and maintained the APIs and the backend structure that run and support client dashboards, helping keep them up and running day to day.",
-        "Delivered projects on time while staying in regular contact with each client and adapting to their needs across different time zones.",
+        "Worked as a remote Python backend engineer with several companies, including clients based outside India, taking on projects end to end and working with each client directly to understand what they needed and to keep the work on track.",
+        "Built and maintained the APIs and the backend structure that run and support client dashboards, handling the day-to-day upkeep that keeps those dashboards running smoothly for the people who depend on them, from small fixes to features.",
+        "Delivered projects on time while staying in regular contact with each client and adapting to their needs across different time zones, keeping communication clear and progress visible throughout each engagement and handing work over cleanly.",
       ],
       // Used only for the skill-card hover highlight; not shown on the page.
       tags: ["Python", "REST APIs"],
@@ -101,7 +153,7 @@ window.CONTENT = {
       org: "Self-directed learning",
       period: "Oct 2025 – Jan 2026",
       bullets: [
-        "Took a planned career break to deepen my Python backend skills, studying backend development and the tools and practices around it.",
+        "Took a planned career break to deepen my Python backend skills, studying backend development and the tools and practices around it, so I could return to building and shipping software with a stronger foundation in a fast-changing field.",
       ],
     },
     {
@@ -109,9 +161,9 @@ window.CONTENT = {
       org: "Stealth Startup (Full-time)",
       period: "Jul 2024 – Sep 2025",
       bullets: [
-        "Joined an early-stage startup in stealth mode as a full-time Python developer, working on the backend side of its dashboard product.",
-        "Built backend features and APIs using Python, Django and Django REST Framework, with MySQL for data storage and Git for version control.",
-        "Worked in a small, fast-moving team, helping turn early ideas into working features and adapting quickly as priorities changed.",
+        "Joined an early-stage startup in stealth mode as a full-time Python developer, working on the backend side of its dashboard product in a small team, working closely alongside the founders, while the product was still taking shape and moving fast.",
+        "Built backend features and APIs using Python, Django and Django REST Framework, with MySQL for data storage and Git for version control, writing code that the rest of the team could build on and maintain, and keeping it easy to extend later.",
+        "Worked in a small, fast-moving team, helping turn early ideas into working features and adapting quickly as priorities changed, which meant shipping steadily while the product direction kept evolving, and learning quickly along the way.",
       ],
       // Used only for the skill-card hover highlight; not shown on the page.
       tags: ["Python", "Django", "Django REST Framework", "MySQL", "Git"],
@@ -122,9 +174,9 @@ window.CONTENT = {
       location: "Delhi",
       period: "May 2023 – Jun 2024",
       bullets: [
-        "Built the FM Logistics client video system in Python, using OCR and computer vision to read timestamps and synchronise two live-stream videos, then stitch them into one combined video.",
-        "Built an applicant tracking system with Selenium that pulls applicant details from LinkedIn into CSV for HR, with Python and SQL storage managing 5,000+ applicants, and trained HR staff to use it.",
-        "Built an Employee Management System that measures productivity by tracking keyboard activity and idle time, delivered as a standalone executable with documentation and user support.",
+        "Built the FM Logistics client video system in Python, using OCR and computer vision to read timestamps and synchronise two live-stream videos, then stitch them into one combined video, delivered as a complete, working system for the client.",
+        "Built an applicant tracking system with Selenium that extracts applicant details for open jobs from LinkedIn into CSV for HR, with Python and SQL storage integrated with the HR systems for 5,000+ applicants, and trained the HR staff to use it.",
+        "Built an Employee Management System (EMS) that measures productivity by tracking keyboard activity and idle time, delivered as a standalone executable with documentation and user support so the team could run it without extra setup.",
       ],
       // Used only for the skill-card hover highlight; not shown on the page.
       tags: ["Python", "OCR", "Computer Vision", "Video processing", "Selenium", "Web Scraping", "SQL", "CSV export", "Activity tracking"],

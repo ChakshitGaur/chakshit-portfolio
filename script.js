@@ -65,7 +65,6 @@
 
   /* ---------- nav ---------- */
   $("navResume").setAttribute("href", C.resumeFile);
-  $("navResume").setAttribute("download", C.resumeFile.split("/").pop());
   var navLinks = $("navLinks"), navToggle = $("navToggle");
   navToggle.addEventListener("click", function () {
     var open = !navLinks.classList.contains("open");
@@ -310,9 +309,38 @@
       show(c.tools) ? el("p", { cls: "core-tools" }, [span(c.tools)]) : null,
     ]);
     card.setAttribute("data-match", (c.match || []).join("|").toLowerCase());
+    card.setAttribute("aria-haspopup", "dialog");
+    card.addEventListener("click", function () { openSkills(c); });
     coreEl.appendChild(fade(card, i * 0.06));
     coreCards.push(card);
   });
+
+  // Popup that describes every skill behind a card.
+  var skillDlg = null, skillTitle = null, skillSub = null, skillList = null;
+  function openSkills(c) {
+    if (typeof HTMLDialogElement !== "function") { return; }
+    if (!skillDlg) {
+      skillDlg = el("dialog", { cls: "mail-dialog skill-dialog", attrs: { "aria-labelledby": "skillDlgTitle" } });
+      var x = el("button", { cls: "mail-dlg-x", text: "\u00d7", attrs: { type: "button", "aria-label": "Close" } });
+      x.addEventListener("click", function () { skillDlg.close(); });
+      skillTitle = el("h3", { attrs: { id: "skillDlgTitle" } });
+      skillSub = el("p", { cls: "mail-dlg-sub" });
+      skillList = el("ul", { cls: "skill-list" });
+      skillDlg.appendChild(el("div", { cls: "mail-dlg-head" }, [skillTitle, x]));
+      skillDlg.appendChild(skillSub);
+      skillDlg.appendChild(skillList);
+      skillDlg.addEventListener("click", function (e) { if (e.target === skillDlg) { skillDlg.close(); } });
+      skillDlg.addEventListener("close", function () { clearHighlight(); });
+      document.body.appendChild(skillDlg);
+    }
+    skillTitle.textContent = c.name;
+    skillSub.textContent = c.tools || "";
+    skillList.textContent = "";
+    (c.skills || []).forEach(function (sk) {
+      skillList.appendChild(el("li", {}, [el("strong", { text: sk.name }), el("span", { text: sk.text })]));
+    });
+    skillDlg.showModal();
+  }
 
   /* ---------- projects (bento) ---------- */
   function rng(seed) {
@@ -584,7 +612,7 @@
 
   if (show(C.links.linkedin)) { actions.appendChild(link(C.links.linkedin, "LinkedIn", "btn btn-outline-light", true)); }
   if (show(C.links.github)) { actions.appendChild(link(C.links.github, "GitHub", "btn btn-outline-light", true)); }
-  actions.appendChild(el("a", { cls: "btn btn-outline-light", text: "Download resume", attrs: { href: C.resumeFile, download: C.resumeFile.split("/").pop() } }));
+  actions.appendChild(el("a", { cls: "btn btn-outline-light", text: "View resume", attrs: { href: C.resumeFile, target: "_blank", rel: "noopener noreferrer" } }));
   $("copy").textContent = "© " + new Date().getFullYear() + " " + C.name + " · " + C.location;
 
   /* ---------- skills <-> projects link ---------- */
@@ -607,12 +635,6 @@
     card.addEventListener("mouseleave", function () { if (!card.classList.contains("on")) { clearHighlight(); } });
     card.addEventListener("focus", function () { highlight(card); });
     card.addEventListener("blur", function () { if (!card.classList.contains("on")) { clearHighlight(); } });
-    card.addEventListener("click", function () {
-      var wasOn = card.classList.contains("on");
-      coreCards.forEach(function (c) { c.classList.remove("on"); c.setAttribute("aria-pressed", "false"); });
-      clearHighlight();
-      if (!wasOn) { card.classList.add("on"); card.setAttribute("aria-pressed", "true"); highlight(card); }
-    });
   });
 
   /* ---------- theme toggle ---------- */
