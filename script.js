@@ -306,7 +306,7 @@
     var card = el("button", { cls: "core-card", attrs: { type: "button", "aria-pressed": "false" } }, [
       icon(c.icon),
       el("strong", { text: c.name }),
-      show(c.tools) ? el("p", { cls: "core-tools" }, [span(c.tools)]) : null,
+      show(c.tagline) ? el("p", { cls: "core-tools" }, [span(c.tagline)]) : null,
     ]);
     card.setAttribute("data-match", (c.match || []).join("|").toLowerCase());
     card.setAttribute("aria-haspopup", "dialog");
@@ -325,7 +325,7 @@
       x.addEventListener("click", function () { skillDlg.close(); });
       skillTitle = el("h3", { attrs: { id: "skillDlgTitle" } });
       skillSub = el("p", { cls: "mail-dlg-sub" });
-      skillList = el("ul", { cls: "skill-list" });
+      skillList = el("ul", { cls: "skill-pills" });
       skillDlg.appendChild(el("div", { cls: "mail-dlg-head" }, [skillTitle, x]));
       skillDlg.appendChild(skillSub);
       skillDlg.appendChild(skillList);
@@ -334,10 +334,10 @@
       document.body.appendChild(skillDlg);
     }
     skillTitle.textContent = c.name;
-    skillSub.textContent = c.tools || "";
+    skillSub.textContent = c.tagline || "";
     skillList.textContent = "";
     (c.skills || []).forEach(function (sk) {
-      skillList.appendChild(el("li", {}, [el("strong", { text: sk.name }), el("span", { text: sk.text })]));
+      skillList.appendChild(el("li", { text: sk }));
     });
     skillDlg.showModal();
   }
