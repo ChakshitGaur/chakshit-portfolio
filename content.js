@@ -231,7 +231,7 @@ window.CONTENT = {
         "a cost-based targeting plan, and a Streamlit dashboard for single and batch scoring.",
       stack: ["Python", "XGBoost", "Scikit-learn", "SHAP", "Streamlit", "pytest"],
       metric: "PR-AUC 0.671; contacting 33% of customers reaches 73% of churners",
-      // No github link: the repository is private. Add one here if you make it public.
+      github: "https://github.com/ChakshitGaur/customer-churn-prediction",
     },
   ],
 
