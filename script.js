@@ -672,25 +672,38 @@
   }
 
   /* ---------- creative layer ---------- */
-  // Skills ticker (decorative; the real skills list is above)
-  var tickerItems = [];
-  (C.skills || []).forEach(function (g) { (g.items || []).filter(show).forEach(function (n) { tickerItems.push(n); }); });
+  // Every skill, once: the skill cards' lists plus the grouped lists. Both running bars use it.
+  var allSkills = [], seenSkills = {};
+  function addSkill(n) {
+    var key = String(n).toLowerCase();
+    if (show(n) && !seenSkills[key]) { seenSkills[key] = true; allSkills.push(n); }
+  }
+  (C.core || []).forEach(function (c) { (c.skills || []).forEach(addSkill); });
+  (C.skills || []).forEach(function (g) { (g.items || []).forEach(addSkill); });
+
+  // Skills ticker: the simple line that keeps moving
+  var tickerItems = allSkills.slice();
   var track = $("tickerTrack");
   if (tickerItems.length) {
     for (var rep = 0; rep < 2; rep++) { tickerItems.forEach(function (n) { track.appendChild(el("span", { text: n })); }); }
+    track.style.animationDuration = Math.max(48, Math.round(tickerItems.length * 1.8)) + "s";
   } else { track.parentNode.hidden = true; }
   if (REDUCED) { track.style.animation = "none"; }
 
   // Big outlined marquee band between sections
   var bandTrack = $("bandTrack");
-  var bandWords = (C.stack || []).slice();
+  var bandWords = allSkills.slice();
   if (bandWords.length) {
     for (var br = 0; br < 4; br++) { bandWords.forEach(function (w, wi) { bandTrack.appendChild(el("span", { cls: wi % 2 ? "solid" : "", text: w })); }); }
-    // The band slides with the scroll position (no timer), looping seamlessly.
-    bandTrack.style.animation = "none";
+    // The band slides with the scroll position, plus a slow constant drift (CSS "translate") so every word passes by.
+    if (REDUCED) { bandTrack.style.animation = "none"; }
     if (!REDUCED) {
       var bandEl = document.querySelector(".band"), bandHalf = 0, bandTick = false;
-      var measureBand = function () { bandHalf = bandTrack.scrollWidth / 2; moveBand(); };
+      var measureBand = function () {
+        bandHalf = bandTrack.scrollWidth / 2;
+        bandTrack.style.animationDuration = Math.max(40, Math.round(bandHalf / 70)) + "s"; // about 70px per second
+        moveBand();
+      };
       var moveBand = function () {
         bandTick = false;
         if (!bandHalf) { return; }

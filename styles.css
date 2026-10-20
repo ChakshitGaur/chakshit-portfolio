@@ -366,7 +366,7 @@ mark { color: inherit; background: linear-gradient(var(--accent-soft), var(--acc
 .band-track span.solid { color: var(--ink); -webkit-text-stroke: 0; }
 .band-track span::after { content: "\2726"; font-size: 0.45em; color: var(--accent); -webkit-text-stroke: 0; }
 .band:hover .band-track { animation-play-state: paused; }
-@keyframes band { to { transform: translateX(-50%); } }
+@keyframes band { to { translate: -50% 0; } }
 
 /* Soft glow that follows the cursor in the hero */
 :root { --glow: rgba(47, 75, 255, 0.07); }
