@@ -143,6 +143,7 @@ window.CONTENT = {
       org: "Independent",
       location: "Remote",
       period: "Feb 2026 – Present",
+      type: "Freelance",
       bullets: [
         "Worked as a remote Python backend engineer with several companies, including clients based outside India, taking on projects end to end and working with each client directly to understand what they needed and to keep the work on track.",
         "Built and maintained the APIs and the backend structure that run and support client dashboards, handling the day-to-day upkeep that keeps those dashboards running smoothly for the people who depend on them, from small fixes to features.",
@@ -161,7 +162,8 @@ window.CONTENT = {
     },
     {
       title: "Python Developer",
-      org: "Stealth Startup (Full-time)",
+      org: "Stealth Startup",
+      type: "Full-time",
       period: "Jul 2024 – Sep 2025",
       bullets: [
         "Joined an early-stage startup in stealth mode as a full-time Python developer, working on the backend side of its dashboard product in a small team, working closely alongside the founders, while the product was still taking shape and moving fast.",
@@ -176,6 +178,7 @@ window.CONTENT = {
       org: "Isourse Technologies Pvt. Ltd.",
       location: "Delhi",
       period: "May 2023 – Jun 2024",
+      highlight: "5,000+ applicants managed by the applicant tracking system",
       bullets: [
         "Built the FM Logistics client video system in Python, using OCR and computer vision to read timestamps and synchronise two live-stream videos, then stitch them into one combined video, delivered as a complete, working system for the client.",
         "Built an applicant tracking system with Selenium that extracts applicant details for open jobs from LinkedIn into CSV for HR, with Python and SQL storage integrated with the HR systems for 5,000+ applicants, and trained the HR staff to use it.",
