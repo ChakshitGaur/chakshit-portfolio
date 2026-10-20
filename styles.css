@@ -159,8 +159,8 @@ body.preview .nav { top: calc(14px + var(--banner-h, 0px)); }
 .core-card:hover, .core-card:focus-visible, .core-card.on { border-color: var(--accent); transform: translateY(-3px); box-shadow: 0 14px 34px rgba(47, 75, 255, 0.12); }
 .core-card .ico { display: block; width: 26px; height: 26px; color: var(--accent); margin-bottom: 16px; }
 .core-card strong { display: block; font-size: 1.3rem; font-weight: 600; letter-spacing: -0.02em; }
-.core-tools { margin-top: 8px; font-size: 0.95rem; color: var(--ink); line-height: 1.5; }
-.core-card span { display: block; margin-top: 10px; font-size: 0.9rem; color: var(--muted); line-height: 1.45; }
+.core-tools { margin-top: 8px; font-size: 0.95rem; color: var(--muted); line-height: 1.5; }
+.core > :last-child:nth-child(odd) { grid-column: 1 / -1; }
 .core-card.empty { border-style: dashed; }
 @media (max-width: 640px) { .core { grid-template-columns: minmax(0, 1fr); } }
 /* Highlight link between skills and projects */

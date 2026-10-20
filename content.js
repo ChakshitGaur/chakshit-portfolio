@@ -38,18 +38,19 @@ window.CONTENT = {
     { t: "out", s: "Chakshit Gaur | Python Developer (Django, APIs & Automation) | New Delhi, India" },
   ],
 
-  // Core stack: your five headline skills, each with one line of proof.
+  // Core stack: your headline skill groups, each with a tools line.
   // "match" words are compared with project tags: hovering a card highlights the projects that use it.
   // Short list of headline skills: feeds the hero API card and the marquee band.
   stack: ["Python", "Django", "SQL", "Selenium & scraping", "Machine learning & CV"],
 
   // Skills section: what I can build. "match" words are compared with project tags:
-  // hovering a card highlights the projects that use it. "icon": code, bolt, chart or spark.
+  // hovering a card highlights the projects that use it. "icon": code, bolt, chart, merge or spark.
   core: [
-    { name: "Backends and APIs", icon: "code", tools: "Python · Django · REST framework · MySQL", proof: "Multi-user Expense Tracker, 43 tests + CI", match: ["python", "django", "sql"] },
-    { name: "Automation and scraping", icon: "bolt", tools: "Selenium · Web scraping · Python scripts", proof: "LinkedIn applicant extraction for HR", match: ["selenium", "scraping"] },
-    { name: "Data and ML models", icon: "chart", tools: "Pandas · NumPy · Scikit-learn · TensorFlow · PyTorch · OCR", proof: "Disease prediction, recommender, OCR video sync", match: ["machine learning", "svm", "logistic", "recommender", "computer vision", "ocr"] },
-    { name: "Faster delivery with AI agents", icon: "spark", tools: "Claude Code · Codex · Cursor", proof: "I review everything I ship." },
+    { name: "Backends and APIs", icon: "code", tools: "Python · Django · REST framework · MySQL", match: ["python", "django", "sql"] },
+    { name: "Automation and scraping", icon: "bolt", tools: "Selenium · Web scraping · Python scripts", match: ["selenium", "scraping"] },
+    { name: "Data and ML models", icon: "chart", tools: "Pandas · NumPy · Scikit-learn · TensorFlow · PyTorch · OCR", match: ["machine learning", "svm", "logistic", "recommender", "computer vision", "ocr"] },
+    { name: "Testing, CI/CD and Docker", icon: "merge", tools: "GitHub Actions · Automated tests · Docker · Git", match: ["django"] },
+    { name: "Faster delivery with AI agents", icon: "spark", tools: "Claude Code · Codex · Cursor" },
   ],
 
   // Optional status shown in the hero, e.g. status: "Open to work". Leave it out to hide it.
@@ -171,7 +172,7 @@ window.CONTENT = {
     { group: "Databases", items: ["MySQL", "Oracle SQL"] },
     { group: "Automation & data", items: ["Selenium", "Web Scraping", "Pandas", "NumPy", "Matplotlib", "Power BI"] },
     { group: "ML & computer vision", items: ["Computer Vision", "OCR", "Scikit-learn", "TensorFlow", "PyTorch", "YOLO"] },
-    { group: "Tools & version control", items: ["Git", "GitHub", "VS Code", "PyCharm", "Jupyter Notebook"] },
+    { group: "Tools & version control", items: ["Git", "GitHub", "GitHub Actions", "Docker", "VS Code", "PyCharm", "Jupyter Notebook"] },
   ],
 };
 
