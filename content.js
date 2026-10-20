@@ -178,7 +178,6 @@ window.CONTENT = {
       org: "Isourse Technologies Pvt. Ltd.",
       location: "Delhi",
       period: "May 2023 – Jun 2024",
-      highlight: "5,000+ applicants managed by the applicant tracking system",
       bullets: [
         "Built the FM Logistics client video system in Python, using OCR and computer vision to read timestamps and synchronise two live-stream videos, then stitch them into one combined video, delivered as a complete, working system for the client.",
         "Built an applicant tracking system with Selenium that extracts applicant details for open jobs from LinkedIn into CSV for HR, with Python and SQL storage integrated with the HR systems for 5,000+ applicants, and trained the HR staff to use it.",
