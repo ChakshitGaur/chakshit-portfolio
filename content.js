@@ -54,9 +54,8 @@ window.CONTENT = {
       // Shown in the popup when the card is clicked.
       skills: [
         "Python", "Django", "Django REST Framework", "REST APIs",
-        "Flask", "SQL", "MySQL", "Oracle SQL",
-        "SQLite",
-        "Postman", "Swagger",
+        "Flask", "SQL", "MySQL", "SQLite",
+        "Postman", "JWT authentication", "API Integration",
       ],
     },
     {
@@ -66,8 +65,8 @@ window.CONTENT = {
       match: ["selenium", "scraping"],
       // Shown in the popup when the card is clicked.
       skills: [
-        "Selenium", "Web scraping", "Python scripts", "CSV import and export",
-        "BeautifulSoup", "Requests",
+        "Selenium", "Web scraping", "Python scripts", "BeautifulSoup",
+        "Requests", "Data Extraction", "API Automation",
       ],
     },
     {
@@ -78,11 +77,11 @@ window.CONTENT = {
       // Shown in the popup when the card is clicked.
       skills: [
         "NumPy", "Pandas", "Matplotlib", "Seaborn",
-        "Power BI", "Scikit-learn", "XGBoost", "LightGBM",
-        "SHAP", "TensorFlow", "PyTorch", "Logistic regression",
-        "SVM", "Collaborative filtering", "Cosine similarity", "OCR",
-        "Computer vision", "YOLO", "Streamlit",
-        "Feature engineering", "Model evaluation and tuning",
+        "Power BI", "Scikit-learn", "XGBoost", "SHAP",
+        "TensorFlow", "PyTorch", "Logistic regression", "Regression",
+        "Classification", "SVM", "Collaborative filtering", "Cosine similarity",
+        "OCR", "Computer vision", "YOLO", "Streamlit",
+        "Feature engineering", "Model evaluation and tuning", "Model Serialization", "EDA",
       ],
     },
     {
@@ -92,9 +91,9 @@ window.CONTENT = {
       match: ["django"],
       // Shown in the popup when the card is clicked.
       skills: [
-        "GitHub Actions", "pytest", "Automated tests", "Docker",
-        "Git", "GitHub", "VS Code", "PyCharm",
-        "Jupyter Notebook",
+        "GitHub Actions", "pytest", "Automated tests", "Unit Testing",
+        "Docker", "Git", "GitHub", "VS Code",
+        "PyCharm", "Jupyter Notebook",
       ],
     },
     {
@@ -104,8 +103,7 @@ window.CONTENT = {
       // Shown in the popup when the card is clicked.
       skills: [
         "Claude Code", "Codex", "Cursor", "Claude",
-        "ChatGPT",
-        "LLM APIs", "Prompt engineering", "MCP",
+        "ChatGPT", "LLM APIs", "Prompt engineering", "MCP",
       ],
     },
   ],
@@ -236,9 +234,9 @@ window.CONTENT = {
   ],
 
   skills: [
-    { group: "Programming languages", items: ["Python", "SQL", "Core Java"] },
+    { group: "Programming languages", items: ["Python", "SQL"] },
     { group: "Web & backend", items: ["Django", "Django REST Framework", "REST APIs"] },
-    { group: "Databases", items: ["MySQL", "Oracle SQL"] },
+    { group: "Databases", items: ["MySQL"] },
     { group: "Automation & data", items: ["Selenium", "Web Scraping", "Pandas", "NumPy", "Matplotlib", "Power BI"] },
     { group: "ML & computer vision", items: ["Computer Vision", "OCR", "Scikit-learn", "TensorFlow", "PyTorch", "YOLO"] },
     { group: "Tools & version control", items: ["Git", "GitHub", "GitHub Actions", "Docker", "VS Code", "PyCharm", "Jupyter Notebook"] },
