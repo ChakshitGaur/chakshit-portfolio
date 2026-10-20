@@ -500,7 +500,7 @@
   (C.experience || []).forEach(function (job) {
     if (!show(job.title)) { return; }
     var current = /present/i.test(job.period || "");
-    var meta = [job.period, tenure(job.period), job.type, job.location, job.org].filter(show);
+    var meta = [job.org, job.location].filter(show);
     var metaLine = el("p", { cls: "tl-meta" });
     meta.forEach(function (m, k) { if (k) { metaLine.appendChild(document.createTextNode(" \u00b7 ")); } metaLine.appendChild(span(m)); });
 
@@ -515,6 +515,13 @@
       })));
     }
     if (show(job.highlight)) { body.appendChild(el("p", { cls: "tl-chip" }, [span(job.highlight)])); }
+    // Right-hand column (or a row on narrow screens): dates, time spent, type.
+    var spent = tenure(job.period);
+    body.appendChild(el("div", { cls: "tl-side" }, [
+      show(job.period) ? el("span", { cls: "tl-period" }, [span(job.period)]) : null,
+      spent ? el("span", { cls: "tl-tenure", text: spent }) : null,
+      show(job.type) ? el("span", { cls: "tl-type", text: job.type }) : null,
+    ]));
     var rail = el("div", { cls: "tl-rail", attrs: { "aria-hidden": "true" } }, [el("span", { cls: "tl-dot" }), el("span", { cls: "tl-line" })]);
     timeline.appendChild(fade(el("li", { cls: "tl-item" + (current ? " current" : ""), attrs: job.tags && job.tags.length ? { "data-tags": [job.title].concat(job.tags).join("|").toLowerCase() } : {} }, [rail, body])));
   });
