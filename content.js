@@ -56,6 +56,7 @@ window.CONTENT = {
         "Python", "Django", "Django REST Framework", "REST APIs",
         "Flask", "SQL", "MySQL", "Oracle SQL",
         "SQLite",
+        "Postman", "Swagger",
       ],
     },
     {
@@ -66,6 +67,7 @@ window.CONTENT = {
       // Shown in the popup when the card is clicked.
       skills: [
         "Selenium", "Web scraping", "Python scripts", "CSV import and export",
+        "BeautifulSoup", "Requests",
       ],
     },
     {
@@ -80,6 +82,7 @@ window.CONTENT = {
         "SHAP", "TensorFlow", "PyTorch", "Logistic regression",
         "SVM", "Collaborative filtering", "Cosine similarity", "OCR",
         "Computer vision", "YOLO", "Streamlit",
+        "Feature engineering", "Model evaluation and tuning",
       ],
     },
     {
@@ -102,6 +105,7 @@ window.CONTENT = {
       skills: [
         "Claude Code", "Codex", "Cursor", "Claude",
         "ChatGPT",
+        "LLM APIs", "Prompt engineering", "MCP",
       ],
     },
   ],
