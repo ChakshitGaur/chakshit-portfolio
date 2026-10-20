@@ -481,22 +481,42 @@
 
   /* ---------- experience ---------- */
   var timeline = $("timeline");
+  // "Feb 2026 - Present" -> "9 mo"; "Jul 2024 - Sep 2025" -> "1 yr 3 mo" (both months count)
+  var MONTHS = { jan: 0, feb: 1, mar: 2, apr: 3, may: 4, jun: 5, jul: 6, aug: 7, sep: 8, oct: 9, nov: 10, dec: 11 };
+  function tenure(period) {
+    var m = String(period || "").match(/([A-Za-z]{3})[a-z]*\.?\s+(\d{4})\s*[\u2013\u2014-]\s*(?:([A-Za-z]{3})[a-z]*\.?\s+(\d{4})|(Present))/i);
+    if (!m) { return ""; }
+    var sm = MONTHS[m[1].toLowerCase()], sy = +m[2], em, ey;
+    if (m[5]) { var now = new Date(); em = now.getMonth(); ey = now.getFullYear(); } else { em = MONTHS[m[3].toLowerCase()]; ey = +m[4]; }
+    if (sm == null || em == null) { return ""; }
+    var total = (ey - sy) * 12 + (em - sm) + 1;
+    if (total < 1) { return ""; }
+    var y = Math.floor(total / 12), mo = total % 12, out = [];
+    if (y) { out.push(y + (y > 1 ? " yrs" : " yr")); }
+    if (mo) { out.push(mo + " mo"); }
+    return out.join(" ");
+  }
+
   (C.experience || []).forEach(function (job) {
     if (!show(job.title)) { return; }
-    var meta = [job.org, job.location].filter(show);
-    var orgLine = el("p", { cls: "tl-org" });
-    meta.forEach(function (m, i) { if (i) { orgLine.appendChild(document.createTextNode(" · ")); } orgLine.appendChild(span(m)); });
+    var current = /present/i.test(job.period || "");
+    var meta = [job.period, tenure(job.period), job.type, job.location, job.org].filter(show);
+    var metaLine = el("p", { cls: "tl-meta" });
+    meta.forEach(function (m, k) { if (k) { metaLine.appendChild(document.createTextNode(" \u00b7 ")); } metaLine.appendChild(span(m)); });
 
-    var right = el("div", {}, [el("h3", {}, [span(job.title)]), meta.length ? orgLine : null]);
+    var head = el("div", { cls: "tl-head" }, [el("h3", {}, [span(job.title)]), current ? el("span", { cls: "tl-now", text: "Present" }) : null]);
+    var body = el("div", { cls: "tl-body" }, [head, meta.length ? metaLine : null]);
     var bullets = (job.bullets || []).filter(show);
-    if (bullets.length) { right.appendChild(el("ul", { cls: "tl-bullets" }, bullets.map(function (b) { return el("li", {}, [span(b)]); }))); }
+    if (bullets.length) { body.appendChild(el("ul", { cls: "tl-bullets" }, bullets.map(function (b) { return el("li", {}, [span(b)]); }))); }
     var projects = (job.projects || []).filter(function (p) { return show(p.name); });
     if (projects.length) {
-      right.appendChild(el("div", { cls: "mini-grid" }, projects.map(function (p) {
+      body.appendChild(el("div", { cls: "mini-grid" }, projects.map(function (p) {
         return el("article", { cls: "mini", attrs: { "data-tags": [p.name].concat(p.tags || []).join("|").toLowerCase() } }, [el("h4", {}, [span(p.name)]), el("p", { text: p.text }), tagList(p.tags)]);
       })));
     }
-    timeline.appendChild(fade(el("li", { cls: "tl-item", attrs: job.tags && job.tags.length ? { "data-tags": [job.title].concat(job.tags).join("|").toLowerCase() } : {} }, [el("div", { cls: "tl-when" }, [show(job.period) ? span(job.period) : null]), right])));
+    if (show(job.highlight)) { body.appendChild(el("p", { cls: "tl-chip" }, [span(job.highlight)])); }
+    var rail = el("div", { cls: "tl-rail", attrs: { "aria-hidden": "true" } }, [el("span", { cls: "tl-dot" }), el("span", { cls: "tl-line" })]);
+    timeline.appendChild(fade(el("li", { cls: "tl-item" + (current ? " current" : ""), attrs: job.tags && job.tags.length ? { "data-tags": [job.title].concat(job.tags).join("|").toLowerCase() } : {} }, [rail, body])));
   });
 
   /* ---------- about ---------- */
