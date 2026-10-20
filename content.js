@@ -78,7 +78,7 @@ window.CONTENT = {
   stats: [
     { value: "3+ yrs", label: "Professional experience" },
     { value: "3", label: "Projects built at Isourse" },
-    { value: "3", label: "Personal projects" },
+    { value: "4", label: "Personal projects" },
     { value: "5,000+", label: "Applicants managed by my ATS" },
   ],
 
@@ -163,6 +163,18 @@ window.CONTENT = {
         "A Flask-based machine learning recommender: preprocessed book-rating datasets, then used collaborative filtering and cosine similarity to recommend similar books.",
       stack: ["Python", "Flask", "NumPy", "Pandas", "Scikit-learn", "Cosine similarity"],
       github: "https://github.com/ChakshitGaur/BookPilot",
+    },
+    {
+      name: "Customer Churn Prediction",
+      category: "Machine Learning · Dashboard",
+      visual: "bars",
+      problem: "Finding which telecom customers are likely to leave, and which are worth a retention offer.",
+      approach:
+        "An end-to-end pipeline on 7,043 telecom customers: an XGBoost model with calibrated probabilities, SHAP explanations of each customer's top churn drivers, " +
+        "a cost-based targeting plan, and a Streamlit dashboard for single and batch scoring.",
+      stack: ["Python", "XGBoost", "Scikit-learn", "SHAP", "Streamlit", "pytest"],
+      metric: "PR-AUC 0.671; contacting 33% of customers reaches 73% of churners",
+      // No github link: the repository is private. Add one here if you make it public.
     },
   ],
 

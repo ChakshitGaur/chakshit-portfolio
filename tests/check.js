@@ -70,7 +70,7 @@ visible.forEach(function (p) {
   var n = "project '" + p.name + "'";
   ["category", "problem", "approach"].forEach(function (k) { check(n + " has " + k, isStr(p[k]) && !isPh(p[k])); });
   check(n + " has a stack", Array.isArray(p.stack) && p.stack.length > 0);
-  check(n + " github is URL or placeholder", isPh(p.github) || isUrl(p.github), p.github);
+  check(n + " github is a URL, a placeholder or left out", p.github == null || isPh(p.github) || isUrl(p.github), p.github);
   check(n + " demo is a URL, a placeholder or left out", p.demo == null || isPh(p.demo) || isUrl(p.demo), p.demo);
   if (p.visual) { check(n + " visual is known", VISUALS.indexOf(p.visual) > -1, p.visual); }
 });
