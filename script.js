@@ -290,7 +290,8 @@
     code: "M8 7l-5 5 5 5M16 7l5 5-5 5M14 4l-4 16",
     bolt: "M13 3L4 14h7l-1 7 9-11h-7l1-7z",
     chart: "M4 20V11M10 20V4M16 20v-6M2 20h20",
-    spark: "M12 3l2.2 5.8L20 11l-5.8 2.2L12 19l-2.2-5.8L4 11l5.8-2.2z"
+    spark: "M12 3l2.2 5.8L20 11l-5.8 2.2L12 19l-2.2-5.8L4 11l5.8-2.2z",
+    merge: "M6 3v12M6 15a3 3 0 1 0 0 6 3 3 0 0 0 0-6zM18 3a3 3 0 1 0 0 6 3 3 0 0 0 0-6zM18 9v1a5 5 0 0 1-5 5H9"
   };
   function icon(name) {
     var svg = document.createElementNS(SVGNS, "svg");
@@ -303,12 +304,10 @@
   var coreEl = $("core");
   var coreCards = [];
   (C.core || []).forEach(function (c, i) {
-    var proofOk = show(c.proof);
-    var card = el("button", { cls: "core-card" + (proofOk && isPh(c.proof) ? " empty" : ""), attrs: { type: "button", "aria-pressed": "false" } }, [
+    var card = el("button", { cls: "core-card", attrs: { type: "button", "aria-pressed": "false" } }, [
       icon(c.icon),
       el("strong", { text: c.name }),
       show(c.tools) ? el("p", { cls: "core-tools" }, [span(c.tools)]) : null,
-      proofOk ? el("span", {}, [span(c.proof)]) : null,
     ]);
     card.setAttribute("data-match", (c.match || []).join("|").toLowerCase());
     coreEl.appendChild(fade(card, i * 0.06));
