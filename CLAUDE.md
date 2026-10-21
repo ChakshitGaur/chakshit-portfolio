@@ -15,7 +15,7 @@ Live site: https://chakshitgaur.github.io/chakshit-portfolio/ (GitHub Pages, ser
 | File | What it does |
 |---|---|
 | `index.html` | Page structure and asset links (carry `?v=` numbers, see below) |
-| `content.js` | **All text and links.** Sections: `hero`, `glance`, `stack`, `core`, `links`, `resumeFile`, `updated`, `about`, `stats`, `experience`, `projects`, `skills` |
+| `content.js` | **All text and links.** Sections: `hero`, `howIWork`, `stack`, `core`, `links`, `resumeFile`, `updated`, `about`, `stats`, `experience`, `projects`, `skills` |
 | `script.js` | Builds every section from `content.js` and runs the effects |
 | `styles.css` | Light and dark editorial theme |
 | `hero-api.js`, `hero-dots.js`, `hero-gradient.js` | Hero effects (API card, dot grid, WebGL gradient) |

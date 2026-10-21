@@ -224,10 +224,14 @@
     } else { counters.forEach(function (c) { c.node.textContent = fmtStat(c.p, c.p.num); }); }
   }
 
-  /* ---------- about: at a glance ---------- */
-  var glanceList = $("glanceList");
-  (C.glance || []).filter(function (g) { return g && show(g.label) && show(g.value); }).forEach(function (g) {
-    glanceList.appendChild(el("div", { cls: "glance-row" }, [el("dt", { text: g.label }), el("dd", { text: g.value })]));
+  /* ---------- about: how I work ---------- */
+  var howList = $("howList");
+  (C.howIWork || []).filter(function (h) { return h && show(h.title) && show(h.text); }).forEach(function (h, i) {
+    howList.appendChild(el("li", null, [
+      el("span", { cls: "how-n", text: String(i + 1).padStart(2, "0"), attrs: { "aria-hidden": "true" } }),
+      el("h4", { text: h.title }),
+      el("p", { text: h.text }),
+    ]));
   });
 
   /* ---------- skills: what I can build (cards) ---------- */
