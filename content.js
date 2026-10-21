@@ -120,11 +120,12 @@ window.CONTENT = {
 
   about: [
     "I'm a Python developer and Computer Science graduate (B.Tech) based in New Delhi, with experience in " +
-      "**automation, web scraping, computer vision and video processing**. As an AI/ML Engineer I built an applicant tracking system for 5,000+ applicants, " +
-      "a client video processing system and an employee monitoring tool, **end to end**, from data collection and storage to packaging and documentation.",
-    "I also build **Django web apps**, such as a multi-user Expense Tracker with automated tests and CI. My core toolkit is " +
-      "**Python, SQL (MySQL, Oracle SQL) and Git**, with Pandas and NumPy for data and Scikit-learn, TensorFlow and PyTorch for machine learning. " +
-      "I enjoy turning **messy data and manual processes into reliable software**.",
+      "**automation, web scraping, computer vision and video processing**. My first role was AI/ML Engineer, where I built " +
+      "**an applicant tracking system for 5,000+ applicants, a client video processing system and an employee monitoring tool**, each one end to end, " +
+      "from data collection and storage to packaging and documentation.",
+    "Since then I've moved into **Python back ends**: Django and Django REST Framework APIs at an early-stage startup, and now freelance work for remote clients, " +
+      "some of them outside India. On my own I build projects like **a multi-user Expense Tracker with 43 automated tests and CI** and " +
+      "**a customer churn model with a Streamlit dashboard**. I enjoy **turning messy data and manual processes into reliable software**.",
   ],
 
   // Only facts taken from the resume. Add more numbers here once you have real ones.
