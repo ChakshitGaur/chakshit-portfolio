@@ -224,65 +224,11 @@
     } else { counters.forEach(function (c) { c.node.textContent = fmtStat(c.p, c.p.num); }); }
   }
 
-  /* ---------- terminal (types itself) ---------- */
-  var termBody = $("termBody");
-  var termLines = (C.terminal || []).filter(function (l) { return l && typeof l.s === "string"; });
-  $("termText").textContent = termLines.map(function (l) { return (l.t === "cmd" ? "$ " : "") + l.s; }).join("\n");
-  var TOKEN = /("[^"]*"|'[^']*'|#.*$|\b\d[\d,]*\b|\b(?:print|import|from|for|in|def|return|if|else)\b)/g;
-  function tokenize(text) {
-    var out = [], last = 0, m;
-    TOKEN.lastIndex = 0;
-    while ((m = TOKEN.exec(text)) !== null) {
-      if (m.index > last) { out.push({ s: text.slice(last, m.index), c: "" }); }
-      var tk = m[0], c = "tk-kw";
-      if (tk[0] === '"' || tk[0] === "'") { c = "tk-str"; } else if (tk[0] === "#") { c = "tk-com"; } else if (/^\d/.test(tk)) { c = "tk-num"; }
-      out.push({ s: tk, c: c });
-      last = m.index + tk.length;
-    }
-    if (last < text.length) { out.push({ s: text.slice(last), c: "" }); }
-    return out;
-  }
-  var termRows = termLines.map(function (l) {
-    var row = el("div", { cls: "tl " + (l.t === "out" ? "out" : l.t === "cmd" ? "cmd" : "code") });
-    if (l.t === "cmd") { row.appendChild(el("span", { cls: "prompt", text: "$ " })); }
-    var body = el("span");
-    row.appendChild(body);
-    termBody.appendChild(row);
-    return { body: body, tokens: l.t === "code" ? tokenize(l.s) : [{ s: l.s, c: "" }], len: l.s.length, kind: l.t };
+  /* ---------- about: at a glance ---------- */
+  var glanceList = $("glanceList");
+  (C.glance || []).filter(function (g) { return g && show(g.label) && show(g.value); }).forEach(function (g) {
+    glanceList.appendChild(el("div", { cls: "glance-row" }, [el("dt", { text: g.label }), el("dd", { text: g.value })]));
   });
-  var tcaret = el("span", { cls: "caret-t" });
-  function drawRow(r, n) {
-    r.body.textContent = "";
-    var left = n, rest = "";
-    r.tokens.forEach(function (t) {
-      if (left >= t.s.length) { left -= t.s.length; r.body.appendChild(el("span", { cls: t.c, text: t.s })); }
-      else if (left > 0) { r.body.appendChild(el("span", { cls: t.c, text: t.s.slice(0, left) })); rest += t.s.slice(left); left = 0; }
-      else { rest += t.s; }
-    });
-    if (n < r.len || r.showCaret) { r.body.appendChild(tcaret); }
-    if (rest) { r.body.appendChild(el("span", { cls: "ghost", text: rest })); }
-  }
-  termRows.forEach(function (r) { drawRow(r, REDUCED ? r.len : 0); });
-  function typeTerminal() {
-    var ri = 0;
-    (function nextRow() {
-      if (ri >= termRows.length) { var last = termRows[termRows.length - 1]; last.showCaret = true; drawRow(last, last.len); return; }
-      var r = termRows[ri], n = 0, speed = r.kind === "cmd" ? 50 : 12;
-      if (r.kind === "out") { setTimeout(function () { drawRow(r, r.len); ri++; setTimeout(nextRow, 120); }, 420); return; }
-      (function typeChar() {
-        n++; drawRow(r, n);
-        if (n < r.len) { setTimeout(typeChar, speed); }
-        else { r.showCaret = false; drawRow(r, r.len); ri++; setTimeout(nextRow, r.kind === "cmd" ? 340 : 80); }
-      })();
-    })();
-  }
-  // The terminal now lives in About, so it types itself when it scrolls into view.
-  if (termRows.length && !REDUCED) {
-    if ("IntersectionObserver" in window) {
-      var termIO = new IntersectionObserver(function (en) { if (en[0].isIntersecting) { termIO.disconnect(); typeTerminal(); } }, { threshold: 0.4 });
-      termIO.observe($("term"));
-    } else { setTimeout(typeTerminal, 900); }
-  }
 
   /* ---------- skills: what I can build (cards) ---------- */
   var ICONS = {

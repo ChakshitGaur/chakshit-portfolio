@@ -23,19 +23,14 @@ window.CONTENT = {
     rotating: ["Django back ends", "REST APIs", "automation", "web scraping", "data pipelines"],
   },
 
-  // Terminal in the hero. t: "cmd" (typed after a $ prompt), "code" (a line of Python), "out" (program output).
-  // Keep it to facts from your resume.
-  terminal: [
-    { t: "cmd", s: "cat about.py" },
-    { t: "code", s: 'name = "Chakshit Gaur"' },
-    { t: "code", s: 'role = "Python Developer (Django, APIs & Automation)"' },
-    { t: "code", s: 'location = "New Delhi, India"' },
-    { t: "code", s: 'stack = ["Python", "Django", "SQL", "Selenium", "OCR", "Scikit-learn"]' },
-    { t: "code", s: 'experience = "AI/ML Engineer @ Isourse Technologies"' },
-    { t: "code", s: "applicants_managed = 5000  # in the ATS I built" },
-    { t: "code", s: 'print(f"{name} | {role} | {location}")' },
-    { t: "cmd", s: "python about.py" },
-    { t: "out", s: "Chakshit Gaur | Python Developer (Django, APIs & Automation) | New Delhi, India" },
+  // "At a glance" card in About: short label/value rows. Keep it to facts that are already true on this page.
+  glance: [
+    { label: "Based in", value: "New Delhi, India" },
+    { label: "Education", value: "B.Tech, Computer Science" },
+    { label: "Focus", value: "Django back ends, REST APIs, automation" },
+    { label: "Core toolkit", value: "Python, SQL, Git" },
+    { label: "Experience", value: "3+ years" },
+    { label: "Right now", value: "Freelance Python backend engineer, remote" },
   ],
 
   // Core stack: your headline skill groups, each with a tools line.
