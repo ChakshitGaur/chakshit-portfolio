@@ -38,6 +38,7 @@ check("content.js sets window.CONTENT", !!C);
 if (!C) { process.exit(1); }
 
 ["name", "role", "location", "resumeFile"].forEach(function (k) { check("CONTENT." + k + " is set", isStr(C[k]) && !isPh(C[k])); });
+check("CONTENT.updated is a month and year", /^(January|February|March|April|May|June|July|August|September|October|November|December) \d{4}$/.test(C.updated || ""), C.updated);
 check("hero headline contains accent text", C.hero.headline.indexOf(C.hero.accent) > -1);
 check("hero has rotating words", Array.isArray(C.hero.rotating) && C.hero.rotating.length > 0);
 

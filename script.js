@@ -613,7 +613,7 @@
   if (show(C.links.linkedin)) { actions.appendChild(link(C.links.linkedin, "LinkedIn", "btn btn-outline-light", true)); }
   if (show(C.links.github)) { actions.appendChild(link(C.links.github, "GitHub", "btn btn-outline-light", true)); }
   actions.appendChild(el("a", { cls: "btn btn-outline-light", text: "View resume", attrs: { href: C.resumeFile, target: "_blank", rel: "noopener noreferrer" } }));
-  $("copy").textContent = "© " + new Date().getFullYear() + " " + C.name + " · " + C.location;
+  $("copy").textContent = "© " + new Date().getFullYear() + " " + C.name + " · " + C.location + (C.updated ? " · Updated " + C.updated : "");
 
   /* ---------- skills <-> projects link ---------- */
   var linkables = document.querySelectorAll("[data-tags]");
