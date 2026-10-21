@@ -112,6 +112,9 @@ window.CONTENT = {
 
   location: "New Delhi, India",
 
+  // Shown in the footer as "Updated <month year>". Change it whenever you update the site.
+  updated: "October 2026",
+
   links: {
     email: "chakshitgaur25@gmail.com",
     linkedin: "https://www.linkedin.com/in/chakshit-gaur",
