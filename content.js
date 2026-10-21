@@ -23,19 +23,14 @@ window.CONTENT = {
     rotating: ["Django back ends", "REST APIs", "automation", "web scraping", "data pipelines"],
   },
 
-  // Terminal in the hero. t: "cmd" (typed after a $ prompt), "code" (a line of Python), "out" (program output).
-  // Keep it to facts from your resume.
-  terminal: [
-    { t: "cmd", s: "cat about.py" },
-    { t: "code", s: 'name = "Chakshit Gaur"' },
-    { t: "code", s: 'role = "Python Developer (Django, APIs & Automation)"' },
-    { t: "code", s: 'location = "New Delhi, India"' },
-    { t: "code", s: 'stack = ["Python", "Django", "SQL", "Selenium", "OCR", "Scikit-learn"]' },
-    { t: "code", s: 'experience = "AI/ML Engineer @ Isourse Technologies"' },
-    { t: "code", s: "applicants_managed = 5000  # in the ATS I built" },
-    { t: "code", s: 'print(f"{name} | {role} | {location}")' },
-    { t: "cmd", s: "python about.py" },
-    { t: "out", s: "Chakshit Gaur | Python Developer (Django, APIs & Automation) | New Delhi, India" },
+  // "At a glance" card in About: short label/value rows. Keep it to facts that are already true on this page.
+  glance: [
+    { label: "Based in", value: "New Delhi, India" },
+    { label: "Education", value: "B.Tech, Computer Science" },
+    { label: "Focus", value: "Django back ends, REST APIs, automation" },
+    { label: "Core toolkit", value: "Python, SQL, Git" },
+    { label: "Experience", value: "3+ years" },
+    { label: "Right now", value: "Freelance Python backend engineer, remote" },
   ],
 
   // Core stack: your headline skill groups, each with a tools line.
@@ -125,11 +120,12 @@ window.CONTENT = {
 
   about: [
     "I'm a Python developer and Computer Science graduate (B.Tech) based in New Delhi, with experience in " +
-      "**automation, web scraping, computer vision and video processing**. As an AI/ML Engineer I built an applicant tracking system for 5,000+ applicants, " +
-      "a client video processing system and an employee monitoring tool, **end to end**, from data collection and storage to packaging and documentation.",
-    "I also build **Django web apps**, such as a multi-user Expense Tracker with automated tests and CI. My core toolkit is " +
-      "**Python, SQL (MySQL, Oracle SQL) and Git**, with Pandas and NumPy for data and Scikit-learn, TensorFlow and PyTorch for machine learning. " +
-      "I enjoy turning **messy data and manual processes into reliable software**.",
+      "**automation, web scraping, computer vision and video processing**. My first role was AI/ML Engineer, where I built " +
+      "**an applicant tracking system for 5,000+ applicants, a client video processing system and an employee monitoring tool**, each one end to end, " +
+      "from data collection and storage to packaging and documentation.",
+    "Since then I've moved into **Python back ends**: Django and Django REST Framework APIs at an early-stage startup, and now freelance work for remote clients, " +
+      "some of them outside India. On my own I build projects like **a multi-user Expense Tracker with 43 automated tests and CI** and " +
+      "**a customer churn model with a Streamlit dashboard**. I enjoy **turning messy data and manual processes into reliable software**.",
   ],
 
   // Only facts taken from the resume. Add more numbers here once you have real ones.

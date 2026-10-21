@@ -54,8 +54,8 @@ if (fs.existsSync(path.join(ROOT, C.resumeFile))) {
   check("resume file is a real PDF", head === "%PDF-", head);
 }
 
-C.terminal.forEach(function (l, i) {
-  check("terminal line " + i + " is valid", ["cmd", "code", "out"].indexOf(l.t) > -1 && typeof l.s === "string");
+(C.glance || []).forEach(function (g, i) {
+  check("glance row " + i + " has a label and a value", isStr(g.label) && isStr(g.value));
 });
 
 // Stats must be parseable by the count-up (a number somewhere in the value).

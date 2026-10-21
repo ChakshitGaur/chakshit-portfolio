@@ -16,7 +16,7 @@ Everything you change lives in **`content.js`**.
 | What | Where in `content.js` |
 |---|---|
 | Hero headline, accent words, scrambling words | `hero` |
-| Terminal in About (facts only) | `terminal` |
+| "At a glance" card in About (facts only) | `glance` |
 | Five headline skills with a proof line each | `core` |
 | All skills, in groups | `skills` |
 | What you did since June 2024 | first item in `experience` |
@@ -28,7 +28,7 @@ Only add numbers and claims that are true.
 
 ## Extras built in
 - **Hero:** a live API card beside the headline (a Django REST Framework-style `GET /api/chakshit/` response with tabs for projects, skills and experience, all built from `content.js`), headline letters that get bolder near the cursor, and a dot grid that bends toward the cursor and ripples on click. Also: a slow, interactive WebGL gradient behind the headline that leans toward the cursor (`hero-gradient.js`; colours are the `--g-a`, `--g-b`, `--g-c` and `--g-strength` tokens in `styles.css`). It pauses off-screen, shows one still frame for reduced motion, and the hero falls back to its plain look without WebGL. Also a calm, centred headline with rotating words, two buttons, count-up stats and a slow skills ticker.
-- **Terminal in About:** types a short Python script about you when it scrolls into view (edit `terminal` in `content.js`).
+- **At a glance card in About:** short label and value rows next to the About text (edit `glance` in `content.js`).
 - **Email:** the address is a normal email link (opens the visitor's own mail app, with a subject filled in), and a "Copy email" button sits next to it for visitors with no mail app. No third-party service is involved.
 - **Light/dark theme:** follows the visitor's system setting; the moon/sun button switches and remembers it.
 - **Motion:** word-by-word headline reveals, a scroll-driven skills band, a sliding nav highlight, parallax on the outlined numbers, project artwork that draws itself in, stacked project cards that pin under the nav and slide over each other as you scroll (on screens at least 900×600; a plain list otherwise), spotlight glow and tilt on cards, magnetic buttons, a cursor follower, a back-to-top button with a progress ring, confetti on "Copy email", a hidden Konami-code easter egg, and an animated highlighter for phrases wrapped in `**double asterisks**` in the `about` text.
