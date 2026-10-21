@@ -23,14 +23,12 @@ window.CONTENT = {
     rotating: ["Django back ends", "REST APIs", "automation", "web scraping", "data pipelines"],
   },
 
-  // "At a glance" card in About: short label/value rows. Keep it to facts that are already true on this page.
-  glance: [
-    { label: "Based in", value: "New Delhi, India" },
-    { label: "Education", value: "B.Tech, Computer Science" },
-    { label: "Focus", value: "Django back ends, REST APIs, automation" },
-    { label: "Core toolkit", value: "Python, SQL, Git" },
-    { label: "Experience", value: "3+ years" },
-    { label: "Right now", value: "Freelance Python backend engineer, remote" },
+  // "How I work" list beside the About text: a short title and one line each. Keep it to things the Experience bullets already say.
+  howIWork: [
+    { title: "Understand what is needed", text: "I work closely with the people who will use it, whether clients, founders or HR teams." },
+    { title: "Build it end to end", text: "From data collection and storage to packaging, delivered as a complete, working system." },
+    { title: "Adapt as priorities change", text: "Small teams and remote clients move fast, so I keep communication clear and adjust quickly." },
+    { title: "Hand it over cleanly", text: "Documentation, training and support, and code others can build on and maintain." },
   ],
 
   // Core stack: your headline skill groups, each with a tools line.

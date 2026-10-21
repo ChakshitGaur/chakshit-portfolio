@@ -504,10 +504,12 @@ mark { color: inherit; background: linear-gradient(var(--accent-soft), var(--acc
   .fade { opacity: 1; transform: none; }
 }
 
-/* About: at a glance card */
-.glance { padding: 26px 28px 8px; border: 1px solid var(--line); border-radius: 20px; background: var(--surface); }
-.glance-title { font-family: var(--mono); font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); margin-bottom: 8px; }
-.glance-row { padding: 15px 0; border-top: 1px solid var(--line); }
-.glance-row:first-child { border-top: 0; }
-.glance-row dt { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); margin-bottom: 4px; }
-.glance-row dd { font-size: 1.06rem; font-weight: 500; letter-spacing: -0.01em; color: var(--ink); }
+/* About: how I work */
+.how-title { font-family: var(--mono); font-size: 0.78rem; font-weight: 400; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); margin-bottom: 6px; }
+.how { list-style: none; padding: 0; margin: 0; }
+.how li { display: grid; grid-template-columns: 44px 1fr; gap: 4px 14px; padding: 20px 0; border-top: 1px solid var(--line); }
+.how li:first-child { border-top-color: var(--line-strong); }
+.how li:last-child { border-bottom: 1px solid var(--line); }
+.how-n { font-family: var(--mono); font-size: 0.8rem; color: var(--accent); padding-top: 5px; }
+.how h4 { font-size: 1.25rem; font-weight: 600; letter-spacing: -0.025em; line-height: 1.2; }
+.how p { grid-column: 2; margin-top: 4px; font-size: 0.98rem; line-height: 1.5; color: var(--muted); }
