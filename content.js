@@ -46,8 +46,8 @@ window.CONTENT = {
       match: ["python", "django", "sql"],
       // Shown in the popup when the card is clicked.
       skills: [
-        "Python", "Django", "Django REST Framework", "REST APIs",
-        "Flask", "SQL", "MySQL", "SQLite",
+        "Python", "Core Java", "Django", "Django REST Framework", "REST APIs",
+        "Flask", "SQL", "MySQL", "Oracle SQL", "SQLite", "Database design",
         "Postman", "JWT authentication", "API Integration",
       ],
     },
@@ -59,7 +59,9 @@ window.CONTENT = {
       // Shown in the popup when the card is clicked.
       skills: [
         "Selenium", "Web scraping", "Python scripts", "BeautifulSoup",
-        "Requests", "Data Extraction", "API Automation",
+        "Requests", "Data Extraction", "Data parsing", "JSON processing",
+        "API Automation", "Task automation", "ETL pipelines", "Data collection and storage",
+        "CSV export", "PyInstaller", "Packaging as a standalone executable", "pynput",
       ],
     },
     {
@@ -84,9 +86,10 @@ window.CONTENT = {
       match: ["django"],
       // Shown in the popup when the card is clicked.
       skills: [
-        "GitHub Actions", "pytest", "Automated tests", "Unit Testing",
-        "Docker", "Git", "GitHub", "VS Code",
-        "PyCharm", "Jupyter Notebook",
+        "GitHub Actions", "Continuous integration", "Continuous deployment", "pytest",
+        "Automated tests", "Unit Testing", "Debugging", "Exception handling",
+        "Docker", "Git", "GitHub", "Git pull requests",
+        "Virtual environments", "VS Code", "PyCharm", "Jupyter Notebook",
       ],
     },
     {
@@ -97,6 +100,7 @@ window.CONTENT = {
       skills: [
         "Claude Code", "Codex", "Cursor", "Claude",
         "ChatGPT", "LLM APIs", "Prompt engineering", "MCP",
+        "Agentic workflows", "AI-assisted pull requests", "AI-assisted code review",
       ],
     },
   ],
@@ -233,9 +237,9 @@ window.CONTENT = {
   ],
 
   skills: [
-    { group: "Programming languages", items: ["Python", "SQL"] },
+    { group: "Programming languages", items: ["Python", "SQL", "Core Java"] },
     { group: "Web & backend", items: ["Django", "Django REST Framework", "REST APIs"] },
-    { group: "Databases", items: ["MySQL"] },
+    { group: "Databases", items: ["MySQL", "Oracle SQL"] },
     { group: "Automation & data", items: ["Selenium", "Web Scraping", "Pandas", "NumPy", "Matplotlib", "Power BI"] },
     { group: "ML & computer vision", items: ["Computer Vision", "OCR", "Scikit-learn", "TensorFlow", "PyTorch", "YOLO"] },
     { group: "Tools & version control", items: ["Git", "GitHub", "GitHub Actions", "Docker", "VS Code", "PyCharm", "Jupyter Notebook"] },
