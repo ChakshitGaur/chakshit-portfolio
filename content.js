@@ -46,7 +46,7 @@ window.CONTENT = {
       match: ["python", "django", "sql"],
       // Shown in the popup when the card is clicked.
       skills: [
-        "Python", "Core Java", "Django", "Django REST Framework", "REST APIs",
+        "Python", "Django", "Django REST Framework", "REST APIs",
         "Flask", "SQL", "MySQL", "Oracle SQL", "SQLite", "Database design",
         "Postman", "JWT authentication", "API Integration",
       ],
@@ -237,7 +237,7 @@ window.CONTENT = {
   ],
 
   skills: [
-    { group: "Programming languages", items: ["Python", "SQL", "Core Java"] },
+    { group: "Programming languages", items: ["Python", "SQL"] },
     { group: "Web & backend", items: ["Django", "Django REST Framework", "REST APIs"] },
     { group: "Databases", items: ["MySQL", "Oracle SQL"] },
     { group: "Automation & data", items: ["Selenium", "Web Scraping", "Pandas", "NumPy", "Matplotlib", "Power BI"] },
