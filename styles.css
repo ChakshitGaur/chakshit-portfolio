@@ -131,7 +131,7 @@ body.preview .nav { top: calc(14px + var(--banner-h, 0px)); }
 .section { padding: 110px 0 20px; }
 .sec-head { margin-bottom: 44px; position: relative; isolation: isolate; }
 .sec-head > * { max-width: 640px; }
-.sec-head::before { content: attr(data-n); position: absolute; z-index: -1; right: 0; top: -0.5em; font-size: clamp(5rem, 14vw, 10.5rem); font-weight: 600; letter-spacing: -0.06em; line-height: 1; color: transparent; -webkit-text-stroke: 1px var(--line-strong); opacity: 0.38; pointer-events: none; user-select: none; }
+.sec-head::before { content: attr(data-n); position: absolute; z-index: -1; right: 0; top: -0.5em; font-size: clamp(5rem, 14vw, 10.5rem); font-weight: 600; letter-spacing: -0.06em; line-height: 1; color: var(--bg); -webkit-text-stroke: 2px var(--line-strong); paint-order: stroke fill; opacity: 0.38; pointer-events: none; user-select: none; }
 .sec-num { font-family: var(--mono); font-size: 0.8rem; letter-spacing: 0.08em; color: var(--accent); margin-bottom: 10px; }
 .sec-head h2 { font-size: clamp(2.2rem, 4.8vw, 3.6rem); font-weight: 600; letter-spacing: -0.04em; line-height: 1.05; }
 .sec-sub { margin-top: 14px; color: var(--muted); font-size: 1.05rem; }
@@ -340,9 +340,11 @@ mark { color: inherit; background: linear-gradient(var(--accent-soft), var(--acc
 /* Big outlined marquee band */
 .band { margin-top: 90px; overflow: hidden; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 22px 0; }
 .band-track { display: flex; gap: 0.5em; width: max-content; font-size: clamp(3rem, 9vw, 7.5rem); font-weight: 600; letter-spacing: -0.045em; line-height: 1; animation: band 60s linear infinite; }
-.band-track span { display: inline-flex; align-items: center; gap: 0.5em; white-space: nowrap; color: transparent; -webkit-text-stroke: 1.5px var(--ink); }
+/* Outlined text: the variable font has overlapping contours that a transparent fill would show as stray lines.
+   Filling with the page colour and painting the stroke underneath hides them; the stroke is doubled because half of it is covered. */
+.band-track span { display: inline-flex; align-items: center; gap: 0.5em; white-space: nowrap; color: var(--bg); -webkit-text-stroke: 3px var(--ink); paint-order: stroke fill; }
 .band-track span.solid { color: var(--ink); -webkit-text-stroke: 0; }
-.band-track span::after { content: "\2726"; font-size: 0.45em; color: var(--accent); -webkit-text-stroke: 0; }
+.band-track span::after { content: "\2726"; font-size: 0.45em; color: var(--accent); -webkit-text-stroke: 0; paint-order: normal; }
 .band:hover .band-track { animation-play-state: paused; }
 @keyframes band { to { translate: -50% 0; } }
 
