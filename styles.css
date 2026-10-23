@@ -45,6 +45,7 @@ code { font-family: var(--mono); font-size: 0.9em; }
 
 .skip { position: fixed; z-index: 500; left: 12px; top: -60px; padding: 10px 18px; border-radius: 999px; background: var(--inv-bg); color: var(--inv-ink); font-weight: 500; transition: top 0.2s; }
 .skip:focus { top: 12px; }
+main:focus { outline: none; }
 
 /* ---------- Motion helpers ---------- */
 .fade { opacity: 0; transform: translateY(24px); }
@@ -515,3 +516,16 @@ mark { color: inherit; background: linear-gradient(var(--accent-soft), var(--acc
 .how-n { font-family: var(--mono); font-size: 0.8rem; color: var(--accent); padding-top: 5px; }
 .how h4 { font-size: 1.25rem; font-weight: 600; letter-spacing: -0.025em; line-height: 1.2; }
 .how p { grid-column: 2; margin-top: 4px; font-size: 0.98rem; line-height: 1.5; color: var(--muted); }
+
+/* Touch screens: controls get at least a 44px target. Negative margins keep the layout as it was.
+   Underlined links use a text underline instead of a bottom border, so padding can grow the target without moving the line. */
+@media (pointer: coarse) {
+  .nav-brand { padding: 4px; margin: -4px; }
+  .icon-btn { width: 44px; height: 44px; margin: -4px; }
+  .nav-toggle { min-height: 44px; margin-block: -2px; }
+  .api-tab { min-height: 44px; min-width: 44px; }
+  .mail-dlg-x { width: 44px; height: 44px; }
+  .plinks a { display: inline-block; padding-block: 13px; margin-block: -13px; border-bottom: 0; text-decoration: underline; text-decoration-color: var(--line-strong); text-underline-offset: 5px; }
+  .plinks a:hover { text-decoration-color: var(--accent); }
+  .contact-mail { padding-block: 10px; margin-block: 24px -10px; border-bottom: 0; text-decoration: underline; text-decoration-color: rgba(244, 242, 236, 0.4); text-underline-offset: 6px; }
+}
