@@ -131,6 +131,12 @@
     var longest = phrases.reduce(function (m, p) { return Math.max(m, p.length); }, 0);
     liveEl.style.display = "inline-block";
     liveEl.style.minWidth = longest + "ch";
+    // With reduced motion nothing rotates, so show every phrase at once instead of only the first.
+    if (REDUCED && phrases.length > 1) {
+      liveEl.textContent = phrases.slice(0, -1).join(", ") + " and " + phrases[phrases.length - 1];
+      liveEl.style.display = "inline";
+      liveEl.style.minWidth = "0";
+    }
     rotateLine.appendChild(liveEl);
     if (!REDUCED) { rotateLine.appendChild(el("span", { cls: "caret", attrs: { "aria-hidden": "true" } })); }
   } else { rotateLine.hidden = true; }
