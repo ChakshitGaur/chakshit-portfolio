@@ -20,7 +20,7 @@ window.CONTENT = {
     accent: "working software.", // the part of the headline shown in the accent colour
     // Line under the headline: the last words scramble from one phrase to the next.
     rotatingPrefix: "Currently into",
-    rotating: ["Django back ends", "REST APIs", "automation", "web scraping", "data pipelines"],
+    rotating: ["Django back ends", "REST APIs", "automation tools", "ML with clear reasons", "AI coding agents", "tested Django apps"],
   },
 
   // "How I work" list beside the About text: a short title and one line each. Keep it to things the Experience bullets already say.
