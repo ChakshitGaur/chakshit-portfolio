@@ -354,16 +354,31 @@
   var bento = $("bento");
   var projectList = (C.projects || []).filter(function (p) { return show(p.name); });
   projectList.forEach(function (p, i) {
+    var highlights = (p.highlights || []).filter(show);
     var dl = el("dl");
-    [["Problem", p.problem], ["Approach", p.approach]].forEach(function (pair) {
-      if (show(pair[1])) { dl.appendChild(el("div", {}, [el("dt", { text: pair[0] }), el("dd", {}, [span(pair[1])])])); }
-    });
+    if (highlights.length) {
+      // Short card: the problem as one line, then the highlights as a list (no labels).
+      if (show(p.problem)) { dl.appendChild(el("div", {}, [el("dd", { cls: "pcard-problem" }, [span(p.problem)])])); }
+    } else {
+      [["Problem", p.problem], ["Approach", p.approach]].forEach(function (pair) {
+        if (show(pair[1])) { dl.appendChild(el("div", {}, [el("dt", { text: pair[0] }), el("dd", {}, [span(pair[1])])])); }
+      });
+    }
+    var hlList = highlights.length ? el("ul", { cls: "pcard-hl" }, highlights.map(function (h) { return el("li", {}, [span(h)]); })) : null;
     var links = el("div", { cls: "plinks" });
     if (show(p.github)) { links.appendChild(link(p.github, "GitHub ↗", "", true)); }
     if (show(p.demo)) { links.appendChild(link(p.demo, "Live demo ↗", "", true)); }
 
     var artBox = el("div", { cls: "pcard-art" }, [el("span", { cls: "num", text: pad2(i + 1) })]);
-    artBox.insertBefore(art(p.visual || ["scatter", "graph", "bars"][i % 3], i + 1), artBox.firstChild);
+    if (show(p.shot)) {
+      // A real screenshot in a small browser frame; it replaces the generated artwork.
+      artBox.classList.add("has-shot");
+      var shotImg = el("img", { attrs: { src: p.shot, alt: p.shotAlt || (p.name + " screenshot"), width: "1100", loading: "lazy", decoding: "async" } });
+      var frame = el("div", { cls: "pshot" }, [el("div", { cls: "pshot-bar", attrs: { "aria-hidden": "true" } }, [el("i"), el("i"), el("i")]), shotImg]);
+      artBox.insertBefore(frame, artBox.firstChild);
+    } else {
+      artBox.insertBefore(art(p.visual || ["scatter", "graph", "bars"][i % 3], i + 1), artBox.firstChild);
+    }
 
     var card = el("article", { cls: "pcard", attrs: { "data-tags": [p.name, p.category].concat(p.stack || []).join("|").toLowerCase() } }, [
       artBox,
@@ -371,6 +386,7 @@
         show(p.category) ? el("p", { cls: "pcard-cat" }, [span(p.category)]) : null,
         el("h3", {}, [span(p.name)]),
         dl,
+        hlList,
         show(p.metric) ? el("p", { cls: "metric" }, [span(p.metric)]) : null,
         tagList(p.stack),
         links.childNodes.length ? links : null,

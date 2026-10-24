@@ -126,7 +126,7 @@ window.CONTENT = {
       "**an applicant tracking system for 5,000+ applicants, a client video processing system and an employee monitoring tool**, each one end to end, " +
       "from data collection and storage to packaging and documentation.",
     "Since then I've moved into **Python back ends**: Django and Django REST Framework APIs at an early-stage startup, and now freelance work for remote clients, " +
-      "some of them outside India. On my own I build projects like **a multi-user Expense Tracker with 43 automated tests and CI** and " +
+      "some of them outside India. On my own I build projects like **a multi-user Expense Tracker with 46 automated tests and CI** and " +
       "**a customer churn model with a Streamlit dashboard**. I enjoy **turning messy data and manual processes into reliable software**.",
   ],
 
@@ -189,47 +189,65 @@ window.CONTENT = {
     },
   ],
 
+  // Each project: a screenshot ("shot", in assets/projects), a one-line problem, short highlights, tags and links.
+  // "metric" is the highlighted result line. Add "demo": "https://..." only when there is a real live link.
   projects: [
     {
       name: "Expense Tracker",
       category: "Web app · Django",
-      visual: "donut", // card artwork: "scatter", "graph", "bars" or "donut"
+      shot: "assets/projects/expense-tracker.jpg",
+      shotAlt: "Expense Tracker dashboard with a spending-by-category chart and monthly budget bars",
+      visual: "donut", // card artwork used when there is no screenshot: "scatter", "graph", "bars" or "donut"
       problem: "Keeping track of everyday spending and staying within a monthly budget.",
-      approach:
-        "A multi-user Django web app to log expenses by category, set monthly budgets with threshold warnings and track spending on a dashboard; each user sees only their own data. " +
-        "Includes CSV import/export with per-row error reports.",
-      stack: ["Python", "Django", "SQLite"],
-      metric: "43 automated tests running on GitHub Actions CI",
+      highlights: [
+        "Multi-user: each user sees only their own data",
+        "Charts dashboard and monthly budgets with progress bars and threshold warnings",
+        "CSV import and export with per-row error reports",
+      ],
+      stack: ["Python", "Django", "SQLite", "Chart.js"],
+      metric: "46 automated tests running on GitHub Actions CI",
       github: "https://github.com/ChakshitGaur/expense-tracker",
     },
     {
       name: "Multiple Disease Prediction System",
       category: "Machine Learning",
+      shot: "assets/projects/disease-prediction.jpg",
+      shotAlt: "Diabetes prediction form in the Streamlit app, showing the result The person is not diabetic",
       visual: "scatter",
       problem: "Early detection of Parkinson's disease, heart disease and diabetes from patient data.",
-      approach:
-        "Built classification models for each condition using logistic regression and support vector machines.",
-      stack: ["Python", "Machine Learning", "Logistic Regression", "SVM"],
+      highlights: [
+        "Streamlit app that predicts diabetes, heart disease and Parkinson's disease from medical inputs",
+        "A separate scikit-learn model for each disease (logistic regression, SVM), loaded in the app",
+      ],
+      stack: ["Python", "Streamlit", "Scikit-learn", "Logistic Regression", "SVM"],
       github: "https://github.com/ChakshitGaur/Multiple-Disease-Prediction-System",
     },
     {
       name: "Book Recommendation System",
       category: "Recommender System",
+      shot: "assets/projects/book-recommender.jpg",
+      shotAlt: "BookPilot home page showing popular books with their covers",
       visual: "graph",
       problem: "Suggesting books readers are likely to enjoy, based on their ratings and similar readers.",
-      approach:
-        "A Flask-based machine learning recommender: preprocessed book-rating datasets, then used collaborative filtering and cosine similarity to recommend similar books.",
+      highlights: [
+        "Flask app that recommends similar books with collaborative filtering and cosine similarity",
+        "Book-rating data prepared with NumPy, Pandas and Scikit-learn; HTML front end and a Procfile",
+      ],
       stack: ["Python", "Flask", "NumPy", "Pandas", "Scikit-learn", "Cosine similarity"],
       github: "https://github.com/ChakshitGaur/BookPilot",
     },
     {
       name: "Customer Churn Prediction",
       category: "Machine Learning · Dashboard",
+      shot: "assets/projects/customer-churn-prediction.jpg",
+      shotAlt: "Churn risk dashboard showing test PR-AUC 0.671, risk tiers, targeting strategies and SHAP feature importance",
       visual: "bars",
       problem: "Finding which telecom customers are likely to leave, and which are worth a retention offer.",
-      approach:
-        "An end-to-end pipeline on 7,043 telecom customers: an XGBoost model with calibrated probabilities, SHAP explanations of each customer's top churn drivers, " +
-        "a cost-based targeting plan, and a Streamlit dashboard for single and batch scoring.",
+      highlights: [
+        "End-to-end pipeline on 7,043 telecom customers: 2.9x lift in the top risk decile, beating a logistic regression baseline",
+        "SHAP explanations, calibrated risk tiers and a cost-based targeting plan",
+        "Streamlit dashboard for single and batch scoring, with 80+ pytest tests",
+      ],
       stack: ["Python", "XGBoost", "Scikit-learn", "SHAP", "Streamlit", "pytest"],
       metric: "PR-AUC 0.671; contacting 33% of customers reaches 73% of churners",
       github: "https://github.com/ChakshitGaur/customer-churn-prediction",
