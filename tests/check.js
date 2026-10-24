@@ -69,7 +69,9 @@ var visible = C.projects.filter(function (p) { return !isPh(p.name); });
 check("at least one project is visible", visible.length > 0);
 visible.forEach(function (p) {
   var n = "project '" + p.name + "'";
-  ["category", "problem", "approach"].forEach(function (k) { check(n + " has " + k, isStr(p[k]) && !isPh(p[k])); });
+  ["category", "problem"].forEach(function (k) { check(n + " has " + k, isStr(p[k]) && !isPh(p[k])); });
+  check(n + " has an approach or highlights", (isStr(p.approach) && !isPh(p.approach)) || (Array.isArray(p.highlights) && p.highlights.length > 0 && p.highlights.every(isStr)));
+  if (p.shot) { check(n + " screenshot file exists", fs.existsSync(path.join(ROOT, p.shot)), p.shot); }
   check(n + " has a stack", Array.isArray(p.stack) && p.stack.length > 0);
   check(n + " github is a URL, a placeholder or left out", p.github == null || isPh(p.github) || isUrl(p.github), p.github);
   check(n + " demo is a URL, a placeholder or left out", p.demo == null || isPh(p.demo) || isUrl(p.demo), p.demo);
