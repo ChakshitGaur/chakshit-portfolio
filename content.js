@@ -125,7 +125,7 @@ window.CONTENT = {
       "**automation, web scraping, computer vision and video processing**. My first role was AI/ML Engineer, where I built " +
       "**an applicant tracking system for 5,000+ applicants, a client video processing system and an employee monitoring tool**, each one end to end, " +
       "from data collection and storage to packaging and documentation.",
-    "Since then I've moved into **Python back ends**: Django and Django REST Framework APIs at an early-stage startup, and now freelance work for remote clients, " +
+    "Since then I've moved into **Python back ends**: Django and Django REST Framework APIs at a stealth startup, and now freelance work for remote clients, " +
       "some of them outside India. On my own I build projects like **a multi-user Expense Tracker with 46 automated tests and CI** and " +
       "**a customer churn model with a Streamlit dashboard**. I enjoy **turning messy data and manual processes into reliable software**.",
   ],
@@ -140,44 +140,45 @@ window.CONTENT = {
 
   experience: [
     {
-      title: "Freelancing",
-      org: "Independent",
+      title: "Backend Developer (Python)",
+      org: "Self-Employed",
       location: "Remote",
       period: "Feb 2026 – Present",
       type: "Freelance",
       bullets: [
-        "Worked as a remote Python backend engineer with several companies, including clients based outside India, taking on projects end to end and working with each client directly to understand what they needed and to keep the work on track.",
-        "Built and maintained the APIs and the backend structure that run and support client dashboards, handling the day-to-day upkeep that keeps those dashboards running smoothly for the people who depend on them, from small fixes to features.",
-        "Delivered projects on time while staying in regular contact with each client and adapting to their needs across different time zones, keeping communication clear and progress visible throughout each engagement and handing work over cleanly.",
+        "Work remotely as a freelance Python backend developer with clients, including some based outside India, owning each project from the first conversation to the final handover and learning exactly what the client needs before I build.",
+        "Build and maintain the APIs and backend that keep client dashboards running, from small fixes to new features, with Python, Django, Django REST Framework, REST APIs and SQL, leaving behind work that is easy to understand and to maintain.",
+        "Keep clients updated regularly whatever their time zone, with clear visibility of progress, documentation and delivery on the agreed date; in my own projects I back this up with automated tests (pytest), Git, GitHub Actions CI and Docker.",
       ],
       // Used only for the skill-card hover highlight; not shown on the page.
-      tags: ["Python", "REST APIs"],
+      tags: ["Python", "Django", "Django REST Framework", "REST APIs", "SQL"],
     },
     {
       title: "Career Break",
-      org: "Self-directed learning",
+      org: "Professional development",
       period: "Oct 2025 – Jan 2026",
       bullets: [
-        "Took a planned career break to deepen my Python backend skills, studying backend development and the tools and practices around it, so I could return to building and shipping software with a stronger foundation in a fast-changing field.",
+        "Planned career break for self-directed learning: deepened my Python backend skills and the tools and practices around backend development before returning to building and shipping software with a stronger foundation in the field.",
       ],
     },
     {
       title: "Python Developer",
       org: "Stealth Startup",
-      type: "Full-time",
+      location: "Remote",
       period: "Jul 2024 – Sep 2025",
+      type: "Full-time",
       bullets: [
-        "Joined an early-stage startup in stealth mode as a full-time Python developer, working on the backend side of its dashboard product in a small team, working closely alongside the founders, while the product was still taking shape and moving fast.",
-        "Built backend features and APIs using Python, Django and Django REST Framework, with MySQL for data storage and Git for version control, writing code that the rest of the team could build on and maintain, and keeping it easy to extend later.",
-        "Worked in a small, fast-moving team, helping turn early ideas into working features and adapting quickly as priorities changed, which meant shipping steadily while the product direction kept evolving, and learning quickly along the way.",
+        "Developed backend services in Python and Django for a confidential product at a stealth startup, working in a remote team and keeping the code clean, well documented and easy for the rest of the team to understand, maintain and extend.",
+        "Built backend features and APIs with Django and Django REST Framework, and wrote SQL queries for effective database management, using Git for version control and writing code the whole team could easily build on and maintain.",
+        "Adapted quickly to changing priorities, contributing to AI and ML initiatives alongside backend development, and helping turn early ideas into working features while the product direction kept changing and evolving, learning quickly along the way.",
       ],
       // Used only for the skill-card hover highlight; not shown on the page.
-      tags: ["Python", "Django", "Django REST Framework", "MySQL", "Git"],
+      tags: ["Python", "Django", "Django REST Framework", "SQL", "Git"],
     },
     {
       title: "AI/ML Engineer",
       org: "Isourse Technologies Pvt. Ltd.",
-      location: "Delhi",
+      location: "Delhi · On-site",
       period: "May 2023 – Jun 2024",
       bullets: [
         "Built the FM Logistics client video system in Python, using OCR and computer vision to read timestamps and synchronise two live-stream videos, then stitch them into one combined video, delivered as a complete, working system for the client.",
