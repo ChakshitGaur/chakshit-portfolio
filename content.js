@@ -125,8 +125,8 @@ window.CONTENT = {
       "**automation, web scraping, computer vision and video processing**. My first role was AI/ML Engineer, where I built " +
       "**an applicant tracking system for 5,000+ applicants, a client video processing system and an employee monitoring tool**, each one end to end, " +
       "from data collection and storage to packaging and documentation.",
-    "Since then I've moved into **Python back ends**: Django and Django REST Framework APIs at a stealth startup, and now freelance work for remote clients, " +
-      "some of them outside India. On my own I build projects like **a multi-user Expense Tracker with 46 automated tests and CI** and " +
+    "Since then I've moved into **Python back ends**: Django and Django REST Framework APIs at a stealth startup, and now freelance work for remote clients. " +
+      "On my own I build projects like **a multi-user Expense Tracker with 46 automated tests and CI** and " +
       "**a customer churn model with a Streamlit dashboard**. I enjoy **turning messy data and manual processes into reliable software**.",
   ],
 
@@ -146,7 +146,7 @@ window.CONTENT = {
       period: "Feb 2026 – Present",
       type: "Freelance",
       bullets: [
-        "Work remotely as a freelance Python backend developer with clients, including some based outside India, owning each project from the first conversation to the final handover and learning exactly what the client needs before I build.",
+        "Work remotely as a freelance Python backend developer with my clients, owning each project from the first conversation to the final handover, learning exactly what the client needs before I build and keeping the work on track throughout.",
         "Build and maintain the APIs and backend that keep client dashboards running, from small fixes to new features, with Python, Django, Django REST Framework, REST APIs and SQL, leaving behind work that is easy to understand and to maintain.",
         "Keep clients updated regularly whatever their time zone, with clear visibility of progress, documentation and delivery on the agreed date; in my own projects I back this up with automated tests (pytest), Git, GitHub Actions CI and Docker.",
       ],
